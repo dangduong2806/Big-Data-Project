@@ -1,0 +1,110 @@
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+    environment:
+      - CLUSTER_NAME=test
+    volumes:
+      - namenode:/hadoop/dfs/name
+    ports:
+      - "9870:9870"
+
+  datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
+    environment:
+      - CLUSTER_NAME=test
+      - NAMENODE_URI=hdfs://namenode:9000
+    volumes:
+      - datanode:/hadoop/dfs/data
+    depends_on:
+      - namenode
+
+  spark-master:
+    image: bde2020/spark-master:2.4.5-hadoop2.7
+    environment:
+      - ENABLE_INIT_DAEMON=false
+    ports:
+      - "8080:8080"
+    depends_on:
+      - namenode
+      - datanode
+      - kafka
+
+  spark-worker:
+    image: bde2020/spark-worker:2.4.5-hadoop2.7
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+    depends_on:
+      - spark-master
+
+  model-service:
+    build: ./model_service
+    ports:
+      - "8000:8000"
+    environment:
+      - KAFKA_BOOTSTRAP=kafka:9092
+      - INPUT_TOPIC=raw_prices
+      - OUTPUT_TOPIC=predictions
+      - WINDOW_SIZE=30
+    volumes:
+      - ./model_service:/app
+    depends_on:
+      - kafka
+
+  kafka-producer:
+    build: ./kafka-producer
+    environment:
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - TOPIC=raw_prices
+      - TICKER=^GSPC
+      - POLL_INTERVAL_SECONDS=60
+    volumes:
+      - ./kafka-producer:/app
+    depends_on:
+      - kafka
+
+  spark-jobs:
+    build: ./spark-jobs
+    depends_on:
+      - spark-master
+      - namenode
+      - kafka
+    # we won't start it automatically; used to run spark-submit manually if desired
+    command: tail -f /dev/null
+    
+  save-to-hdfs:
+    build: ./spark-jobs
+    depends_on:
+      - spark-master
+      - namenode
+      - kafka
+    command: >
+      spark-submit
+      --master spark://spark-master:7077
+      --packages org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.5
+      /app/save_to_hdfs_job.py
+
+volumes:
+  namenode:
+  datanode:

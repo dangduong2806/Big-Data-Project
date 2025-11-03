@@ -1,0 +1,3 @@
+yfinance
+kafka-python
+pandas

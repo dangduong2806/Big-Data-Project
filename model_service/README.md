@@ -1,0 +1,1 @@
+File serve.py để model nhận dữ liệu từ kafka truyền real time đến, dự đoán và đưa ra kết quả (Giai đoạn inference/ deploy realtime)

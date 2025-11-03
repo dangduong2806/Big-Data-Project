@@ -1,0 +1,1 @@
+File producer.py để kafka đọc dữ liệu real-time từ thư viện yahoo finance / yahoo finance api.
