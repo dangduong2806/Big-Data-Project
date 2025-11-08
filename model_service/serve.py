@@ -17,7 +17,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Cấu hình từ environment variables
-MODEL_PATH = os.environ.get("MODEL_PATH", "/app/model.joblib")
+
+MODEL_PATH = os.environ.get("MODEL_PATH", "./risk_model.joblib")
 KAFKA_BOOTSTRAP = os.environ.get("KAFKA_BOOTSTRAP", "kafka:9092")
 INPUT_TOPIC = os.environ.get("INPUT_TOPIC", "daily_prices")  # Đọc dữ liệu real-time từ Yahoo Finance
 OUTPUT_TOPIC = os.environ.get("OUTPUT_TOPIC", "predictions")

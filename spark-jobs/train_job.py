@@ -5,6 +5,8 @@ from pyspark.sql import SparkSession
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import average_precision_score
+
 from sklearn.metrics import (
     classification_report,
     accuracy_score,
@@ -22,7 +24,7 @@ logger = logging.getLogger("train_job")
 # then fallback to raw path where the streaming job writes features.
 TRAIN_PARQUET_PATH = os.environ.get(
     "TRAIN_PARQUET_PATH",
-    "hdfs://namenode:9000/data/processed"
+    "hdfs://namenode:9000/data/raw/stock_data"
 )
 FALLBACK_PARQUET_PATH = "hdfs://namenode:9000/data/raw/stock_data"
 
@@ -82,8 +84,8 @@ else:
     df['Volume_Based_Volatility'] = df['Volume'].rolling(21).std() / df['Volume'].rolling(21).mean()
 
 # create label: risk in next 3 days (>=5% drop)
-threshold = -0.05
-window = 3
+threshold = -0.03
+window = 5
 for i in range(1, window+1):
     df[f'{i}d_ret'] = df['Close'].shift(-i) / df['Close'] - 1
 df['Future_Min_Return'] = df[[f'{i}d_ret' for i in range(1, window+1)]].min(axis=1)
@@ -96,55 +98,47 @@ df = df.dropna(subset=cols)
 X = df[feature_cols]
 y = df['Risk_Event']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle=True)
+# split_date = "2024-01-01"
+# train = df[df.index < split_date]
+# test = df[df.index >= split_date]
 
 # Train model
-logger.info("Training Random Forest model...")
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
-
-# Evaluate model
-y_pred = model.predict(X_test)
-logger.info("\nClassification Report:")
-logger.info(classification_report(y_test, y_pred))
-
-logger.info("\nAccuracy: %.3f", accuracy_score(y_test, y_pred))
-logger.info("Precision: %.3f", precision_score(y_test, y_pred))
-logger.info("Recall: %.3f", recall_score(y_test, y_pred))
-logger.info("F1: %.3f", f1_score(y_test, y_pred))
-logger.info("ROC AUC: %.3f", roc_auc_score(y_test, y_pred))
-
-# Save model
-model_path = os.environ.get('MODEL_SAVE_PATH', '/models/risk_model.joblib')
-logger.info("Saving model to %s", model_path)
-joblib.dump(model, model_path)
-logger.info("Model training and saving completed successfully")
-
-clf = RandomForestClassifier(n_estimators=200, max_depth=6, random_state=42, class_weight='balanced')
-clf.fit(X_train, y_train)
-
-# Evaluate on the hold-out test set and print results to terminal
-logger.info("Evaluating model on test set (size=%d)", X_test.shape[0])
 try:
-    y_pred = clf.predict(X_test)
-    y_proba = clf.predict_proba(X_test)[:, 1]
+    logger.info("Training Random Forest model...")
+    model = RandomForestClassifier(n_estimators=200, max_depth=6, random_state=42, class_weight='balanced')
+    model.fit(X_train, y_train)
+
+    # Evaluate on the hold-out test set
+    logger.info("Evaluating model on test set (size=%d)", X_test.shape[0])
+    y_pred = model.predict(X_test)
+    y_proba = model.predict_proba(X_test)[:, 1]
 
     acc = accuracy_score(y_test, y_pred)
     prec = precision_score(y_test, y_pred, zero_division=0)
     rec = recall_score(y_test, y_pred, zero_division=0)
     f1 = f1_score(y_test, y_pred, zero_division=0)
-    rocauc = roc_auc_score(y_test, y_proba)
+    # rocauc = roc_auc_score(y_test, y_proba)
+    pr_auc = average_precision_score(y_test, y_proba)
+
     cm = confusion_matrix(y_test, y_pred)
 
     logger.info("Test Accuracy: %.4f", acc)
     logger.info("Test Precision: %.4f", prec)
     logger.info("Test Recall: %.4f", rec)
     logger.info("Test F1: %.4f", f1)
-    logger.info("Test ROC AUC: %.4f", rocauc)
+    # logger.info("Test ROC AUC: %.4f", rocauc)
+    logger.info("Test PR AUC: %.4f", pr_auc)
     logger.info("Confusion Matrix:\n%s", cm)
     logger.info("Classification Report:\n%s", classification_report(y_test, y_pred, zero_division=0))
-except Exception as e:
-    logger.exception("Failed to evaluate model: %s", e)
 
-joblib.dump(clf, "/app/model.joblib")
-logger.info("Model trained and saved to /app/model.joblib")
+    # Save model
+    model_path = os.environ.get('MODEL_SAVE_PATH', '/models/risk_model.joblib')
+    os.makedirs(os.path.dirname(model_path), exist_ok=True)
+    logger.info("Saving model to %s", model_path)
+    joblib.dump(model, model_path)
+    logger.info("Model training and saving completed successfully")
+
+except Exception as e:
+    logger.exception("Failed during model training or saving: %s", e)
+    raise

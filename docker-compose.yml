@@ -28,6 +28,7 @@ services:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
     volumes:
       - namenode:/hadoop/dfs/name
+      - hadoop_conf:/opt/hadoop/conf  # Chia sẻ cấu hình HDFS với Spark
     ports:
       - "9870:9870"
       - "9000:9000"
@@ -39,6 +40,7 @@ services:
       - SERVICE_PRECONDITION=namenode:9870
     volumes:
       - datanode:/hadoop/dfs/data
+      - hadoop_conf:/opt/hadoop/conf  # Đồng bộ cấu hình từ namenode
     depends_on:
       - namenode
 
@@ -53,6 +55,10 @@ services:
       - SPARK_MASTER_HOST=spark-master
       - SPARK_MASTER_PORT=7077
       - SPARK_MASTER_WEBUI_PORT=8080
+      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
+      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
+    volumes:
+      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
     depends_on:
       - namenode
       - datanode
@@ -66,6 +72,10 @@ services:
       - SPARK_WORKER_MEMORY=1G
       - SPARK_WORKER_CORES=1
       - SPARK_WORKER_WEBUI_PORT=8081
+      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
+      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
+    volumes:
+      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
     depends_on:
       - spark-master
 
@@ -80,6 +90,7 @@ services:
       - WINDOW_SIZE=30
     volumes:
       - ./model_service:/app
+      # - ./models/risk_model.joblib:/app/models/risk_model.joblib
     depends_on:
       - kafka
 
@@ -102,10 +113,16 @@ services:
       - spark-master
       - namenode
       - kafka
+    environment:
+      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
+      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
+    volumes:
+      - ./spark-jobs:/app
+      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
     command: >
       /opt/spark/bin/spark-submit
       --master spark://spark-master:7077
-      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0
+      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
       /app/save_to_hdfs_job.py
 
   train-job:
@@ -117,13 +134,19 @@ services:
     command: >
       /opt/spark/bin/spark-submit
       --master spark://spark-master:7077
-      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0
+      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
       /app/train_job.py
     volumes:
       - ./model_service:/models
+      - ./spark-jobs:/app
+      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
     environment:
+      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
+      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
       - MODEL_SAVE_PATH=/models/risk_model.joblib
+    user: root
 
 volumes:
   namenode:
   datanode:
+  hadoop_conf:  # Volume mới để chia sẻ cấu hình HDFS
