@@ -22,7 +22,7 @@ MODEL_PATH = os.environ.get("MODEL_PATH", "./risk_model.joblib")
 KAFKA_BOOTSTRAP = os.environ.get("KAFKA_BOOTSTRAP", "kafka:9092")
 INPUT_TOPIC = os.environ.get("INPUT_TOPIC", "daily_prices")  # Đọc dữ liệu real-time từ Yahoo Finance
 OUTPUT_TOPIC = os.environ.get("OUTPUT_TOPIC", "predictions")
-WINDOW_SIZE = 21  # window size giống như trong train_job.py
+WINDOW_SIZE = 3  # window size giống như trong train_job.py
 
 app = FastAPI(title="Real-time Risk Event Model API")
 
@@ -95,6 +95,7 @@ def process_message(msg):
         except json.JSONDecodeError:
             logger.warning("Skipping invalid JSON message: %s", msg_str)
             return
+        
         
         price_data.add_record(record)
         
