@@ -100,10 +100,10 @@ services:
       - KAFKA_BOOTSTRAP=kafka:9092
       - INPUT_TOPIC=daily_prices
       - OUTPUT_TOPIC=predictions
-      - WINDOW_SIZE=30
+      # Sửa phần này
+      - WINDOW_SIZE=3
     volumes:
       - ./model_service:/app
-      # - ./models/risk_model.joblib:/app/models/risk_model.joblib
     depends_on:
       - kafka
 
@@ -126,6 +126,8 @@ services:
       - spark-master
       - namenode
       - kafka
+      # Thêm cái này (không chắc)
+      - kafka-producer
     environment:
       - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
       - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS

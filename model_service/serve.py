@@ -121,8 +121,11 @@ def process_message(msg):
             "probability": float(proba)
         }
         
-        kafka_producer.send(OUTPUT_TOPIC, json.dumps(result).encode('utf-8'))
+        # kafka_producer.send(OUTPUT_TOPIC, json.dumps(result).encode('utf-8'))
         logger.info(f"Sent prediction: pred={pred}, prob={proba:.3f}")
+        message_bytes = json.dumps(result, default=str).encode('utf-8')
+        kafka_producer.send(OUTPUT_TOPIC, message_bytes)
+
         
     except Exception as e:
         logger.exception("Error processing message")
