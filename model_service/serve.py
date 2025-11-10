@@ -79,7 +79,23 @@ kafka_producer = None
 
 def process_message(msg):
     try:
-        record = json.loads(msg.value.decode('utf-8'))
+        if not msg.value:
+            logger.warning("Skipping empty message")
+            return
+        
+        msg_str = msg.value.decode('utf-8').strip()
+        if not msg_str:
+            logger.warning("Skipping empty message")
+            return
+        
+        # record = json.loads(msg.value.decode('utf-8'))
+        # Dùng msg_str đã strip
+        try:
+            record = json.loads(msg_str)
+        except json.JSONDecodeError:
+            logger.warning("Skipping invalid JSON message: %s", msg_str)
+            return
+        
         price_data.add_record(record)
         
         # Tính features
@@ -127,12 +143,23 @@ async def startup_event():
         logger.error(f"Model not found at {MODEL_PATH}")
     
     # Khởi tạo Kafka consumer & producer
+    # Đây là cấu hình khi deploy real-time
+    # kafka_consumer = KafkaConsumer(
+    #     INPUT_TOPIC,
+    #     bootstrap_servers=KAFKA_BOOTSTRAP,
+        
+    #     auto_offset_reset='latest',
+    #     enable_auto_commit=True,
+    #     group_id='model_service'
+    # )
+
+    # Đây là cấu hình khi test
     kafka_consumer = KafkaConsumer(
         INPUT_TOPIC,
         bootstrap_servers=KAFKA_BOOTSTRAP,
-        auto_offset_reset='latest',
+        auto_offset_reset='earliest',
         enable_auto_commit=True,
-        group_id='model_service'
+        group_id=None
     )
     
     kafka_producer = KafkaProducer(

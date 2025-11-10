@@ -117,11 +117,14 @@ def fetch_and_send():
     # Gửi dữ liệu lịch sử trước
     send_historical_data()
     
+    # current data và historical data để tính features
+    # hiện tại ko tính features nữa nên ko cần
+
     # Lấy dữ liệu lịch sử cho việc tính features
-    historical_data = ticker.history(period="1mo")
+    # historical_data = ticker.history(period="1mo")
     
     sent_count = 0
-    batch_counter = 0
+    # batch_counter = 0
     new_last = None
     try:    
         while True:
@@ -169,28 +172,28 @@ def fetch_and_send():
                     time.sleep(POLL_INTERVAL)
                     continue
 
-                # Chuẩn bị dữ liệu cơ bản
-                current_data = pd.Series({
-                    'Open': float(latest_row['Open']),
-                    'High': float(latest_row['High']),
-                    'Low': float(latest_row['Low']),
-                    'Close': float(latest_row['Close']),
-                    'Volume': float(latest_row['Volume'])
-                })
+                # # Chuẩn bị dữ liệu cơ bản
+                # current_data = pd.Series({
+                #     'Open': float(latest_row['Open']),
+                #     'High': float(latest_row['High']),
+                #     'Low': float(latest_row['Low']),
+                #     'Close': float(latest_row['Close']),
+                #     'Volume': float(latest_row['Volume'])
+                # })
 
                 # Tính toán features
-                features = calculate_features(current_data, historical_data)
+                # features = calculate_features(current_data, historical_data)
                 
                 # Chuẩn bị record để gửi
-                record = {
-                    'timestamp': ts_dt.isoformat(),
-                    'Open': float(latest_row['Open']),
-                    'High': float(latest_row['High']),
-                    'Low': float(latest_row['Low']),
-                    'Close': float(latest_row['Close']),
-                    'Volume': float(latest_row['Volume']),
-                    **features  # Thêm các features đã tính toán
-                }
+                # record = {
+                #     'timestamp': ts_dt.isoformat(),
+                #     'Open': float(latest_row['Open']),
+                #     'High': float(latest_row['High']),
+                #     'Low': float(latest_row['Low']),
+                #     'Close': float(latest_row['Close']),
+                #     'Volume': float(latest_row['Volume']),
+                #     **features  # Thêm các features đã tính toán
+                # }
 
                 record = {
                     "Date": ts_dt.strftime("%Y-%m-%d %H:%M:%S"),
@@ -205,14 +208,19 @@ def fetch_and_send():
                 # async send
                 # kafka ghi đè message nếu key trùng lặp
                 producer.send(DAILY_TOPIC, key=ts_dt.isoformat().encode(), value=record)
+                
+                # Thêm phần này
+                producer.flush() # Đảm bảo kafka nhận message ngày
+                LOG.info("Sent record to daily_prices: %s", record)
+
                 sent_count += 1
-                batch_counter += 1
+                # batch_counter += 1
                 new_last = ts_dt
 
                 # flush periodically to ensure delivery and limit memory
-                if batch_counter >= 100:
-                    producer.flush()
-                    batch_counter = 0
+                # if batch_counter >= 100:
+                #     producer.flush()
+                #     batch_counter = 0
 
             # update last_sent if we sent new records
             if new_last and (last_sent is None or new_last > last_sent):
@@ -226,13 +234,6 @@ def fetch_and_send():
             time.sleep(POLL_INTERVAL)
     except KeyboardInterrupt:
         LOG.info("Stopping on user interrupt")
-    finally:
-        try:
-            producer.flush()
-            producer.close()
-        except Exception:
-            pass
-
-
+        
 if __name__ == "__main__":
     fetch_and_send()

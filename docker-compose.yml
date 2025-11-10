@@ -13,6 +13,8 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      # Thêm dòng này
+      # KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
@@ -20,6 +22,17 @@ services:
       - "9092:9092"
     depends_on:
       - zookeeper
+
+  # Thêm phần này
+  kafka-cli:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: kafka-cli
+    depends_on:
+      - zookeeper
+      - kafka
+    entrypoint: /bin/bash
+    tty: true
+
 
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
