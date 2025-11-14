@@ -8,6 +8,8 @@ from datetime import datetime
 import yfinance as yf
 from kafka import KafkaProducer
 
+import threading
+
 
 LOG = logging.getLogger("producer")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -15,9 +17,26 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 
 # Config via env vars for flexibility in docker-compose
 BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "kafka:9092")
-HISTORICAL_TOPIC = os.getenv("HISTORICAL_TOPIC", "historical_prices")
-DAILY_TOPIC = os.getenv("DAILY_TOPIC", "daily_prices")
+HISTORICAL_TOPIC = os.getenv("HISTORICAL_TOPIC_GSPC", "historical_prices_GSPC")
+HISTORICAL_TOPIC_XOM = os.getenv("HISTORICAL_TOPIC_XOM","historical_prices_XOM")
+HISTORICAL_TOPIC_CVX = os.getenv("HISTORICAL_TOPIC_CVX","historical_prices_CVX")
+HISTORICAL_TOPIC_BP = os.getenv("HISTORICAL_TOPIC_BP", "historical_prices_BP")
+
+DAILY_TOPIC = os.getenv("DAILY_TOPIC_GSPC", "daily_prices_GSPC")
+DAILY_TOPIC_XOM = os.getenv("DAILY_TOPIC_XOM", 'daily_prices_XOM')
+DAILY_TOPIC_CVX = os.getenv("DAILY_TOPIC_CVX", "daily_prices_CVX")
+DAILY_TOPIC_BP = os.getenv("DAILY_TOPIC_BP", "daily_prices_BP")
+
 TICKER = os.getenv("TICKER", "^GSPC")
+TICKER_XOM = os.getenv("TICKER_XOM", "XOM")
+TICKER_CVX = os.getenv("TICKER_CVX", "CVX")
+TICKER_BP = os.getenv("TICKER_BP", "BP")
+
+companies = {"GSPC":[TICKER, HISTORICAL_TOPIC, DAILY_TOPIC],
+             "XOM":[TICKER_XOM, HISTORICAL_TOPIC_XOM, DAILY_TOPIC_XOM], 
+             "CVX":[TICKER_CVX, HISTORICAL_TOPIC_CVX, DAILY_TOPIC_CVX], 
+             "BP":[TICKER_BP, HISTORICAL_TOPIC_BP, DAILY_TOPIC_BP]}
+
 # Set polling interval in seconds
 POLL_INTERVAL = int(os.getenv("POLL_INTERVAL_SECONDS", "60"))
 PERSIST_LAST_FILE = os.getenv("LAST_SENT_FILE", "/app/last_sent.json")
@@ -52,29 +71,12 @@ def save_last_sent(ts: datetime):
     except Exception:
         LOG.exception("Failed to persist last sent timestamp")
 
-
-def calculate_features(current_data, historical_data):
-    """Tính toán features dựa trên dữ liệu hiện tại và lịch sử"""
-    # Ghép dữ liệu hiện tại vào historical_data
-    # df = historical_data.append(current_data)
-    df = pd.concat([historical_data, current_data], ignore_index=True)
-    
-    # Tính toán các features
-    df['Daily_Return'] = df['Close'].pct_change()
-    df['Volatility_Cluster'] = df['Daily_Return'].rolling(21).std() * (252**0.5)
-    df['Volume_Based_Volatility'] = df['Volume'].rolling(21).std() / df['Volume'].rolling(21).mean()
-    
-    # Lấy giá trị cuối cùng (dữ liệu hiện tại)
-    latest = df.iloc[-1]
-    
-    return {
-        'Daily_Return': float(latest['Daily_Return']) if not pd.isna(latest['Daily_Return']) else 0.0,
-        'Volatility_Cluster': float(latest['Volatility_Cluster']) if not pd.isna(latest['Volatility_Cluster']) else 0.0,
-        'Volume_Based_Volatility': float(latest['Volume_Based_Volatility']) if not pd.isna(latest['Volume_Based_Volatility']) else 0.0
-    }
-
-def send_historical_data():
+def send_historical_data(company: str):
     """Gửi dữ liệu lịch sử 1 năm lên Kafka"""
+    stastics = companies[company]
+    TICKER = stastics[0]
+    HIS_TOPIC = stastics[1]
+
     LOG.info("Fetching historical data for %s...", TICKER)
     ticker = yf.Ticker(TICKER)
     
@@ -88,6 +90,8 @@ def send_historical_data():
     # Xử lý và gửi từng record
     for i, (idx, row) in enumerate(historical_data.iterrows()):
         record = {
+            # Thêm dòng này
+            "Company": company,
             "timestamp": idx.isoformat(),
             "Open": float(row["Open"]),
             "High": float(row["High"]),
@@ -96,35 +100,31 @@ def send_historical_data():
             "Volume": int(row["Volume"]),
         }
         
-        # Thêm features
-        features = calculate_features(pd.DataFrame([record]), historical_data.iloc[:i])
-        record.update(features)
-        
         # Gửi lên Kafka
-        producer.send(HISTORICAL_TOPIC, 
+        producer.send(HIS_TOPIC, 
                      key=idx.isoformat().encode(),
                      value=record)
-    
-    producer.flush()
-    LOG.info("Historical data sent successfully")
+        
+        # Thêm delay nhẹ để tránh Yahoo finance/ Kafka bị nghẽn
+        if i % 100 == 0:
+            producer.flush()
+            time.sleep(0.1)
 
-def fetch_and_send():
+    producer.flush()
+    LOG.info("Historical data of %s sent successfully", company)
+            
+
+def fetch_and_send(company: str):   
+    stastics = companies[company]
+    TICKER = stastics[0]
+    DAILY_TOPIC = stastics[2]
+
     last_sent = load_last_sent()
     LOG.info("Starting polling for %s, poll interval=%ss, bootstrap=%s", TICKER, POLL_INTERVAL, BOOTSTRAP_SERVERS)
 
     ticker = yf.Ticker(TICKER)
     
-    # Gửi dữ liệu lịch sử trước
-    send_historical_data()
-    
-    # current data và historical data để tính features
-    # hiện tại ko tính features nữa nên ko cần
-
-    # Lấy dữ liệu lịch sử cho việc tính features
-    # historical_data = ticker.history(period="1mo")
-    
     sent_count = 0
-    # batch_counter = 0
     new_last = None
     try:    
         while True:
@@ -164,36 +164,9 @@ def fetch_and_send():
                 else:
                     ts_dt = ts.to_pydatetime()
 
-                # Kiểm tra nếu đã gửi rồi thì bỏ qua
-                # if ts_dt in hist[time_col].to_list():
-                #     continue
-
                 if last_sent is not None and ts_dt <= last_sent:
                     time.sleep(POLL_INTERVAL)
                     continue
-
-                # # Chuẩn bị dữ liệu cơ bản
-                # current_data = pd.Series({
-                #     'Open': float(latest_row['Open']),
-                #     'High': float(latest_row['High']),
-                #     'Low': float(latest_row['Low']),
-                #     'Close': float(latest_row['Close']),
-                #     'Volume': float(latest_row['Volume'])
-                # })
-
-                # Tính toán features
-                # features = calculate_features(current_data, historical_data)
-                
-                # Chuẩn bị record để gửi
-                # record = {
-                #     'timestamp': ts_dt.isoformat(),
-                #     'Open': float(latest_row['Open']),
-                #     'High': float(latest_row['High']),
-                #     'Low': float(latest_row['Low']),
-                #     'Close': float(latest_row['Close']),
-                #     'Volume': float(latest_row['Volume']),
-                #     **features  # Thêm các features đã tính toán
-                # }
 
                 record = {
                     "Date": ts_dt.strftime("%Y-%m-%d %H:%M:%S"),
@@ -214,13 +187,7 @@ def fetch_and_send():
                 LOG.info("Sent record to daily_prices: %s", record)
 
                 sent_count += 1
-                # batch_counter += 1
                 new_last = ts_dt
-
-                # flush periodically to ensure delivery and limit memory
-                # if batch_counter >= 100:
-                #     producer.flush()
-                #     batch_counter = 0
 
             # update last_sent if we sent new records
             if new_last and (last_sent is None or new_last > last_sent):
@@ -234,6 +201,20 @@ def fetch_and_send():
             time.sleep(POLL_INTERVAL)
     except KeyboardInterrupt:
         LOG.info("Stopping on user interrupt")
+    producer.flush()
+    
         
 if __name__ == "__main__":
-    fetch_and_send()
+    # Thực hiện đẩy historical data lên trước để train
+    for company in companies.keys():
+        send_historical_data(company)
+        
+    # Sau đó mới cập nhật dữ liệu mới liên tục từ yahoo finance
+    threads = []
+    for company in companies.keys():
+        t = threading.Thread(target=fetch_and_send, args=(company,), daemon=True)
+        t.start()
+        threads.append(t)
+    
+    # for t in threads:
+    #     t.join()

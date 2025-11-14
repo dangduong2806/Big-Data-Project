@@ -92,28 +92,102 @@ services:
     depends_on:
       - spark-master
 
-  model-service:
+  # sửa phần này
+  model-service-gspc:
     build: ./model_service
     ports:
       - "8000:8000"
     environment:
+      - PORT=8000
       - KAFKA_BOOTSTRAP=kafka:9092
-      - INPUT_TOPIC=daily_prices
-      - OUTPUT_TOPIC=predictions
+      - COMPANY=GSPC
+      - INPUT_TOPIC=daily_prices_GSPC
+      # - OUTPUT_TOPIC=predictions
       # Sửa phần này
       - WINDOW_SIZE=3
     volumes:
       - ./model_service:/app
     depends_on:
       - kafka
+      - spark-master
+    # Thêm phần này
+    user: root
+  model-service-xom:
+    build: ./model_service
+    ports:
+      - "8001:8000"
+    environment:
+      - PORT=8001
+      - KAFKA_BOOTSTRAP=kafka:9092
+      - COMPANY=XOM
+      - INPUT_TOPIC=daily_prices_XOM
+      # - OUTPUT_TOPIC=predictions
+      # Sửa phần này
+      - WINDOW_SIZE=3
+    volumes:
+      - ./model_service:/app
+    depends_on:
+      - kafka
+      - spark-master
+    # thêm phần này
+    user: root
+  model-service-cvx:
+    build: ./model_service
+    ports:
+      - "8002:8000"
+    environment:
+      - PORT=8002
+      - KAFKA_BOOTSTRAP=kafka:9092
+      - COMPANY=CVX
+      - INPUT_TOPIC=daily_prices_CVX
+      # - OUTPUT_TOPIC=predictions
+      # Sửa phần này
+      - WINDOW_SIZE=3
+    volumes:
+      - ./model_service:/app
+    depends_on:
+      - kafka
+      - spark-master
+    # Thêm phần này
+    user: root
+  model-service-bp:
+    build: ./model_service
+    ports:
+      - "8003:8000"
+    environment:
+      - PORT=8003
+      - KAFKA_BOOTSTRAP=kafka:9092
+      - COMPANY=BP
+      - INPUT_TOPIC=daily_prices_BP
+      # - OUTPUT_TOPIC=predictions
+      # Sửa phần này
+      - WINDOW_SIZE=3
+    volumes:
+      - ./model_service:/app
+    depends_on:
+      - kafka
+      - spark-master 
+    # Thêm phần này
+    user: root   
 
   kafka-producer:
     build: ./kafka-producer
     environment:
       - BOOTSTRAP_SERVERS=kafka:9092
-      - HISTORICAL_TOPIC=historical_prices
-      - DAILY_TOPIC=daily_prices
+      - HISTORICAL_TOPIC_GSPC=historical_prices_GSPC
+      - DAILY_TOPIC_GSPC=daily_prices_GSPC
       - TICKER=^GSPC
+      # Thêm phần này
+      - TICKER_XOM=XOM #XOM
+      - HISTORICAL_TOPIC_XOM=historical_prices_XOM
+      - DAILY_TOPIC_XOM=daily_prices_XOM
+      - TICKER_CVX=CVX #CVX
+      - HISTORICAL_TOPIC_CVX=historical_prices_CVX
+      - DAILY_TOPIC_CVX=daily_prices_CVX
+      - TICKER_BP=BP #BP
+      - HISTORICAL_TOPIC_BP=historical_prices_BP
+      - DAILY_TOPIC_BP=daily_prices_BP
+
       - POLL_INTERVAL_SECONDS=60
     volumes:
       - ./kafka-producer:/app
@@ -158,8 +232,52 @@ services:
     environment:
       - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
       - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
-      - MODEL_SAVE_PATH=/models/risk_model.joblib
+      # Bỏ đường dẫn này
+      # - MODEL_SAVE_PATH=/models/risk_model.joblib
     user: root
+
+  # Thêm fraud-detection
+  fraud-train:
+    build: ./fraud-train
+    container_name: fraud-train
+    environment:
+      DATA_PATH: /app/data/train_transaction.csv
+      MODEL_PATH: /app/model/fraud_xgb_pipeline.pkl
+    volumes:
+      - ./data:/app/data      # mount dữ liệu vào container
+      - ./model:/app/model    # mount thư mục model ra local
+    command: python train_fraud_model.py
+    
+  # Thêm fraud-inference
+  fraud-inference:
+    build: ./fraud-inference
+    container_name: fraud-app
+    environment:
+      - MODEL_PATH=/app/model/fraud_xgb_pipeline.pkl
+      - BOOTSTRAP_SERVERS=kafka:9092
+    volumes:
+      - ./model:/app/model
+    ports:
+      - "8060:8060"
+    depends_on:
+      - kafka
+      - fraud-train
+    user: root
+  
+  fraud-producer:
+    build: ./fraud-inference
+    command: ["python", "kafka_producer.py"]
+    depends_on:
+      - kafka
+    volumes:
+      - ./data:/app/data
+  
+  fraud-consumer:
+    build: ./fraud-inference
+    command: ["python", "kafka_consumer.py"]
+    depends_on:
+      - kafka
+      - fraud-inference
 
 volumes:
   namenode:

@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+joblib
+pandas
+xgboost
+scikit-learn
+kafka-python
+requests

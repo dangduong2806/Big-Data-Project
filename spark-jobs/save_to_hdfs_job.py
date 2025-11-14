@@ -16,6 +16,8 @@ def create_spark_session():
 def create_schema():
     """Định nghĩa schema cho dữ liệu từ Kafka"""
     return StructType([
+        # Thêm tin công ty
+        StructField("Company", StringType(), True),
         StructField("timestamp", StringType(), True),
         StructField("Open", DoubleType(), True),
         StructField("High", DoubleType(), True),
@@ -46,20 +48,24 @@ import logging
 # Cấu hình logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def main():
+companies = ["GSPC", "XOM", "CVX", "BP"]
+
+def main(company : str, spark):
     try:
         logging.info("Starting Spark Session creation...")
         # Tạo Spark Session
-        spark = create_spark_session()
-        logging.info("Spark Session created successfully")
+        # spark = create_spark_session()
+        if spark is not None:
+            logging.info("Spark Session created successfully")
         
         logging.info("Reading data from Kafka topic 'historical_prices'...")
+        historical_topic = "historical_prices_" + company
         # Đọc dữ liệu từ Kafka (sử dụng batch read thay vì streaming)
         df = spark \
             .read \
             .format("kafka") \
             .option("kafka.bootstrap.servers", "kafka:9092") \
-            .option("subscribe", "historical_prices") \
+            .option("subscribe", historical_topic) \
             .option("startingOffsets", "earliest") \
             .option("endingOffsets", "latest") \
             .load()
@@ -101,9 +107,10 @@ def main():
         
         logging.info("Writing data to HDFS...")
         # Lưu trực tiếp vào HDFS (không cần streaming)
+        # Sửa mode từ overwrite sang append.
         processed_df.write \
-            .partitionBy("year", "month", "day") \
-            .mode("overwrite") \
+            .partitionBy("Company","year", "month", "day") \
+            .mode("append") \
             .parquet("hdfs://namenode:9000/data/raw/stock_data")
             
         logging.info("Data successfully written to HDFS")
@@ -112,4 +119,6 @@ def main():
         logging.error(f"An error occurred: {str(e)}", exc_info=True)
 
 if __name__ == "__main__":
-    main()
+    spark = create_spark_session()
+    for company in companies:
+        main(company, spark)

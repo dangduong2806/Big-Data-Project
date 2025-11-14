@@ -1,15 +1,16 @@
-FROM python:3.10-slim
-
+FROM apache/spark:3.5.0
 WORKDIR /app
 
-# Install system dependencies required for numpy/pandas
+USER root
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc build-essential && \
+    apt-get install -y python3-pip && \
     rm -rf /var/lib/apt/lists/*
+
+ENV PYTHONPATH="${PYTHONPATH}:/opt/spark/python/"
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["uvicorn", "serve:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "inference:app", "--host", "0.0.0.0", "--port", "8000"]

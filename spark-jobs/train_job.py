@@ -1,21 +1,17 @@
 import os
 import logging
-import pandas as pd
 from pyspark.sql import SparkSession
-import joblib
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import average_precision_score
 
-from sklearn.metrics import (
-    classification_report,
-    accuracy_score,
-    precision_score,
-    recall_score,
-    f1_score,
-    roc_auc_score,
-    confusion_matrix,
-)
+# Thêm phần này
+from pyspark.sql import functions as F
+from pyspark.sql.window import Window
+from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.classification import RandomForestClassifier
+from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
+from pyspark.ml import Pipeline
+
+import math
+from functools import reduce
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("train_job")
@@ -44,101 +40,148 @@ def read_parquet_with_fallback(primary, fallback):
         logger.info("Trying fallback path %s", fallback)
         return spark.read.parquet(fallback)
 
+# Không convert toàn bộ sang pandas luôn mà xử lý trên pyspark dataframe, 
+# rồi mới sample sang pandas để huấn luyênj
 
 df_spark = read_parquet_with_fallback(TRAIN_PARQUET_PATH, FALLBACK_PARQUET_PATH)
-df = df_spark.toPandas()
+# Kiểm tra cột Company có trong df_spark không
+if 'Company' not in df_spark.columns:
+    raise RuntimeError("Missing 'Company' column in dataset. Each record must belong to a company.")
 
-# Normalize time column: accept 'Date' or 'timestamp'
-if 'Date' in df.columns:
-    time_col = 'Date'
-elif 'timestamp' in df.columns:
-    time_col = 'timestamp'
-else:
-    # fallback to first column if it looks like a datetime index
-    time_col = df.columns[0]
+companies = df_spark.select("Company").distinct().rdd.flatMap(lambda x: x).collect()
+logger.info(f"Found {len(companies)} companies: {companies}")
 
-# ensure datetime and sort
-try:
-    df[time_col] = pd.to_datetime(df[time_col])
-    df = df.sort_values(time_col)
-except Exception:
-    logger.warning("Could not parse/convert time column %s; proceeding without sorting", time_col)
+for company in companies:
+    logger.info(f"====================== Training model for {company} ======================")
 
-# Feature columns that streaming producer already writes
-feature_cols = ['Daily_Return', 'Volatility_Cluster', 'Volume_Based_Volatility']
+    df_company = df_spark.filter(F.col("Company") == company)
 
-# If features exist already in HDFS, skip recomputing them to avoid duplication.
-missing_features = [c for c in feature_cols if c not in df.columns]
-if len(missing_features) == 0:
-    logger.info("Found precomputed feature columns in HDFS; skipping feature recomputation")
-else:
-    logger.info("Missing feature columns (%s). Computing features now.", missing_features)
+    count_before = df_company.count()
+    logger.info(f"{company}: raw data count = {count_before}")
+
+    # Normalize time column: accept 'Date' or 'timestamp'
+    if 'Date' in df_company.columns:
+        time_col = 'Date'
+    elif 'timestamp' in df_company.columns:
+        time_col = 'timestamp'
+    else:
+        # fallback to first column if it looks like a datetime index
+        time_col = df_company.columns[0]
+
+    # ensure datetime and sort
+    try:
+        # df_company[time_col] = pd.to_datetime(df_company[time_col])
+        # df_company = df_company.sort_values(time_col)
+        windowSpec = Window.orderBy(time_col)
+    except Exception:
+        logger.warning("Could not parse/convert time column %s; proceeding without sorting", time_col)
+
+    # Feature columns that streaming producer already writes
+    feature_cols = ['Daily_Return', 'Volatility_Cluster', 'Volume_Based_Volatility']
+
+    # If features exist already in HDFS, skip recomputing them to avoid duplication.
+    
     # compute features based on Close and Volume
     # ensure Close and Volume exist
-    if 'Close' not in df.columns or 'Volume' not in df.columns:
+    if 'Close' not in df_company.columns or 'Volume' not in df_company.columns:
         raise RuntimeError("Input data must contain 'Close' and 'Volume' to compute features")
 
     # compute Daily_Return and rolling features
-    df['Daily_Return'] = df['Close'].pct_change()
-    df['Volatility_Cluster'] = df['Daily_Return'].rolling(21).std() * (252**0.5)
-    df['Volume_Based_Volatility'] = df['Volume'].rolling(21).std() / df['Volume'].rolling(21).mean()
+    # --- Daily_Return ---
+    df_company = df_company.withColumn("Daily_Return",
+                                    (F.col("Close") - F.lag("Close").over(windowSpec)) / F.lag("Close").over(windowSpec))
+    # --- Volatility_Cluster (rolling 21 ngày std) ---
+    rolling_window = Window.orderBy("timestamp").rowsBetween(-20, 0)  # 21 rows including current
+    df_company = df_company.withColumn(
+        "Volatility_Cluster",
+        F.stddev("Daily_Return").over(rolling_window) * math.sqrt(252)
+    )
+    # --- Volume_Based_Volatility ---
+    df_company = df_company.withColumn("Volume_Based_Volatility",
+                                    F.stddev("Volume").over(rolling_window) / F.mean("Volume").over(rolling_window))
+        
+    # create label: risk in next 3 days (>=5% drop)
+    # window_future = Window.orderBy("timestamp").rowsBetween(1, 5)  # 5 ngày tương lai
+    # df_company = df_company.withColumn("Future_Min_Return",
+    #                                    F.min((F.col("Close") - F.lag("Close", -1).over(windowSpec)) / F.col("Close")).over(window_future))
+    
+    # df_company = df_company.withColumn("Risk_Event", F.when(F.col("Future_Min_Return") <= -0.03, 1).otherwise(0))
+    future_returns = [F.lead("Close", i).over(windowSpec) / F.col("Close") - 1 for i in range(1,3)]
+    df_company = df_company.withColumn("Future_Min_Return", reduce(lambda a,b: F.least(a,b), future_returns))
+    df_company = df_company.withColumn("Risk_Event", F.when(F.col("Future_Min_Return") <= -0.02, 1).otherwise(0))
+    
+    # Prepare columns for training
+    # Chỉ xóa NaN các cột quan trọng
+    df_company = df_company.select(feature_cols + ["Risk_Event"]).dropna(subset=feature_cols)
+    # Thay bằng giá trị 0
+    df_company = df_company.fillna({"Daily_Return": 0, "Volatility_Cluster":0, "Volume_Based_Volatility": 0})
 
-# create label: risk in next 3 days (>=5% drop)
-threshold = -0.03
-window = 5
-for i in range(1, window+1):
-    df[f'{i}d_ret'] = df['Close'].shift(-i) / df['Close'] - 1
-df['Future_Min_Return'] = df[[f'{i}d_ret' for i in range(1, window+1)]].min(axis=1)
-df['Risk_Event'] = (df['Future_Min_Return'] <= threshold).astype(int)
+    if df_company.count() == 0:
+        logger.info(f"{company} dữ liệu sau khi tính toán đặc trưng bị NaN hết")
+    else:
+        logger.info(f"Dữ liệu {company} chuẩn bị để train")
+    
+    # Không Convert sang Pandas để train, dùng Pyspark MLlib
+    # để train và lưu model trên hdfs 
+    # --- Assemble features ---
+    assembler = VectorAssembler(inputCols=feature_cols, outputCol="Features")
+    df_vector = assembler.transform(df_company).select("Features", "Risk_Event")
+    train_df, test_df = df_vector.randomSplit([0.6, 0.4], seed=42)
 
-# Prepare columns for training
-cols = feature_cols + ['Risk_Event']
-df = df.dropna(subset=cols)
+    if train_df.count() == 0:
+        logger.info("Dataset trống, không thể train model.")
+        raise ValueError("Dataset trống, không thể train model.")
+    # Train model
+    try:
+        logger.info("Training Random Forest model...")
+        # --- Model: RandomForest (Spark MLlib) ---
+        rf = RandomForestClassifier(
+            labelCol="Risk_Event",
+            featuresCol="Features",
+            numTrees=200,
+            maxDepth=6,
+            seed=42
+        )
+        # --- Pipeline (có thể mở rộng sau này) ---
+        pipeline = Pipeline(stages=[rf])
+        model = pipeline.fit(train_df)
+        # Evaluate on the hold-out test set
+        logger.info("Evaluating model on test set")
+        preds = model.transform(test_df)
 
-X = df[feature_cols]
-y = df['Risk_Event']
+        # Tính các chỉ số metrics
+        binary_eval = BinaryClassificationEvaluator(
+            labelCol="Risk_Event",
+            rawPredictionCol="rawPrediction",
+            metricName="areaUnderROC"
+        )
+        auc = binary_eval.evaluate(preds)
+        # Multiclass evaluator (cho accuracy, precision, recall, f1)
+        multi_eval = MulticlassClassificationEvaluator(
+            labelCol="Risk_Event",
+            predictionCol="prediction"
+        )
+        accuracy = multi_eval.setMetricName("accuracy").evaluate(preds)
+        precision = multi_eval.setMetricName("weightedPrecision").evaluate(preds)
+        recall = multi_eval.setMetricName("weightedRecall").evaluate(preds)
+        f1 = multi_eval.setMetricName("f1").evaluate(preds)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, shuffle=True)
-# split_date = "2024-01-01"
-# train = df[df.index < split_date]
-# test = df[df.index >= split_date]
+        logger.info(f"=== Evaluation Metrics for {company} ===")
+        logger.info(f"AUC: {auc:.4f}")
+        logger.info(f"Accuracy: {accuracy:.4f}")
+        logger.info(f"Precision: {precision:.4f}")
+        logger.info(f"Recall: {recall:.4f}")
+        logger.info(f"F1 Score: {f1:.4f}")
 
-# Train model
-try:
-    logger.info("Training Random Forest model...")
-    model = RandomForestClassifier(n_estimators=200, max_depth=6, random_state=42, class_weight='balanced')
-    model.fit(X_train, y_train)
+        # Save model to HDFS
+        # path = f"/models/{company}_risk_model.joblib"
+        # model_path = os.environ.get('MODEL_SAVE_PATH', path)
+        # os.makedirs(os.path.dirname(model_path), exist_ok=True)
+        model_path = f"hdfs://namenode:9000/models/{company}_risk_model"
+        model.write().overwrite().save(model_path)
+        # joblib.dump(model, model_path)
+        logger.info("Model training and saving completed successfully")
 
-    # Evaluate on the hold-out test set
-    logger.info("Evaluating model on test set (size=%d)", X_test.shape[0])
-    y_pred = model.predict(X_test)
-    y_proba = model.predict_proba(X_test)[:, 1]
-
-    acc = accuracy_score(y_test, y_pred)
-    prec = precision_score(y_test, y_pred, zero_division=0)
-    rec = recall_score(y_test, y_pred, zero_division=0)
-    f1 = f1_score(y_test, y_pred, zero_division=0)
-    # rocauc = roc_auc_score(y_test, y_proba)
-    pr_auc = average_precision_score(y_test, y_proba)
-
-    cm = confusion_matrix(y_test, y_pred)
-
-    logger.info("Test Accuracy: %.4f", acc)
-    logger.info("Test Precision: %.4f", prec)
-    logger.info("Test Recall: %.4f", rec)
-    logger.info("Test F1: %.4f", f1)
-    # logger.info("Test ROC AUC: %.4f", rocauc)
-    logger.info("Test PR AUC: %.4f", pr_auc)
-    logger.info("Confusion Matrix:\n%s", cm)
-    logger.info("Classification Report:\n%s", classification_report(y_test, y_pred, zero_division=0))
-
-    # Save model
-    model_path = os.environ.get('MODEL_SAVE_PATH', '/models/risk_model.joblib')
-    os.makedirs(os.path.dirname(model_path), exist_ok=True)
-    logger.info("Saving model to %s", model_path)
-    joblib.dump(model, model_path)
-    logger.info("Model training and saving completed successfully")
-
-except Exception as e:
-    logger.exception("Failed during model training or saving: %s", e)
-    raise
+    except Exception as e:
+        logger.exception("Failed during model training or saving: %s", e)
+        raise
