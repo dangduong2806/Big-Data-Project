@@ -1,4 +1,93 @@
 services:
+  postgres-airflow:
+    image: postgres:13
+    container_name: postgres-airflow
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432" # Dùng cổng 5433 để tránh trùng lặp
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  airflow-init:
+    image: apache/airflow:2.8.1
+    container_name: airflow-init
+    depends_on:
+      - postgres-airflow
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - AIRFLOW_USER_HOME_DIR=/opt/airflow
+    command: >
+      bash -c "
+        airflow db init &&
+        airflow users create \
+          -u admin \
+          -f Admin \
+          -l User \
+          -r Admin \
+          -e admin@example.org \
+          -p admin
+      "
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    
+  airflow-webserver:
+    image: apache/airflow:2.8.1
+    container_name: airflow-webserver
+    restart: always
+    depends_on:
+      - postgres-airflow
+      - airflow-init
+    ports:
+      - "8081:8080" # Dùng cổng 8081 cho UI (vì 8080 là của Spark-Master)
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - AIRFLOW__WEBSERVER__SECRET_KEY=itsAsecret!!
+      - AIRFLOW_USER_HOME_DIR=/opt/airflow
+    command: airflow webserver
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  airflow-scheduler:
+    image: apache/airflow:2.8.1
+    container_name: airflow-scheduler
+    restart: always
+    depends_on:
+      - postgres-airflow
+      - airflow-init
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock # <-- Rất quan trọng
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow:5432/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=false
+      - AIRFLOW_USER_HOME_DIR=/opt/airflow
+    # Cần cài thêm 'docker' vào image Airflow
+    # Tạm thời chưa cần nếu dùng DockerOperator
+    command: airflow scheduler
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
     environment:
@@ -100,12 +189,22 @@ services:
       - KAFKA_BOOTSTRAP=kafka:9092
       - INPUT_TOPIC=daily_prices
       - OUTPUT_TOPIC=predictions
-      # Sửa phần này
-      - WINDOW_SIZE=3
+      - WINDOW_SIZE=21
+      # --- THÊM CÁC DÒNG NÀY ---
+      - REDIS_HOST=redis
+      - MODEL_PATH=/models/risk_model.joblib
+      - FEATURES_PATH=/models/model_features.json
+      # --- HẾT THÊM ---
     volumes:
       - ./model_service:/app
+      # --- THÊM DÒNG NÀY (RẤT QUAN TRỌNG) ---
+      # Đây là thư mục mà train_job (Airflow) ghi model vào
+      # và service này cần đọc model từ đó
+      - ./model_service:/models
+      # --- HẾT THÊM ---
     depends_on:
       - kafka
+      - redis
 
   kafka-producer:
     build: ./kafka-producer
@@ -113,55 +212,99 @@ services:
       - BOOTSTRAP_SERVERS=kafka:9092
       - HISTORICAL_TOPIC=historical_prices
       - DAILY_TOPIC=daily_prices
-      - TICKER=^GSPC
-      - POLL_INTERVAL_SECONDS=60
+      # --- SỬA PHẦN NÀY ---
+      # Xóa dòng "TICKER=^GSPC" cũ
+      # Thêm dòng "TICKERS" mới (với danh sách các công ty)
+      - TICKERS=^GSPC,AAPL,MSFT,GOOG
+      # --- HẾT SỬA ---
+      - POLL_INTERVAL_SECONDS=5
+      - PERSIST_LAST_FILE=/app/state/last_sent.json
     volumes:
       - ./kafka-producer:/app
+      - ./kafka-producer-state:/app/state
     depends_on:
       - kafka
+    
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
 
-  spark-jobs:
-    build: ./spark-jobs
+  prediction_saver:
+    build: ./prediction_saver
+    container_name: prediction_saver
     depends_on:
-      - spark-master
-      - namenode
       - kafka
-      # Thêm cái này (không chắc)
-      - kafka-producer
+      - redis
     environment:
-      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
-      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
-    volumes:
-      - ./spark-jobs:/app
-      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
-    command: >
-      /opt/spark/bin/spark-submit
-      --master spark://spark-master:7077
-      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
-      /app/save_to_hdfs_job.py
+      - KAFKA_BOOTSTRAP=kafka:9092
+      - INPUT_TOPIC=predictions
+      - REDIS_HOST=redis
 
-  train-job:
-    build: ./spark-jobs
-    depends_on:
-      - spark-master
-      - namenode
-      - spark-jobs
-    command: >
-      /opt/spark/bin/spark-submit
-      --master spark://spark-master:7077
-      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
-      /app/train_job.py
-    volumes:
-      - ./model_service:/models
-      - ./spark-jobs:/app
-      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
+  historical-service:
+    build: ./historical_service
+    container_name: historical-service
+    ports:
+      - "8001:8001" # <-- Mở cổng 8001
     environment:
-      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
-      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
-      - MODEL_SAVE_PATH=/models/risk_model.joblib
-    user: root
+      # (Không cần env, vì code Flask đã hardcode HDFS path)
+      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000
+      - HADOOP_CONF_DIR=/opt/hadoop/conf
+    volumes:
+      - hadoop_conf:/opt/hadoop/conf  # <-- Rất quan trọng, để Spark nói chuyện với HDFS
+    depends_on:
+      - namenode
+      - datanode
+      - spark-master
+    networks:
+      - default
+
+  fraud-api:
+    build: ./fraud-api
+    container_name: fraud-api
+    networks:
+      - default  # <-- Kết nối vào mạng chung
+    volumes:
+      # Mount thư mục chứa model .pkl vào container
+      - ./fraud-api/model:/app/model
+    ports:
+      - "8060:8060" # Mở cổng 8060
+    depends_on:
+      - kafka # (Mặc dù không trực tiếp, nhưng để đảm bảo thứ tự)
+
+  fraud-consumer:
+    build: ./fraud-consumer
+    container_name: fraud-consumer
+    networks:
+      - default # <-- Kết nối vào mạng chung
+    depends_on:
+      - kafka
+      - fraud-api # <-- Phải chờ API sẵn sàng
+    # Service này không cần port, nó chạy ngầm
+
+  fraud-producer:
+    build: ./fraud-producer
+    container_name: fraud-producer
+    networks:
+      - default # <-- Kết nối vào mạng chung
+    volumes:
+      # Mount thư mục chứa data CSV vào container
+      - ./fraud-producer/data:/app/data
+    depends_on:
+      - kafka
+      - fraud-api # Chờ API sẵn sàng rồi mới bắt đầu gửi
 
 volumes:
   namenode:
   datanode:
   hadoop_conf:  # Volume mới để chia sẻ cấu hình HDFS
+  kafka-producer-state: {}
+  postgres_db:
+  redis_data:
+
+networks:
+  default:
+    name: big-data-project_default

@@ -1,0 +1,509 @@
+[2025-11-10T10:49:23.850+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: spark_batch_pipeline.train_model scheduled__2025-11-09T00:00:00+00:00 [queued]>
+[2025-11-10T10:49:23.859+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: spark_batch_pipeline.train_model scheduled__2025-11-09T00:00:00+00:00 [queued]>
+[2025-11-10T10:49:23.859+0000] {taskinstance.py:2170} INFO - Starting attempt 2 of 2
+[2025-11-10T10:49:23.874+0000] {taskinstance.py:2191} INFO - Executing <Task(DockerOperator): train_model> on 2025-11-09 00:00:00+00:00
+[2025-11-10T10:49:23.881+0000] {standard_task_runner.py:60} INFO - Started process 710 to run task
+[2025-11-10T10:49:23.883+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'spark_batch_pipeline', 'train_model', 'scheduled__2025-11-09T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/spark_batch_dag.py', '--cfg-path', '/tmp/tmpvqreab7m']
+[2025-11-10T10:49:23.885+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask train_model
+[2025-11-10T10:49:23.901+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:194 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-11-10T10:49:23.932+0000] {task_command.py:423} INFO - Running <TaskInstance: spark_batch_pipeline.train_model scheduled__2025-11-09T00:00:00+00:00 [running]> on host 81ad460b69d6
+[2025-11-10T10:49:24.013+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='spark_batch_pipeline' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-11-09T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-09T00:00:00+00:00'
+[2025-11-10T10:49:24.060+0000] {docker.py:359} INFO - Starting docker container from image apache/spark:3.5.0
+[2025-11-10T10:49:24.071+0000] {docker.py:367} WARNING - Using remote engine or docker-in-docker and mounting temporary volume from host is not supported. Falling back to `mount_tmp_dir=False` mode. You can set `mount_tmp_dir` parameter to False to disable mounting and remove the warning
+[2025-11-10T10:49:25.713+0000] {docker.py:429} INFO - :: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-11-10T10:49:25.781+0000] {docker.py:429} INFO - Ivy Default Cache set to: /root/.ivy2/cache
+The jars for the packages stored in: /root/.ivy2/jars
+[2025-11-10T10:49:25.786+0000] {docker.py:429} INFO - org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
+org.apache.hadoop#hadoop-client added as a dependency
+[2025-11-10T10:49:25.787+0000] {docker.py:429} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-3b9eb428-0e65-462c-9b8e-72cd2338847d;1.0
+	confs: [default]
+[2025-11-10T10:49:25.658+0000] {docker.py:429} INFO - found org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 in central
+[2025-11-10T10:49:25.982+0000] {docker.py:429} INFO - found org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 in central
+[2025-11-10T10:49:26.299+0000] {docker.py:429} INFO - found org.apache.kafka#kafka-clients;3.4.1 in central
+[2025-11-10T10:49:26.602+0000] {docker.py:429} INFO - found org.lz4#lz4-java;1.8.0 in central
+[2025-11-10T10:49:26.923+0000] {docker.py:429} INFO - found org.xerial.snappy#snappy-java;1.1.10.3 in central
+[2025-11-10T10:49:28.034+0000] {docker.py:429} INFO - found org.slf4j#slf4j-api;2.0.7 in central
+[2025-11-10T10:49:30.542+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client-runtime;3.3.4 in central
+[2025-11-10T10:49:30.749+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client-api;3.3.4 in central
+[2025-11-10T10:49:32.158+0000] {docker.py:429} INFO - found commons-logging#commons-logging;1.1.3 in central
+[2025-11-10T10:49:32.362+0000] {docker.py:429} INFO - found com.google.code.findbugs#jsr305;3.0.0 in central
+[2025-11-10T10:49:34.754+0000] {docker.py:429} INFO - found org.apache.commons#commons-pool2;2.11.1 in central
+[2025-11-10T10:49:36.141+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client;3.3.4 in central
+[2025-11-10T10:49:36.338+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-common;3.3.4 in central
+[2025-11-10T10:49:38.654+0000] {docker.py:429} INFO - found org.apache.hadoop.thirdparty#hadoop-shaded-protobuf_3_7;1.1.1 in central
+[2025-11-10T10:49:38.855+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-annotations;3.3.4 in central
+[2025-11-10T10:49:39.176+0000] {docker.py:429} INFO - found org.apache.hadoop.thirdparty#hadoop-shaded-guava;1.1.1 in central
+[2025-11-10T10:49:41.771+0000] {docker.py:429} INFO - found com.google.guava#guava;27.0-jre in central
+[2025-11-10T10:49:42.608+0000] {docker.py:429} INFO - found com.google.guava#failureaccess;1.0 in central
+[2025-11-10T10:49:42.815+0000] {docker.py:429} INFO - found com.google.guava#listenablefuture;9999.0-empty-to-avoid-conflict-with-guava in central
+[2025-11-10T10:49:43.713+0000] {docker.py:429} INFO - found com.google.code.findbugs#jsr305;3.0.2 in central
+[2025-11-10T10:49:43.900+0000] {docker.py:429} INFO - found org.checkerframework#checker-qual;2.5.2 in central
+[2025-11-10T10:49:44.203+0000] {docker.py:429} INFO - found com.google.j2objc#j2objc-annotations;1.1 in central
+[2025-11-10T10:49:46.717+0000] {docker.py:429} INFO - found org.codehaus.mojo#animal-sniffer-annotations;1.17 in central
+[2025-11-10T10:49:49.130+0000] {docker.py:429} INFO - found commons-cli#commons-cli;1.2 in central
+[2025-11-10T10:49:52.627+0000] {docker.py:429} INFO - found org.apache.commons#commons-math3;3.1.1 in central
+[2025-11-10T10:49:54.258+0000] {docker.py:429} INFO - found org.apache.httpcomponents#httpclient;4.5.13 in central
+[2025-11-10T10:49:52.940+0000] {docker.py:429} INFO - found org.apache.httpcomponents#httpcore;4.4.13 in central
+[2025-11-10T10:49:53.159+0000] {docker.py:429} INFO - found commons-codec#commons-codec;1.15 in central
+[2025-11-10T10:49:53.476+0000] {docker.py:429} INFO - found commons-io#commons-io;2.8.0 in central
+[2025-11-10T10:49:54.369+0000] {docker.py:429} INFO - found commons-net#commons-net;3.6 in central
+[2025-11-10T10:49:56.818+0000] {docker.py:429} INFO - found commons-collections#commons-collections;3.2.2 in central
+[2025-11-10T10:49:58.151+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-servlet;9.4.43.v20210629 in central
+[2025-11-10T10:49:58.331+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-security;9.4.43.v20210629 in central
+[2025-11-10T10:49:58.621+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-util-ajax;9.4.43.v20210629 in central
+[2025-11-10T10:49:58.948+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-webapp;9.4.43.v20210629 in central
+[2025-11-10T10:49:59.262+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-xml;9.4.43.v20210629 in central
+[2025-11-10T10:50:01.791+0000] {docker.py:429} INFO - found com.sun.jersey#jersey-servlet;1.19 in central
+[2025-11-10T10:50:01.994+0000] {docker.py:429} INFO - found ch.qos.reload4j#reload4j;1.2.22 in central
+[2025-11-10T10:50:04.290+0000] {docker.py:429} INFO - found commons-beanutils#commons-beanutils;1.9.4 in central
+[2025-11-10T10:50:05.649+0000] {docker.py:429} INFO - found org.apache.commons#commons-configuration2;2.1.1 in central
+[2025-11-10T10:50:06.966+0000] {docker.py:429} INFO - found org.apache.commons#commons-lang3;3.12.0 in central
+[2025-11-10T10:50:07.977+0000] {docker.py:429} INFO - found org.apache.commons#commons-text;1.4 in central
+[2025-11-10T10:50:09.522+0000] {docker.py:429} INFO - found org.slf4j#slf4j-reload4j;1.7.36 in central
+[2025-11-10T10:50:12.937+0000] {docker.py:429} INFO - found org.apache.avro#avro;1.7.7 in central
+[2025-11-10T10:50:13.127+0000] {docker.py:429} INFO - found org.codehaus.jackson#jackson-core-asl;1.9.13 in central
+[2025-11-10T10:50:13.414+0000] {docker.py:429} INFO - found org.codehaus.jackson#jackson-mapper-asl;1.9.13 in central
+[2025-11-10T10:50:15.953+0000] {docker.py:429} INFO - found com.thoughtworks.paranamer#paranamer;2.3 in central
+[2025-11-10T10:50:16.164+0000] {docker.py:429} INFO - found org.apache.commons#commons-compress;1.21 in central
+[2025-11-10T10:50:16.465+0000] {docker.py:429} INFO - found com.google.re2j#re2j;1.1 in central
+[2025-11-10T10:50:17.913+0000] {docker.py:429} INFO - found com.google.protobuf#protobuf-java;2.5.0 in central
+[2025-11-10T10:50:19.535+0000] {docker.py:429} INFO - found com.google.code.gson#gson;2.8.9 in central
+[2025-11-10T10:50:19.713+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-auth;3.3.4 in central
+[2025-11-10T10:50:20.019+0000] {docker.py:429} INFO - found com.nimbusds#nimbus-jose-jwt;9.8.1 in central
+[2025-11-10T10:50:20.425+0000] {docker.py:429} INFO - found com.github.stephenc.jcip#jcip-annotations;1.0-1 in central
+[2025-11-10T10:50:20.700+0000] {docker.py:429} INFO - found net.minidev#json-smart;2.4.7 in central
+[2025-11-10T10:50:21.007+0000] {docker.py:429} INFO - found net.minidev#accessors-smart;2.4.7 in central
+[2025-11-10T10:50:20.814+0000] {docker.py:429} INFO - found org.ow2.asm#asm;5.0.4 in central
+[2025-11-10T10:50:22.137+0000] {docker.py:429} INFO - found org.apache.curator#curator-framework;4.2.0 in central
+[2025-11-10T10:50:22.342+0000] {docker.py:429} INFO - found org.apache.curator#curator-client;4.2.0 in central
+[2025-11-10T10:50:24.851+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-simplekdc;1.0.1 in central
+[2025-11-10T10:50:25.033+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-client;1.0.1 in central
+[2025-11-10T10:50:26.470+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-config;1.0.1 in central
+[2025-11-10T10:50:26.640+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-core;1.0.1 in central
+[2025-11-10T10:50:26.934+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-pkix;1.0.1 in central
+[2025-11-10T10:50:27.230+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-asn1;1.0.1 in central
+[2025-11-10T10:50:27.543+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-util;1.0.1 in central
+[2025-11-10T10:50:27.933+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-common;1.0.1 in central
+[2025-11-10T10:50:28.247+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-crypto;1.0.1 in central
+[2025-11-10T10:50:28.560+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-util;1.0.1 in central
+[2025-11-10T10:50:30.071+0000] {docker.py:429} INFO - found org.apache.kerby#token-provider;1.0.1 in central
+[2025-11-10T10:50:30.266+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-admin;1.0.1 in central
+[2025-11-10T10:50:31.683+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-server;1.0.1 in central
+[2025-11-10T10:50:32.003+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-identity;1.0.1 in central
+[2025-11-10T10:50:32.317+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-xdr;1.0.1 in central
+[2025-11-10T10:50:32.616+0000] {docker.py:429} INFO - found org.apache.curator#curator-recipes;4.2.0 in central
+[2025-11-10T10:50:36.820+0000] {docker.py:429} INFO - found com.fasterxml.jackson.core#jackson-databind;2.12.7 in central
+[2025-11-10T10:50:37.009+0000] {docker.py:429} INFO - found com.fasterxml.jackson.core#jackson-annotations;2.12.7 in central
+[2025-11-10T10:50:37.320+0000] {docker.py:429} INFO - found com.fasterxml.jackson.core#jackson-core;2.12.7 in central
+[2025-11-10T10:50:38.846+0000] {docker.py:429} INFO - found org.codehaus.woodstox#stax2-api;4.2.1 in central
+[2025-11-10T10:50:40.218+0000] {docker.py:429} INFO - found com.fasterxml.woodstox#woodstox-core;5.3.0 in central
+[2025-11-10T10:50:40.397+0000] {docker.py:429} INFO - found dnsjava#dnsjava;2.1.7 in central
+[2025-11-10T10:50:42.747+0000] {docker.py:429} INFO - found jakarta.activation#jakarta.activation-api;1.2.1 in central
+[2025-11-10T10:50:42.953+0000] {docker.py:429} INFO - found javax.servlet.jsp#jsp-api;2.1 in central
+[2025-11-10T10:50:43.252+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-hdfs-client;3.3.4 in central
+[2025-11-10T10:50:45.856+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-yarn-api;3.3.4 in central
+[2025-11-10T10:50:46.044+0000] {docker.py:429} INFO - found javax.xml.bind#jaxb-api;2.2.11 in central
+[2025-11-10T10:50:46.349+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-yarn-client;3.3.4 in central
+[2025-11-10T10:50:47.838+0000] {docker.py:429} INFO - found org.eclipse.jetty.websocket#websocket-client;9.4.43.v20210629 in central
+[2025-11-10T10:50:48.013+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-client;9.4.43.v20210629 in central
+[2025-11-10T10:50:48.324+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-http;9.4.43.v20210629 in central
+[2025-11-10T10:50:48.637+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-util;9.4.43.v20210629 in central
+[2025-11-10T10:50:48.914+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-io;9.4.43.v20210629 in central
+[2025-11-10T10:50:49.225+0000] {docker.py:429} INFO - found org.eclipse.jetty.websocket#websocket-common;9.4.43.v20210629 in central
+[2025-11-10T10:50:49.541+0000] {docker.py:429} INFO - found org.eclipse.jetty.websocket#websocket-api;9.4.43.v20210629 in central
+[2025-11-10T10:50:47.902+0000] {docker.py:429} INFO - found org.jline#jline;3.9.0 in central
+[2025-11-10T10:50:49.241+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-mapreduce-client-core;3.3.4 in central
+[2025-11-10T10:50:49.438+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-yarn-common;3.3.4 in central
+[2025-11-10T10:50:50.498+0000] {docker.py:429} INFO - found javax.servlet#javax.servlet-api;3.1.0 in central
+[2025-11-10T10:50:50.673+0000] {docker.py:429} INFO - found com.sun.jersey#jersey-core;1.19 in central
+[2025-11-10T10:50:50.994+0000] {docker.py:429} INFO - found javax.ws.rs#jsr311-api;1.1.1 in central
+[2025-11-10T10:50:51.305+0000] {docker.py:429} INFO - found com.sun.jersey#jersey-client;1.19 in central
+[2025-11-10T10:50:52.823+0000] {docker.py:429} INFO - found com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.7 in central
+[2025-11-10T10:50:55.272+0000] {docker.py:429} INFO - found jakarta.xml.bind#jakarta.xml.bind-api;2.3.2 in central
+[2025-11-10T10:50:56.659+0000] {docker.py:429} INFO - found com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.7 in central
+[2025-11-10T10:50:57.182+0000] {docker.py:429} INFO - found com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.7 in central
+[2025-11-10T10:50:57.506+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-mapreduce-client-jobclient;3.3.4 in central
+[2025-11-10T10:50:57.807+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-mapreduce-client-common;3.3.4 in central
+[2025-11-10T10:50:58.031+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.5.0/spark-sql-kafka-0-10_2.12-3.5.0.jar ...
+[2025-11-10T10:50:58.347+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0!spark-sql-kafka-0-10_2.12.jar (520ms)
+[2025-11-10T10:50:58.432+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/3.3.4/hadoop-client-3.3.4.jar ...
+[2025-11-10T10:50:58.514+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client;3.3.4!hadoop-client.jar (167ms)
+[2025-11-10T10:50:58.592+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.5.0/spark-token-provider-kafka-0-10_2.12-3.5.0.jar ...
+[2025-11-10T10:50:58.690+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0!spark-token-provider-kafka-0-10_2.12.jar (175ms)
+[2025-11-10T10:50:58.781+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.1/kafka-clients-3.4.1.jar ...
+[2025-11-10T10:50:59.708+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kafka#kafka-clients;3.4.1!kafka-clients.jar (1018ms)
+[2025-11-10T10:50:59.792+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar ...
+[2025-11-10T10:50:59.891+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-pool2;2.11.1!commons-pool2.jar (183ms)
+[2025-11-10T10:50:59.976+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-runtime/3.3.4/hadoop-client-runtime-3.3.4.jar ...
+[2025-11-10T10:51:02.976+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-runtime;3.3.4!hadoop-client-runtime.jar (3084ms)
+[2025-11-10T10:51:03.082+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar ...
+[2025-11-10T10:51:03.243+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.lz4#lz4-java;1.8.0!lz4-java.jar (266ms)
+[2025-11-10T10:51:03.332+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.10.3/snappy-java-1.1.10.3.jar ...
+[2025-11-10T10:51:03.663+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.10.3!snappy-java.jar(bundle) (419ms)
+[2025-11-10T10:51:03.754+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.7/slf4j-api-2.0.7.jar ...
+[2025-11-10T10:51:03.854+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.slf4j#slf4j-api;2.0.7!slf4j-api.jar (191ms)
+[2025-11-10T10:51:03.955+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-api/3.3.4/hadoop-client-api-3.3.4.jar ...
+[2025-11-10T10:51:05.927+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-api;3.3.4!hadoop-client-api.jar (2073ms)
+[2025-11-10T10:51:06.023+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar ...
+[2025-11-10T10:51:06.114+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-logging#commons-logging;1.1.3!commons-logging.jar (186ms)
+[2025-11-10T10:51:06.205+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/3.3.4/hadoop-common-3.3.4.jar ...
+[2025-11-10T10:51:06.777+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-common;3.3.4!hadoop-common.jar (662ms)
+[2025-11-10T10:51:06.868+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs-client/3.3.4/hadoop-hdfs-client-3.3.4.jar ...
+[2025-11-10T10:51:07.519+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-hdfs-client;3.3.4!hadoop-hdfs-client.jar (741ms)
+[2025-11-10T10:51:07.603+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/3.3.4/hadoop-yarn-api-3.3.4.jar ...
+[2025-11-10T10:51:08.085+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-api;3.3.4!hadoop-yarn-api.jar (566ms)
+[2025-11-10T10:51:08.165+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/3.3.4/hadoop-yarn-client-3.3.4.jar ...
+[2025-11-10T10:51:08.273+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-client;3.3.4!hadoop-yarn-client.jar (188ms)
+[2025-11-10T10:51:08.357+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/3.3.4/hadoop-mapreduce-client-core-3.3.4.jar ...
+[2025-11-10T10:51:08.646+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-core;3.3.4!hadoop-mapreduce-client-core.jar (372ms)
+[2025-11-10T10:51:08.729+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/3.3.4/hadoop-mapreduce-client-jobclient-3.3.4.jar ...
+[2025-11-10T10:51:08.819+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-jobclient;3.3.4!hadoop-mapreduce-client-jobclient.jar (173ms)
+[2025-11-10T10:51:08.903+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/3.3.4/hadoop-annotations-3.3.4.jar ...
+[2025-11-10T10:51:09.004+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-annotations;3.3.4!hadoop-annotations.jar (185ms)
+[2025-11-10T10:51:09.088+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/thirdparty/hadoop-shaded-protobuf_3_7/1.1.1/hadoop-shaded-protobuf_3_7-1.1.1.jar ...
+[2025-11-10T10:51:09.360+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop.thirdparty#hadoop-shaded-protobuf_3_7;1.1.1!hadoop-shaded-protobuf_3_7.jar (356ms)
+[2025-11-10T10:51:09.444+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/thirdparty/hadoop-shaded-guava/1.1.1/hadoop-shaded-guava-1.1.1.jar ...
+[2025-11-10T10:51:09.888+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop.thirdparty#hadoop-shaded-guava;1.1.1!hadoop-shaded-guava.jar (527ms)
+[2025-11-10T10:51:10.309+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/guava/guava/27.0-jre/guava-27.0-jre.jar ...
+[2025-11-10T10:51:10.698+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.guava#guava;27.0-jre!guava.jar(bundle) (810ms)
+[2025-11-10T10:51:10.775+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.jar ...
+[2025-11-10T10:51:10.969+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-cli#commons-cli;1.2!commons-cli.jar (271ms)
+[2025-11-10T10:51:11.058+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.1.1/commons-math3-3.1.1.jar ...
+[2025-11-10T10:51:11.341+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-math3;3.1.1!commons-math3.jar (372ms)
+[2025-11-10T10:51:11.426+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar ...
+[2025-11-10T10:51:11.578+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.httpcomponents#httpclient;4.5.13!httpclient.jar (237ms)
+[2025-11-10T10:51:11.662+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.15/commons-codec-1.15.jar ...
+[2025-11-10T10:51:11.782+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-codec#commons-codec;1.15!commons-codec.jar (203ms)
+[2025-11-10T10:51:11.911+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-io/commons-io/2.8.0/commons-io-2.8.0.jar ...
+[2025-11-10T10:51:12.031+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-io#commons-io;2.8.0!commons-io.jar (248ms)
+[2025-11-10T10:51:12.129+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-net/commons-net/3.6/commons-net-3.6.jar ...
+[2025-11-10T10:51:12.245+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-net#commons-net;3.6!commons-net.jar (214ms)
+[2025-11-10T10:51:12.329+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar ...
+[2025-11-10T10:51:12.470+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-collections#commons-collections;3.2.2!commons-collections.jar (224ms)
+[2025-11-10T10:51:12.557+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-servlet/9.4.43.v20210629/jetty-servlet-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:12.652+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-servlet;9.4.43.v20210629!jetty-servlet.jar (182ms)
+[2025-11-10T10:51:12.747+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-webapp/9.4.43.v20210629/jetty-webapp-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:12.842+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-webapp;9.4.43.v20210629!jetty-webapp.jar (189ms)
+[2025-11-10T10:51:12.925+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/sun/jersey/jersey-servlet/1.19/jersey-servlet-1.19.jar ...
+[2025-11-10T10:51:13.023+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.sun.jersey#jersey-servlet;1.19!jersey-servlet.jar (181ms)
+[2025-11-10T10:51:13.111+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/ch/qos/reload4j/reload4j/1.2.22/reload4j-1.2.22.jar ...
+[2025-11-10T10:51:13.227+0000] {docker.py:429} INFO - [SUCCESSFUL ] ch.qos.reload4j#reload4j;1.2.22!reload4j.jar (203ms)
+[2025-11-10T10:51:13.327+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar ...
+[2025-11-10T10:51:13.434+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-beanutils#commons-beanutils;1.9.4!commons-beanutils.jar (206ms)
+[2025-11-10T10:51:13.526+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-configuration2/2.1.1/commons-configuration2-2.1.1.jar ...
+[2025-11-10T10:51:13.678+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-configuration2;2.1.1!commons-configuration2.jar (244ms)
+[2025-11-10T10:51:13.779+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar ...
+[2025-11-10T10:51:13.918+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-lang3;3.12.0!commons-lang3.jar (239ms)
+[2025-11-10T10:51:14.038+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.4/commons-text-1.4.jar ...
+[2025-11-10T10:51:14.165+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-text;1.4!commons-text.jar (246ms)
+[2025-11-10T10:51:14.254+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-reload4j/1.7.36/slf4j-reload4j-1.7.36.jar ...
+[2025-11-10T10:51:14.341+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.slf4j#slf4j-reload4j;1.7.36!slf4j-reload4j.jar (175ms)
+[2025-11-10T10:51:14.426+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/avro/avro/1.7.7/avro-1.7.7.jar ...
+[2025-11-10T10:51:14.552+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.avro#avro;1.7.7!avro.jar(bundle) (211ms)
+[2025-11-10T10:51:14.659+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/re2j/re2j/1.1/re2j-1.1.jar ...
+[2025-11-10T10:51:14.758+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.re2j#re2j;1.1!re2j.jar (206ms)
+[2025-11-10T10:51:14.845+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar ...
+[2025-11-10T10:51:14.986+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.protobuf#protobuf-java;2.5.0!protobuf-java.jar(bundle) (228ms)
+[2025-11-10T10:51:15.076+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.9/gson-2.8.9.jar ...
+[2025-11-10T10:51:15.181+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.code.gson#gson;2.8.9!gson.jar (195ms)
+[2025-11-10T10:51:15.268+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/3.3.4/hadoop-auth-3.3.4.jar ...
+[2025-11-10T10:51:15.364+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-auth;3.3.4!hadoop-auth.jar (182ms)
+[2025-11-10T10:51:15.462+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/curator/curator-client/4.2.0/curator-client-4.2.0.jar ...
+[2025-11-10T10:51:15.891+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.curator#curator-client;4.2.0!curator-client.jar(bundle) (527ms)
+[2025-11-10T10:51:15.981+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/4.2.0/curator-recipes-4.2.0.jar ...
+[2025-11-10T10:51:16.111+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.curator#curator-recipes;4.2.0!curator-recipes.jar(bundle) (220ms)
+[2025-11-10T10:51:16.198+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar ...
+[2025-11-10T10:51:16.291+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.code.findbugs#jsr305;3.0.2!jsr305.jar (180ms)
+[2025-11-10T10:51:16.375+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.jar ...
+[2025-11-10T10:51:16.619+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-compress;1.21!commons-compress.jar (327ms)
+[2025-11-10T10:51:16.706+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-core/1.0.1/kerb-core-1.0.1.jar ...
+[2025-11-10T10:51:16.809+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-core;1.0.1!kerb-core.jar (190ms)
+[2025-11-10T10:51:16.908+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.12.7/jackson-databind-2.12.7.jar ...
+[2025-11-10T10:51:17.185+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.core#jackson-databind;2.12.7!jackson-databind.jar(bundle) (375ms)
+[2025-11-10T10:51:16.664+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1.jar ...
+[2025-11-10T10:51:16.776+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.woodstox#stax2-api;4.2.1!stax2-api.jar(bundle) (-409ms)
+[2025-11-10T10:51:16.857+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/woodstox/woodstox-core/5.3.0/woodstox-core-5.3.0.jar ...
+[2025-11-10T10:51:14.871+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.woodstox#woodstox-core;5.3.0!woodstox-core.jar(bundle) (-1905ms)
+[2025-11-10T10:51:14.951+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/dnsjava/dnsjava/2.1.7/dnsjava-2.1.7.jar ...
+[2025-11-10T10:51:15.061+0000] {docker.py:429} INFO - [SUCCESSFUL ] dnsjava#dnsjava;2.1.7!dnsjava.jar (189ms)
+[2025-11-10T10:51:15.139+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/guava/failureaccess/1.0/failureaccess-1.0.jar ...
+[2025-11-10T10:51:15.221+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.guava#failureaccess;1.0!failureaccess.jar (158ms)
+[2025-11-10T10:51:15.316+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar ...
+[2025-11-10T10:51:15.397+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.guava#listenablefuture;9999.0-empty-to-avoid-conflict-with-guava!listenablefuture.jar (176ms)
+[2025-11-10T10:51:15.479+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/checkerframework/checker-qual/2.5.2/checker-qual-2.5.2.jar ...
+[2025-11-10T10:51:15.581+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.checkerframework#checker-qual;2.5.2!checker-qual.jar (185ms)
+[2025-11-10T10:51:15.672+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar ...
+[2025-11-10T10:51:15.751+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.j2objc#j2objc-annotations;1.1!j2objc-annotations.jar (169ms)
+[2025-11-10T10:51:15.845+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.17/animal-sniffer-annotations-1.17.jar ...
+[2025-11-10T10:51:15.928+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.mojo#animal-sniffer-annotations;1.17!animal-sniffer-annotations.jar (176ms)
+[2025-11-10T10:51:16.009+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar ...
+[2025-11-10T10:51:16.254+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.httpcomponents#httpcore;4.4.13!httpcore.jar (324ms)
+[2025-11-10T10:51:16.350+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-security/9.4.43.v20210629/jetty-security-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:16.514+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-security;9.4.43.v20210629!jetty-security.jar (259ms)
+[2025-11-10T10:51:16.599+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util-ajax/9.4.43.v20210629/jetty-util-ajax-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:16.726+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-util-ajax;9.4.43.v20210629!jetty-util-ajax.jar (212ms)
+[2025-11-10T10:51:16.818+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-xml/9.4.43.v20210629/jetty-xml-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:16.969+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-xml;9.4.43.v20210629!jetty-xml.jar (242ms)
+[2025-11-10T10:51:17.053+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar ...
+[2025-11-10T10:51:17.287+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.jackson#jackson-core-asl;1.9.13!jackson-core-asl.jar (316ms)
+[2025-11-10T10:51:17.369+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar ...
+[2025-11-10T10:51:17.780+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.jackson#jackson-mapper-asl;1.9.13!jackson-mapper-asl.jar (493ms)
+[2025-11-10T10:51:17.865+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.3/paranamer-2.3.jar ...
+[2025-11-10T10:51:17.968+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.thoughtworks.paranamer#paranamer;2.3!paranamer.jar (187ms)
+[2025-11-10T10:51:18.071+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/nimbusds/nimbus-jose-jwt/9.8.1/nimbus-jose-jwt-9.8.1.jar ...
+[2025-11-10T10:51:18.301+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.nimbusds#nimbus-jose-jwt;9.8.1!nimbus-jose-jwt.jar (332ms)
+[2025-11-10T10:51:18.402+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/net/minidev/json-smart/2.4.7/json-smart-2.4.7.jar ...
+[2025-11-10T10:51:18.519+0000] {docker.py:429} INFO - [SUCCESSFUL ] net.minidev#json-smart;2.4.7!json-smart.jar(bundle) (218ms)
+[2025-11-10T10:51:18.600+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/curator/curator-framework/4.2.0/curator-framework-4.2.0.jar ...
+[2025-11-10T10:51:18.776+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.curator#curator-framework;4.2.0!curator-framework.jar(bundle) (256ms)
+[2025-11-10T10:51:18.864+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-simplekdc/1.0.1/kerb-simplekdc-1.0.1.jar ...
+[2025-11-10T10:51:18.976+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-simplekdc;1.0.1!kerb-simplekdc.jar (200ms)
+[2025-11-10T10:51:19.064+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar ...
+[2025-11-10T10:51:19.147+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.github.stephenc.jcip#jcip-annotations;1.0-1!jcip-annotations.jar (170ms)
+[2025-11-10T10:51:19.228+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/net/minidev/accessors-smart/2.4.7/accessors-smart-2.4.7.jar ...
+[2025-11-10T10:51:19.318+0000] {docker.py:429} INFO - [SUCCESSFUL ] net.minidev#accessors-smart;2.4.7!accessors-smart.jar(bundle) (169ms)
+[2025-11-10T10:51:19.399+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar ...
+[2025-11-10T10:51:19.494+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.ow2.asm#asm;5.0.4!asm.jar (176ms)
+[2025-11-10T10:51:19.579+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-client/1.0.1/kerb-client-1.0.1.jar ...
+[2025-11-10T10:51:19.709+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-client;1.0.1!kerb-client.jar (214ms)
+[2025-11-10T10:51:19.796+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-admin/1.0.1/kerb-admin-1.0.1.jar ...
+[2025-11-10T10:51:19.912+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-admin;1.0.1!kerb-admin.jar (202ms)
+[2025-11-10T10:51:20.046+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-config/1.0.1/kerby-config-1.0.1.jar ...
+[2025-11-10T10:51:20.145+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-config;1.0.1!kerby-config.jar (231ms)
+[2025-11-10T10:51:20.239+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-common/1.0.1/kerb-common-1.0.1.jar ...
+[2025-11-10T10:51:20.340+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-common;1.0.1!kerb-common.jar (195ms)
+[2025-11-10T10:51:20.437+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-util/1.0.1/kerb-util-1.0.1.jar ...
+[2025-11-10T10:51:20.526+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-util;1.0.1!kerb-util.jar (185ms)
+[2025-11-10T10:51:20.612+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/token-provider/1.0.1/token-provider-1.0.1.jar ...
+[2025-11-10T10:51:20.708+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#token-provider;1.0.1!token-provider.jar (181ms)
+[2025-11-10T10:51:20.795+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-pkix/1.0.1/kerby-pkix-1.0.1.jar ...
+[2025-11-10T10:51:20.941+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-pkix;1.0.1!kerby-pkix.jar (232ms)
+[2025-11-10T10:51:21.027+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-asn1/1.0.1/kerby-asn1-1.0.1.jar ...
+[2025-11-10T10:51:21.139+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-asn1;1.0.1!kerby-asn1.jar (197ms)
+[2025-11-10T10:51:21.217+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-util/1.0.1/kerby-util-1.0.1.jar ...
+[2025-11-10T10:51:21.314+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-util;1.0.1!kerby-util.jar (174ms)
+[2025-11-10T10:51:21.408+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-crypto/1.0.1/kerb-crypto-1.0.1.jar ...
+[2025-11-10T10:51:21.519+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-crypto;1.0.1!kerb-crypto.jar (204ms)
+[2025-11-10T10:51:21.640+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-server/1.0.1/kerb-server-1.0.1.jar ...
+[2025-11-10T10:51:21.745+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-server;1.0.1!kerb-server.jar (225ms)
+[2025-11-10T10:51:21.828+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-xdr/1.0.1/kerby-xdr-1.0.1.jar ...
+[2025-11-10T10:51:21.918+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-xdr;1.0.1!kerby-xdr.jar (172ms)
+[2025-11-10T10:51:21.999+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-identity/1.0.1/kerb-identity-1.0.1.jar ...
+[2025-11-10T10:51:22.084+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-identity;1.0.1!kerb-identity.jar (165ms)
+[2025-11-10T10:51:22.165+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.12.7/jackson-annotations-2.12.7.jar ...
+[2025-11-10T10:51:22.273+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.core#jackson-annotations;2.12.7!jackson-annotations.jar(bundle) (189ms)
+[2025-11-10T10:51:22.355+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar ...
+[2025-11-10T10:51:22.532+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.core#jackson-core;2.12.7!jackson-core.jar(bundle) (258ms)
+[2025-11-10T10:51:22.614+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar ...
+[2025-11-10T10:51:22.728+0000] {docker.py:429} INFO - [SUCCESSFUL ] jakarta.activation#jakarta.activation-api;1.2.1!jakarta.activation-api.jar (195ms)
+[2025-11-10T10:51:22.817+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.jar ...
+[2025-11-10T10:51:22.923+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.servlet.jsp#jsp-api;2.1!jsp-api.jar (194ms)
+[2025-11-10T10:51:23.014+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.11/jaxb-api-2.2.11.jar ...
+[2025-11-10T10:51:23.116+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.xml.bind#jaxb-api;2.2.11!jaxb-api.jar (192ms)
+[2025-11-10T10:51:23.200+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/websocket/websocket-client/9.4.43.v20210629/websocket-client-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:23.290+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty.websocket#websocket-client;9.4.43.v20210629!websocket-client.jar (174ms)
+[2025-11-10T10:51:23.374+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/jline/jline/3.9.0/jline-3.9.0.jar ...
+[2025-11-10T10:51:23.607+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.jline#jline;3.9.0!jline.jar (317ms)
+[2025-11-10T10:51:23.696+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-client/9.4.43.v20210629/jetty-client-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:23.843+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-client;9.4.43.v20210629!jetty-client.jar (235ms)
+[2025-11-10T10:51:23.931+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.43.v20210629/jetty-util-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:24.114+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-util;9.4.43.v20210629!jetty-util.jar (270ms)
+[2025-11-10T10:51:24.197+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.43.v20210629/jetty-io-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:24.307+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-io;9.4.43.v20210629!jetty-io.jar (192ms)
+[2025-11-10T10:51:24.730+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/websocket/websocket-common/9.4.43.v20210629/websocket-common-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:24.845+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty.websocket#websocket-common;9.4.43.v20210629!websocket-common.jar (538ms)
+[2025-11-10T10:51:24.924+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.43.v20210629/jetty-http-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:25.044+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-http;9.4.43.v20210629!jetty-http.jar (199ms)
+[2025-11-10T10:51:25.134+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/websocket/websocket-api/9.4.43.v20210629/websocket-api-9.4.43.v20210629.jar ...
+[2025-11-10T10:51:25.220+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty.websocket#websocket-api;9.4.43.v20210629!websocket-api.jar (175ms)
+[2025-11-10T10:51:25.302+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/3.3.4/hadoop-yarn-common-3.3.4.jar ...
+[2025-11-10T10:51:25.758+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-common;3.3.4!hadoop-yarn-common.jar (538ms)
+[2025-11-10T10:51:25.837+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar ...
+[2025-11-10T10:51:25.953+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.servlet#javax.servlet-api;3.1.0!javax.servlet-api.jar (195ms)
+[2025-11-10T10:51:26.035+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/sun/jersey/jersey-core/1.19/jersey-core-1.19.jar ...
+[2025-11-10T10:51:26.158+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.sun.jersey#jersey-core;1.19!jersey-core.jar (204ms)
+[2025-11-10T10:51:26.242+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/sun/jersey/jersey-client/1.19/jersey-client-1.19.jar ...
+[2025-11-10T10:51:26.338+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.sun.jersey#jersey-client;1.19!jersey-client.jar (180ms)
+[2025-11-10T10:51:26.419+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.12.7/jackson-module-jaxb-annotations-2.12.7.jar ...
+[2025-11-10T10:51:26.507+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.7!jackson-module-jaxb-annotations.jar(bundle) (169ms)
+[2025-11-10T10:51:26.930+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.12.7/jackson-jaxrs-json-provider-2.12.7.jar ...
+[2025-11-10T10:51:27.014+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.7!jackson-jaxrs-json-provider.jar(bundle) (507ms)
+[2025-11-10T10:51:27.093+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar ...
+[2025-11-10T10:51:27.175+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.ws.rs#jsr311-api;1.1.1!jsr311-api.jar (161ms)
+[2025-11-10T10:51:27.259+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar ...
+[2025-11-10T10:51:27.352+0000] {docker.py:429} INFO - [SUCCESSFUL ] jakarta.xml.bind#jakarta.xml.bind-api;2.3.2!jakarta.xml.bind-api.jar (176ms)
+[2025-11-10T10:51:27.436+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.12.7/jackson-jaxrs-base-2.12.7.jar ...
+[2025-11-10T10:51:27.521+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.7!jackson-jaxrs-base.jar(bundle) (168ms)
+[2025-11-10T10:51:27.604+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/3.3.4/hadoop-mapreduce-client-common-3.3.4.jar ...
+[2025-11-10T10:51:27.763+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-common;3.3.4!hadoop-mapreduce-client-common.jar (242ms)
+[2025-11-10T10:51:27.764+0000] {docker.py:429} INFO - :: resolution report :: resolve 92040ms :: artifacts dl 29937ms
+[2025-11-10T10:51:27.764+0000] {docker.py:429} INFO - :: modules in use:
+[2025-11-10T10:51:27.765+0000] {docker.py:429} INFO - ch.qos.reload4j#reload4j;1.2.22 from central in [default]
+	com.fasterxml.jackson.core#jackson-annotations;2.12.7 from central in [default]
+[2025-11-10T10:51:27.765+0000] {docker.py:429} INFO - com.fasterxml.jackson.core#jackson-core;2.12.7 from central in [default]
+[2025-11-10T10:51:27.766+0000] {docker.py:429} INFO - com.fasterxml.jackson.core#jackson-databind;2.12.7 from central in [default]
+	com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.7 from central in [default]
+[2025-11-10T10:51:27.766+0000] {docker.py:429} INFO - com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.7 from central in [default]
+[2025-11-10T10:51:27.766+0000] {docker.py:429} INFO - com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.7 from central in [default]
+[2025-11-10T10:51:27.767+0000] {docker.py:429} INFO - com.fasterxml.woodstox#woodstox-core;5.3.0 from central in [default]
+[2025-11-10T10:51:27.767+0000] {docker.py:429} INFO - com.github.stephenc.jcip#jcip-annotations;1.0-1 from central in [default]
+[2025-11-10T10:51:27.767+0000] {docker.py:429} INFO - com.google.code.findbugs#jsr305;3.0.2 from central in [default]
+[2025-11-10T10:51:27.768+0000] {docker.py:429} INFO - com.google.code.gson#gson;2.8.9 from central in [default]
+[2025-11-10T10:51:27.768+0000] {docker.py:429} INFO - com.google.guava#failureaccess;1.0 from central in [default]
+[2025-11-10T10:51:27.768+0000] {docker.py:429} INFO - com.google.guava#guava;27.0-jre from central in [default]
+[2025-11-10T10:51:27.769+0000] {docker.py:429} INFO - com.google.guava#listenablefuture;9999.0-empty-to-avoid-conflict-with-guava from central in [default]
+	com.google.j2objc#j2objc-annotations;1.1 from central in [default]
+[2025-11-10T10:51:27.769+0000] {docker.py:429} INFO - com.google.protobuf#protobuf-java;2.5.0 from central in [default]
+[2025-11-10T10:51:27.770+0000] {docker.py:429} INFO - com.google.re2j#re2j;1.1 from central in [default]
+[2025-11-10T10:51:27.770+0000] {docker.py:429} INFO - com.nimbusds#nimbus-jose-jwt;9.8.1 from central in [default]
+[2025-11-10T10:51:27.770+0000] {docker.py:429} INFO - com.sun.jersey#jersey-client;1.19 from central in [default]
+	com.sun.jersey#jersey-core;1.19 from central in [default]
+[2025-11-10T10:51:27.771+0000] {docker.py:429} INFO - com.sun.jersey#jersey-servlet;1.19 from central in [default]
+[2025-11-10T10:51:27.771+0000] {docker.py:429} INFO - com.thoughtworks.paranamer#paranamer;2.3 from central in [default]
+[2025-11-10T10:51:27.772+0000] {docker.py:429} INFO - commons-beanutils#commons-beanutils;1.9.4 from central in [default]
+[2025-11-10T10:51:27.772+0000] {docker.py:429} INFO - commons-cli#commons-cli;1.2 from central in [default]
+[2025-11-10T10:51:27.772+0000] {docker.py:429} INFO - commons-codec#commons-codec;1.15 from central in [default]
+[2025-11-10T10:51:27.773+0000] {docker.py:429} INFO - commons-collections#commons-collections;3.2.2 from central in [default]
+	commons-io#commons-io;2.8.0 from central in [default]
+	commons-logging#commons-logging;1.1.3 from central in [default]
+	commons-net#commons-net;3.6 from central in [default]
+[2025-11-10T10:51:27.773+0000] {docker.py:429} INFO - dnsjava#dnsjava;2.1.7 from central in [default]
+	jakarta.activation#jakarta.activation-api;1.2.1 from central in [default]
+[2025-11-10T10:51:27.774+0000] {docker.py:429} INFO - jakarta.xml.bind#jakarta.xml.bind-api;2.3.2 from central in [default]
+[2025-11-10T10:51:27.774+0000] {docker.py:429} INFO - javax.servlet#javax.servlet-api;3.1.0 from central in [default]
+	javax.servlet.jsp#jsp-api;2.1 from central in [default]
+[2025-11-10T10:51:27.774+0000] {docker.py:429} INFO - javax.ws.rs#jsr311-api;1.1.1 from central in [default]
+	javax.xml.bind#jaxb-api;2.2.11 from central in [default]
+	net.minidev#accessors-smart;2.4.7 from central in [default]
+[2025-11-10T10:51:27.775+0000] {docker.py:429} INFO - net.minidev#json-smart;2.4.7 from central in [default]
+[2025-11-10T10:51:27.775+0000] {docker.py:429} INFO - org.apache.avro#avro;1.7.7 from central in [default]
+[2025-11-10T10:51:27.775+0000] {docker.py:429} INFO - org.apache.commons#commons-compress;1.21 from central in [default]
+[2025-11-10T10:51:27.776+0000] {docker.py:429} INFO - org.apache.commons#commons-configuration2;2.1.1 from central in [default]
+[2025-11-10T10:51:27.776+0000] {docker.py:429} INFO - org.apache.commons#commons-lang3;3.12.0 from central in [default]
+[2025-11-10T10:51:27.777+0000] {docker.py:429} INFO - org.apache.commons#commons-math3;3.1.1 from central in [default]
+[2025-11-10T10:51:27.777+0000] {docker.py:429} INFO - org.apache.commons#commons-pool2;2.11.1 from central in [default]
+	org.apache.commons#commons-text;1.4 from central in [default]
+[2025-11-10T10:51:27.777+0000] {docker.py:429} INFO - org.apache.curator#curator-client;4.2.0 from central in [default]
+	org.apache.curator#curator-framework;4.2.0 from central in [default]
+[2025-11-10T10:51:27.778+0000] {docker.py:429} INFO - org.apache.curator#curator-recipes;4.2.0 from central in [default]
+[2025-11-10T10:51:27.778+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-annotations;3.3.4 from central in [default]
+[2025-11-10T10:51:27.778+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-auth;3.3.4 from central in [default]
+[2025-11-10T10:51:27.779+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-client;3.3.4 from central in [default]
+[2025-11-10T10:51:27.779+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-client-api;3.3.4 from central in [default]
+	org.apache.hadoop#hadoop-client-runtime;3.3.4 from central in [default]
+[2025-11-10T10:51:27.780+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-common;3.3.4 from central in [default]
+[2025-11-10T10:51:27.780+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-hdfs-client;3.3.4 from central in [default]
+	org.apache.hadoop#hadoop-mapreduce-client-common;3.3.4 from central in [default]
+[2025-11-10T10:51:27.780+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-mapreduce-client-core;3.3.4 from central in [default]
+[2025-11-10T10:51:27.781+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-mapreduce-client-jobclient;3.3.4 from central in [default]
+	org.apache.hadoop#hadoop-yarn-api;3.3.4 from central in [default]
+[2025-11-10T10:51:27.781+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-yarn-client;3.3.4 from central in [default]
+[2025-11-10T10:51:27.782+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-yarn-common;3.3.4 from central in [default]
+	org.apache.hadoop.thirdparty#hadoop-shaded-guava;1.1.1 from central in [default]
+[2025-11-10T10:51:27.783+0000] {docker.py:429} INFO - org.apache.hadoop.thirdparty#hadoop-shaded-protobuf_3_7;1.1.1 from central in [default]
+[2025-11-10T10:51:27.783+0000] {docker.py:429} INFO - org.apache.httpcomponents#httpclient;4.5.13 from central in [default]
+[2025-11-10T10:51:27.784+0000] {docker.py:429} INFO - org.apache.httpcomponents#httpcore;4.4.13 from central in [default]
+[2025-11-10T10:51:27.784+0000] {docker.py:429} INFO - org.apache.kafka#kafka-clients;3.4.1 from central in [default]
+[2025-11-10T10:51:27.785+0000] {docker.py:429} INFO - org.apache.kerby#kerb-admin;1.0.1 from central in [default]
+[2025-11-10T10:51:27.785+0000] {docker.py:429} INFO - org.apache.kerby#kerb-client;1.0.1 from central in [default]
+	org.apache.kerby#kerb-common;1.0.1 from central in [default]
+[2025-11-10T10:51:27.786+0000] {docker.py:429} INFO - org.apache.kerby#kerb-core;1.0.1 from central in [default]
+[2025-11-10T10:51:27.786+0000] {docker.py:429} INFO - org.apache.kerby#kerb-crypto;1.0.1 from central in [default]
+[2025-11-10T10:51:27.786+0000] {docker.py:429} INFO - org.apache.kerby#kerb-identity;1.0.1 from central in [default]
+	org.apache.kerby#kerb-server;1.0.1 from central in [default]
+[2025-11-10T10:51:27.787+0000] {docker.py:429} INFO - org.apache.kerby#kerb-simplekdc;1.0.1 from central in [default]
+[2025-11-10T10:51:27.787+0000] {docker.py:429} INFO - org.apache.kerby#kerb-util;1.0.1 from central in [default]
+[2025-11-10T10:51:27.788+0000] {docker.py:429} INFO - org.apache.kerby#kerby-asn1;1.0.1 from central in [default]
+[2025-11-10T10:51:27.788+0000] {docker.py:429} INFO - org.apache.kerby#kerby-config;1.0.1 from central in [default]
+[2025-11-10T10:51:27.788+0000] {docker.py:429} INFO - org.apache.kerby#kerby-pkix;1.0.1 from central in [default]
+[2025-11-10T10:51:27.789+0000] {docker.py:429} INFO - org.apache.kerby#kerby-util;1.0.1 from central in [default]
+	org.apache.kerby#kerby-xdr;1.0.1 from central in [default]
+[2025-11-10T10:51:27.789+0000] {docker.py:429} INFO - org.apache.kerby#token-provider;1.0.1 from central in [default]
+[2025-11-10T10:51:27.790+0000] {docker.py:429} INFO - org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 from central in [default]
+	org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 from central in [default]
+[2025-11-10T10:51:27.790+0000] {docker.py:429} INFO - org.checkerframework#checker-qual;2.5.2 from central in [default]
+[2025-11-10T10:51:27.790+0000] {docker.py:429} INFO - org.codehaus.jackson#jackson-core-asl;1.9.13 from central in [default]
+[2025-11-10T10:51:27.791+0000] {docker.py:429} INFO - org.codehaus.jackson#jackson-mapper-asl;1.9.13 from central in [default]
+[2025-11-10T10:51:27.791+0000] {docker.py:429} INFO - org.codehaus.mojo#animal-sniffer-annotations;1.17 from central in [default]
+[2025-11-10T10:51:27.791+0000] {docker.py:429} INFO - org.codehaus.woodstox#stax2-api;4.2.1 from central in [default]
+[2025-11-10T10:51:27.792+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-client;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.792+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-http;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.792+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-io;9.4.43.v20210629 from central in [default]
+	org.eclipse.jetty#jetty-security;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.793+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-servlet;9.4.43.v20210629 from central in [default]
+	org.eclipse.jetty#jetty-util;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.794+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-util-ajax;9.4.43.v20210629 from central in [default]
+	org.eclipse.jetty#jetty-webapp;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.794+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-xml;9.4.43.v20210629 from central in [default]
+	org.eclipse.jetty.websocket#websocket-api;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.794+0000] {docker.py:429} INFO - org.eclipse.jetty.websocket#websocket-client;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.795+0000] {docker.py:429} INFO - org.eclipse.jetty.websocket#websocket-common;9.4.43.v20210629 from central in [default]
+[2025-11-10T10:51:27.795+0000] {docker.py:429} INFO - org.jline#jline;3.9.0 from central in [default]
+[2025-11-10T10:51:27.795+0000] {docker.py:429} INFO - org.lz4#lz4-java;1.8.0 from central in [default]
+[2025-11-10T10:51:27.796+0000] {docker.py:429} INFO - org.ow2.asm#asm;5.0.4 from central in [default]
+[2025-11-10T10:51:27.796+0000] {docker.py:429} INFO - org.slf4j#slf4j-api;2.0.7 from central in [default]
+[2025-11-10T10:51:27.797+0000] {docker.py:429} INFO - org.slf4j#slf4j-reload4j;1.7.36 from central in [default]
+[2025-11-10T10:51:27.797+0000] {docker.py:429} INFO - org.xerial.snappy#snappy-java;1.1.10.3 from central in [default]
+[2025-11-10T10:51:27.798+0000] {docker.py:429} INFO - :: evicted modules:
+[2025-11-10T10:51:27.798+0000] {docker.py:429} INFO - com.google.code.findbugs#jsr305;3.0.0 by [com.google.code.findbugs#jsr305;3.0.2] in [default]
+	org.slf4j#slf4j-api;1.7.36 by [org.slf4j#slf4j-api;2.0.7] in [default]
+	org.xerial.snappy#snappy-java;1.1.8.2 by [org.xerial.snappy#snappy-java;1.1.10.3] in [default]
+[2025-11-10T10:51:27.798+0000] {docker.py:429} INFO - ---------------------------------------------------------------------
+[2025-11-10T10:51:27.799+0000] {docker.py:429} INFO - |                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+[2025-11-10T10:51:27.799+0000] {docker.py:429} INFO - |      default     |  109  |  107  |  107  |   3   ||  106  |  106  |
+	---------------------------------------------------------------------
+[2025-11-10T10:51:27.799+0000] {docker.py:429} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-3b9eb428-0e65-462c-9b8e-72cd2338847d
+	confs: [default]
+[2025-11-10T10:51:27.956+0000] {docker.py:429} INFO - 106 artifacts copied, 0 already retrieved (105153kB/169ms)
+[2025-11-10T10:51:28.148+0000] {docker.py:429} INFO - 25/11/10 10:51:28 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-11-10T10:51:28.730+0000] {docker.py:429} INFO - Traceback (most recent call last):
+  File "/app/train_job.py", line 3, in <module>
+[2025-11-10T10:51:28.731+0000] {docker.py:429} INFO - import pandas as pd
+ModuleNotFoundError: No module named 'pandas'
+[2025-11-10T10:51:28.759+0000] {docker.py:429} INFO - 25/11/10 10:51:28 INFO ShutdownHookManager: Shutdown hook called
+[2025-11-10T10:51:28.760+0000] {docker.py:429} INFO - 25/11/10 10:51:28 INFO ShutdownHookManager: Deleting directory /tmp/spark-09c94fc8-d0a8-46d0-833f-7fdf8633155b
+[2025-11-10T10:51:29.314+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 265, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: http+docker://localhost/v1.51/containers/create
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 364, in _run_image
+    return self._run_image_with_mounts([*self.mounts, tmp_mount], add_tmp_variable=True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 391, in _run_image_with_mounts
+    self.container = self.cli.create_container(
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/container.py", line 439, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/container.py", line 456, in create_container_from_config
+    return self._result(res, True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 271, in _result
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 267, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 400 Client Error for http+docker://localhost/v1.51/containers/create: Bad Request ("invalid mount config for type "bind": bind source path does not exist: /tmp/airflowtmpt7ven_a5")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 502, in execute
+    return self._run_image()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 373, in _run_image
+    return self._run_image_with_mounts(self.mounts, add_tmp_variable=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 437, in _run_image_with_mounts
+    raise DockerContainerFailedException(f"Docker container failed: {result!r}", logs=log_lines)
+airflow.providers.docker.exceptions.DockerContainerFailedException: Docker container failed: {'StatusCode': 1}
+[2025-11-10T10:51:29.324+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=spark_batch_pipeline, task_id=train_model, execution_date=20251109T000000, start_date=20251110T104923, end_date=20251110T105129
+[2025-11-10T10:51:29.343+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 9 for task train_model (Docker container failed: {'StatusCode': 1}; 710)
+[2025-11-10T10:51:29.391+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-10T10:51:29.406+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

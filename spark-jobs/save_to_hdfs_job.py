@@ -14,17 +14,15 @@ def create_spark_session():
         .getOrCreate()
 
 def create_schema():
-    """Định nghĩa schema cho dữ liệu từ Kafka"""
+    """Định nghĩa schema cho dữ liệu THÔ từ topic 'historical_prices'"""
     return StructType([
         StructField("timestamp", StringType(), True),
+        StructField("Ticker", StringType(), True),
         StructField("Open", DoubleType(), True),
         StructField("High", DoubleType(), True),
         StructField("Low", DoubleType(), True),
         StructField("Close", DoubleType(), True),
         StructField("Volume", LongType(), True),
-        StructField("Daily_Return", DoubleType(), True),
-        StructField("Volatility_Cluster", DoubleType(), True),
-        StructField("Volume_Based_Volatility", DoubleType(), True)
     ])
 
 def process_batch(df, epoch_id):

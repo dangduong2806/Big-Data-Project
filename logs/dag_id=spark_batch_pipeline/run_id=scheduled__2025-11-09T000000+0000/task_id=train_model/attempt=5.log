@@ -1,0 +1,979 @@
+[2025-11-10T17:15:22.835+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: spark_batch_pipeline.train_model scheduled__2025-11-09T00:00:00+00:00 [queued]>
+[2025-11-10T17:15:22.842+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: spark_batch_pipeline.train_model scheduled__2025-11-09T00:00:00+00:00 [queued]>
+[2025-11-10T17:15:22.843+0000] {taskinstance.py:2170} INFO - Starting attempt 5 of 5
+[2025-11-10T17:15:22.855+0000] {taskinstance.py:2191} INFO - Executing <Task(DockerOperator): train_model> on 2025-11-09 00:00:00+00:00
+[2025-11-10T17:15:22.859+0000] {standard_task_runner.py:60} INFO - Started process 271 to run task
+[2025-11-10T17:15:22.862+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'spark_batch_pipeline', 'train_model', 'scheduled__2025-11-09T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/spark_batch_dag.py', '--cfg-path', '/tmp/tmpflprzqpp']
+[2025-11-10T17:15:22.864+0000] {standard_task_runner.py:88} INFO - Job 15: Subtask train_model
+[2025-11-10T17:15:22.878+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:194 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-11-10T17:15:22.911+0000] {task_command.py:423} INFO - Running <TaskInstance: spark_batch_pipeline.train_model scheduled__2025-11-09T00:00:00+00:00 [running]> on host dc8bbb4c3a5d
+[2025-11-10T17:15:22.980+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='spark_batch_pipeline' AIRFLOW_CTX_TASK_ID='train_model' AIRFLOW_CTX_EXECUTION_DATE='2025-11-09T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='5' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-11-09T00:00:00+00:00'
+[2025-11-10T17:15:23.033+0000] {docker.py:359} INFO - Starting docker container from image spark-jobs-image:latest
+[2025-11-10T17:15:23.044+0000] {docker.py:367} WARNING - Using remote engine or docker-in-docker and mounting temporary volume from host is not supported. Falling back to `mount_tmp_dir=False` mode. You can set `mount_tmp_dir` parameter to False to disable mounting and remove the warning
+[2025-11-10T17:15:24.777+0000] {docker.py:429} INFO - :: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-11-10T17:15:24.849+0000] {docker.py:429} INFO - Ivy Default Cache set to: /root/.ivy2/cache
+The jars for the packages stored in: /root/.ivy2/jars
+[2025-11-10T17:15:24.854+0000] {docker.py:429} INFO - org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
+org.apache.hadoop#hadoop-client added as a dependency
+[2025-11-10T17:15:24.855+0000] {docker.py:429} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-d93c067b-cc67-4b9a-9109-cb1f31bdf9d7;1.0
+	confs: [default]
+[2025-11-10T17:15:28.054+0000] {docker.py:429} INFO - found org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 in central
+[2025-11-10T17:15:28.360+0000] {docker.py:429} INFO - found org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 in central
+[2025-11-10T17:15:28.668+0000] {docker.py:429} INFO - found org.apache.kafka#kafka-clients;3.4.1 in central
+[2025-11-10T17:15:28.962+0000] {docker.py:429} INFO - found org.lz4#lz4-java;1.8.0 in central
+[2025-11-10T17:15:29.249+0000] {docker.py:429} INFO - found org.xerial.snappy#snappy-java;1.1.10.3 in central
+[2025-11-10T17:15:30.630+0000] {docker.py:429} INFO - found org.slf4j#slf4j-api;2.0.7 in central
+[2025-11-10T17:15:33.123+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client-runtime;3.3.4 in central
+[2025-11-10T17:15:33.303+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client-api;3.3.4 in central
+[2025-11-10T17:15:35.791+0000] {docker.py:429} INFO - found commons-logging#commons-logging;1.1.3 in central
+[2025-11-10T17:15:35.958+0000] {docker.py:429} INFO - found com.google.code.findbugs#jsr305;3.0.0 in central
+[2025-11-10T17:15:38.365+0000] {docker.py:429} INFO - found org.apache.commons#commons-pool2;2.11.1 in central
+[2025-11-10T17:15:39.667+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client;3.3.4 in central
+[2025-11-10T17:15:39.845+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-common;3.3.4 in central
+[2025-11-10T17:15:42.223+0000] {docker.py:429} INFO - found org.apache.hadoop.thirdparty#hadoop-shaded-protobuf_3_7;1.1.1 in central
+[2025-11-10T17:15:42.422+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-annotations;3.3.4 in central
+[2025-11-10T17:15:42.752+0000] {docker.py:429} INFO - found org.apache.hadoop.thirdparty#hadoop-shaded-guava;1.1.1 in central
+[2025-11-10T17:15:44.648+0000] {docker.py:429} INFO - found com.google.guava#guava;27.0-jre in central
+[2025-11-10T17:15:45.399+0000] {docker.py:429} INFO - found com.google.guava#failureaccess;1.0 in central
+[2025-11-10T17:15:45.575+0000] {docker.py:429} INFO - found com.google.guava#listenablefuture;9999.0-empty-to-avoid-conflict-with-guava in central
+[2025-11-10T17:15:46.476+0000] {docker.py:429} INFO - found com.google.code.findbugs#jsr305;3.0.2 in central
+[2025-11-10T17:15:46.661+0000] {docker.py:429} INFO - found org.checkerframework#checker-qual;2.5.2 in central
+[2025-11-10T17:15:46.958+0000] {docker.py:429} INFO - found com.google.j2objc#j2objc-annotations;1.1 in central
+[2025-11-10T17:15:49.425+0000] {docker.py:429} INFO - found org.codehaus.mojo#animal-sniffer-annotations;1.17 in central
+[2025-11-10T17:15:51.729+0000] {docker.py:429} INFO - found commons-cli#commons-cli;1.2 in central
+[2025-11-10T17:15:51.849+0000] {docker.py:429} INFO - found org.apache.commons#commons-math3;3.1.1 in central
+[2025-11-10T17:15:54.144+0000] {docker.py:429} INFO - found org.apache.httpcomponents#httpclient;4.5.13 in central
+[2025-11-10T17:15:55.524+0000] {docker.py:429} INFO - found org.apache.httpcomponents#httpcore;4.4.13 in central
+[2025-11-10T17:15:55.705+0000] {docker.py:429} INFO - found commons-codec#commons-codec;1.15 in central
+[2025-11-10T17:15:56.005+0000] {docker.py:429} INFO - found commons-io#commons-io;2.8.0 in central
+[2025-11-10T17:15:57.562+0000] {docker.py:429} INFO - found commons-net#commons-net;3.6 in central
+[2025-11-10T17:15:58.741+0000] {docker.py:429} INFO - found commons-collections#commons-collections;3.2.2 in central
+[2025-11-10T17:15:59.978+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-servlet;9.4.43.v20210629 in central
+[2025-11-10T17:16:00.153+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-security;9.4.43.v20210629 in central
+[2025-11-10T17:16:00.465+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-util-ajax;9.4.43.v20210629 in central
+[2025-11-10T17:16:00.765+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-webapp;9.4.43.v20210629 in central
+[2025-11-10T17:16:01.047+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-xml;9.4.43.v20210629 in central
+[2025-11-10T17:16:03.777+0000] {docker.py:429} INFO - found com.sun.jersey#jersey-servlet;1.19 in central
+[2025-11-10T17:16:03.946+0000] {docker.py:429} INFO - found ch.qos.reload4j#reload4j;1.2.22 in central
+[2025-11-10T17:16:06.504+0000] {docker.py:429} INFO - found commons-beanutils#commons-beanutils;1.9.4 in central
+[2025-11-10T17:16:07.856+0000] {docker.py:429} INFO - found org.apache.commons#commons-configuration2;2.1.1 in central
+[2025-11-10T17:16:09.165+0000] {docker.py:429} INFO - found org.apache.commons#commons-lang3;3.12.0 in central
+[2025-11-10T17:16:10.493+0000] {docker.py:429} INFO - found org.apache.commons#commons-text;1.4 in central
+[2025-11-10T17:16:11.251+0000] {docker.py:429} INFO - found org.slf4j#slf4j-reload4j;1.7.36 in central
+[2025-11-10T17:16:14.746+0000] {docker.py:429} INFO - found org.apache.avro#avro;1.7.7 in central
+[2025-11-10T17:16:14.912+0000] {docker.py:429} INFO - found org.codehaus.jackson#jackson-core-asl;1.9.13 in central
+[2025-11-10T17:16:15.212+0000] {docker.py:429} INFO - found org.codehaus.jackson#jackson-mapper-asl;1.9.13 in central
+[2025-11-10T17:16:17.260+0000] {docker.py:429} INFO - found com.thoughtworks.paranamer#paranamer;2.3 in central
+[2025-11-10T17:16:17.443+0000] {docker.py:429} INFO - found org.apache.commons#commons-compress;1.21 in central
+[2025-11-10T17:16:17.725+0000] {docker.py:429} INFO - found com.google.re2j#re2j;1.1 in central
+[2025-11-10T17:16:19.228+0000] {docker.py:429} INFO - found com.google.protobuf#protobuf-java;2.5.0 in central
+[2025-11-10T17:16:18.643+0000] {docker.py:429} INFO - found com.google.code.gson#gson;2.8.9 in central
+[2025-11-10T17:16:18.822+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-auth;3.3.4 in central
+[2025-11-10T17:16:19.120+0000] {docker.py:429} INFO - found com.nimbusds#nimbus-jose-jwt;9.8.1 in central
+[2025-11-10T17:16:19.419+0000] {docker.py:429} INFO - found com.github.stephenc.jcip#jcip-annotations;1.0-1 in central
+[2025-11-10T17:16:19.735+0000] {docker.py:429} INFO - found net.minidev#json-smart;2.4.7 in central
+[2025-11-10T17:16:20.054+0000] {docker.py:429} INFO - found net.minidev#accessors-smart;2.4.7 in central
+[2025-11-10T17:16:21.399+0000] {docker.py:429} INFO - found org.ow2.asm#asm;5.0.4 in central
+[2025-11-10T17:16:22.741+0000] {docker.py:429} INFO - found org.apache.curator#curator-framework;4.2.0 in central
+[2025-11-10T17:16:22.911+0000] {docker.py:429} INFO - found org.apache.curator#curator-client;4.2.0 in central
+[2025-11-10T17:16:25.536+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-simplekdc;1.0.1 in central
+[2025-11-10T17:16:25.726+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-client;1.0.1 in central
+[2025-11-10T17:16:27.134+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-config;1.0.1 in central
+[2025-11-10T17:16:27.310+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-core;1.0.1 in central
+[2025-11-10T17:16:27.601+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-pkix;1.0.1 in central
+[2025-11-10T17:16:27.922+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-asn1;1.0.1 in central
+[2025-11-10T17:16:28.198+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-util;1.0.1 in central
+[2025-11-10T17:16:28.469+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-common;1.0.1 in central
+[2025-11-10T17:16:28.800+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-crypto;1.0.1 in central
+[2025-11-10T17:16:29.106+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-util;1.0.1 in central
+[2025-11-10T17:16:30.508+0000] {docker.py:429} INFO - found org.apache.kerby#token-provider;1.0.1 in central
+[2025-11-10T17:16:30.680+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-admin;1.0.1 in central
+[2025-11-10T17:16:30.986+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-server;1.0.1 in central
+[2025-11-10T17:16:31.316+0000] {docker.py:429} INFO - found org.apache.kerby#kerb-identity;1.0.1 in central
+[2025-11-10T17:16:31.620+0000] {docker.py:429} INFO - found org.apache.kerby#kerby-xdr;1.0.1 in central
+[2025-11-10T17:16:31.923+0000] {docker.py:429} INFO - found org.apache.curator#curator-recipes;4.2.0 in central
+[2025-11-10T17:16:36.654+0000] {docker.py:429} INFO - found com.fasterxml.jackson.core#jackson-databind;2.12.7 in central
+[2025-11-10T17:16:36.826+0000] {docker.py:429} INFO - found com.fasterxml.jackson.core#jackson-annotations;2.12.7 in central
+[2025-11-10T17:16:37.116+0000] {docker.py:429} INFO - found com.fasterxml.jackson.core#jackson-core;2.12.7 in central
+[2025-11-10T17:16:37.953+0000] {docker.py:429} INFO - found org.codehaus.woodstox#stax2-api;4.2.1 in central
+[2025-11-10T17:16:39.226+0000] {docker.py:429} INFO - found com.fasterxml.woodstox#woodstox-core;5.3.0 in central
+[2025-11-10T17:16:39.387+0000] {docker.py:429} INFO - found dnsjava#dnsjava;2.1.7 in central
+[2025-11-10T17:16:41.817+0000] {docker.py:429} INFO - found jakarta.activation#jakarta.activation-api;1.2.1 in central
+[2025-11-10T17:16:41.989+0000] {docker.py:429} INFO - found javax.servlet.jsp#jsp-api;2.1 in central
+[2025-11-10T17:16:42.288+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-hdfs-client;3.3.4 in central
+[2025-11-10T17:16:43.755+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-yarn-api;3.3.4 in central
+[2025-11-10T17:16:43.938+0000] {docker.py:429} INFO - found javax.xml.bind#jaxb-api;2.2.11 in central
+[2025-11-10T17:16:44.228+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-yarn-client;3.3.4 in central
+[2025-11-10T17:16:45.659+0000] {docker.py:429} INFO - found org.eclipse.jetty.websocket#websocket-client;9.4.43.v20210629 in central
+[2025-11-10T17:16:45.822+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-client;9.4.43.v20210629 in central
+[2025-11-10T17:16:46.113+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-http;9.4.43.v20210629 in central
+[2025-11-10T17:16:46.390+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-util;9.4.43.v20210629 in central
+[2025-11-10T17:16:46.676+0000] {docker.py:429} INFO - found org.eclipse.jetty#jetty-io;9.4.43.v20210629 in central
+[2025-11-10T17:16:46.996+0000] {docker.py:429} INFO - found org.eclipse.jetty.websocket#websocket-common;9.4.43.v20210629 in central
+[2025-11-10T17:16:47.294+0000] {docker.py:429} INFO - found org.eclipse.jetty.websocket#websocket-api;9.4.43.v20210629 in central
+[2025-11-10T17:16:46.902+0000] {docker.py:429} INFO - found org.jline#jline;3.9.0 in central
+[2025-11-10T17:16:48.203+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-mapreduce-client-core;3.3.4 in central
+[2025-11-10T17:16:48.393+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-yarn-common;3.3.4 in central
+[2025-11-10T17:16:49.795+0000] {docker.py:429} INFO - found javax.servlet#javax.servlet-api;3.1.0 in central
+[2025-11-10T17:16:49.977+0000] {docker.py:429} INFO - found com.sun.jersey#jersey-core;1.19 in central
+[2025-11-10T17:16:50.271+0000] {docker.py:429} INFO - found javax.ws.rs#jsr311-api;1.1.1 in central
+[2025-11-10T17:16:50.576+0000] {docker.py:429} INFO - found com.sun.jersey#jersey-client;1.19 in central
+[2025-11-10T17:16:52.007+0000] {docker.py:429} INFO - found com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.7 in central
+[2025-11-10T17:16:54.301+0000] {docker.py:429} INFO - found jakarta.xml.bind#jakarta.xml.bind-api;2.3.2 in central
+[2025-11-10T17:16:55.636+0000] {docker.py:429} INFO - found com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.7 in central
+[2025-11-10T17:16:55.809+0000] {docker.py:429} INFO - found com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.7 in central
+[2025-11-10T17:16:56.114+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-mapreduce-client-jobclient;3.3.4 in central
+[2025-11-10T17:16:56.410+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-mapreduce-client-common;3.3.4 in central
+[2025-11-10T17:16:56.641+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.5.0/spark-sql-kafka-0-10_2.12-3.5.0.jar ...
+[2025-11-10T17:16:57.025+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0!spark-sql-kafka-0-10_2.12.jar (595ms)
+[2025-11-10T17:16:57.116+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client/3.3.4/hadoop-client-3.3.4.jar ...
+[2025-11-10T17:16:57.204+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client;3.3.4!hadoop-client.jar (179ms)
+[2025-11-10T17:16:57.291+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.5.0/spark-token-provider-kafka-0-10_2.12-3.5.0.jar ...
+[2025-11-10T17:16:57.387+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0!spark-token-provider-kafka-0-10_2.12.jar (183ms)
+[2025-11-10T17:16:57.473+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.1/kafka-clients-3.4.1.jar ...
+[2025-11-10T17:16:58.383+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kafka#kafka-clients;3.4.1!kafka-clients.jar (995ms)
+[2025-11-10T17:16:58.469+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar ...
+[2025-11-10T17:16:58.569+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-pool2;2.11.1!commons-pool2.jar (185ms)
+[2025-11-10T17:16:58.653+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-runtime/3.3.4/hadoop-client-runtime-3.3.4.jar ...
+[2025-11-10T17:17:01.653+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-runtime;3.3.4!hadoop-client-runtime.jar (3083ms)
+[2025-11-10T17:17:01.740+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar ...
+[2025-11-10T17:17:01.885+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.lz4#lz4-java;1.8.0!lz4-java.jar (231ms)
+[2025-11-10T17:17:01.968+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.10.3/snappy-java-1.1.10.3.jar ...
+[2025-11-10T17:17:02.304+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.10.3!snappy-java.jar(bundle) (418ms)
+[2025-11-10T17:17:02.399+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.7/slf4j-api-2.0.7.jar ...
+[2025-11-10T17:17:02.494+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.slf4j#slf4j-api;2.0.7!slf4j-api.jar (189ms)
+[2025-11-10T17:17:02.585+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-api/3.3.4/hadoop-client-api-3.3.4.jar ...
+[2025-11-10T17:17:04.679+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-api;3.3.4!hadoop-client-api.jar (2184ms)
+[2025-11-10T17:17:04.765+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar ...
+[2025-11-10T17:17:04.860+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-logging#commons-logging;1.1.3!commons-logging.jar (180ms)
+[2025-11-10T17:17:04.955+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/3.3.4/hadoop-common-3.3.4.jar ...
+[2025-11-10T17:17:05.500+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-common;3.3.4!hadoop-common.jar (640ms)
+[2025-11-10T17:17:05.593+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs-client/3.3.4/hadoop-hdfs-client-3.3.4.jar ...
+[2025-11-10T17:17:06.287+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-hdfs-client;3.3.4!hadoop-hdfs-client.jar (786ms)
+[2025-11-10T17:17:06.382+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-api/3.3.4/hadoop-yarn-api-3.3.4.jar ...
+[2025-11-10T17:17:06.876+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-api;3.3.4!hadoop-yarn-api.jar (589ms)
+[2025-11-10T17:17:06.965+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-client/3.3.4/hadoop-yarn-client-3.3.4.jar ...
+[2025-11-10T17:17:07.077+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-client;3.3.4!hadoop-yarn-client.jar (201ms)
+[2025-11-10T17:17:07.159+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-core/3.3.4/hadoop-mapreduce-client-core-3.3.4.jar ...
+[2025-11-10T17:17:07.456+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-core;3.3.4!hadoop-mapreduce-client-core.jar (379ms)
+[2025-11-10T17:17:07.546+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-jobclient/3.3.4/hadoop-mapreduce-client-jobclient-3.3.4.jar ...
+[2025-11-10T17:17:07.637+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-jobclient;3.3.4!hadoop-mapreduce-client-jobclient.jar (181ms)
+[2025-11-10T17:17:07.723+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-annotations/3.3.4/hadoop-annotations-3.3.4.jar ...
+[2025-11-10T17:17:07.810+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-annotations;3.3.4!hadoop-annotations.jar (173ms)
+[2025-11-10T17:17:07.896+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/thirdparty/hadoop-shaded-protobuf_3_7/1.1.1/hadoop-shaded-protobuf_3_7-1.1.1.jar ...
+[2025-11-10T17:17:08.189+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop.thirdparty#hadoop-shaded-protobuf_3_7;1.1.1!hadoop-shaded-protobuf_3_7.jar (377ms)
+[2025-11-10T17:17:08.274+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/thirdparty/hadoop-shaded-guava/1.1.1/hadoop-shaded-guava-1.1.1.jar ...
+[2025-11-10T17:17:08.734+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop.thirdparty#hadoop-shaded-guava;1.1.1!hadoop-shaded-guava.jar (544ms)
+[2025-11-10T17:17:08.832+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/guava/guava/27.0-jre/guava-27.0-jre.jar ...
+[2025-11-10T17:17:09.459+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.guava#guava;27.0-jre!guava.jar(bundle) (722ms)
+[2025-11-10T17:17:09.556+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-cli/commons-cli/1.2/commons-cli-1.2.jar ...
+[2025-11-10T17:17:09.647+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-cli#commons-cli;1.2!commons-cli.jar (187ms)
+[2025-11-10T17:17:09.741+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.1.1/commons-math3-3.1.1.jar ...
+[2025-11-10T17:17:10.040+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-math3;3.1.1!commons-math3.jar (392ms)
+[2025-11-10T17:17:10.132+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar ...
+[2025-11-10T17:17:10.295+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.httpcomponents#httpclient;4.5.13!httpclient.jar (251ms)
+[2025-11-10T17:17:10.381+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-codec/commons-codec/1.15/commons-codec-1.15.jar ...
+[2025-11-10T17:17:10.496+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-codec#commons-codec;1.15!commons-codec.jar (201ms)
+[2025-11-10T17:17:10.583+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-io/commons-io/2.8.0/commons-io-2.8.0.jar ...
+[2025-11-10T17:17:10.696+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-io#commons-io;2.8.0!commons-io.jar (199ms)
+[2025-11-10T17:17:10.783+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-net/commons-net/3.6/commons-net-3.6.jar ...
+[2025-11-10T17:17:10.897+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-net#commons-net;3.6!commons-net.jar (201ms)
+[2025-11-10T17:17:10.987+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar ...
+[2025-11-10T17:17:11.130+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-collections#commons-collections;3.2.2!commons-collections.jar (232ms)
+[2025-11-10T17:17:11.219+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-servlet/9.4.43.v20210629/jetty-servlet-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:11.316+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-servlet;9.4.43.v20210629!jetty-servlet.jar (185ms)
+[2025-11-10T17:17:11.403+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-webapp/9.4.43.v20210629/jetty-webapp-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:11.504+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-webapp;9.4.43.v20210629!jetty-webapp.jar (188ms)
+[2025-11-10T17:17:11.598+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/sun/jersey/jersey-servlet/1.19/jersey-servlet-1.19.jar ...
+[2025-11-10T17:17:11.707+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.sun.jersey#jersey-servlet;1.19!jersey-servlet.jar (202ms)
+[2025-11-10T17:17:11.797+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/ch/qos/reload4j/reload4j/1.2.22/reload4j-1.2.22.jar ...
+[2025-11-10T17:17:11.919+0000] {docker.py:429} INFO - [SUCCESSFUL ] ch.qos.reload4j#reload4j;1.2.22!reload4j.jar (211ms)
+[2025-11-10T17:17:12.012+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar ...
+[2025-11-10T17:17:12.121+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-beanutils#commons-beanutils;1.9.4!commons-beanutils.jar (201ms)
+[2025-11-10T17:17:12.208+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-configuration2/2.1.1/commons-configuration2-2.1.1.jar ...
+[2025-11-10T17:17:12.353+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-configuration2;2.1.1!commons-configuration2.jar (232ms)
+[2025-11-10T17:17:12.440+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.12.0/commons-lang3-3.12.0.jar ...
+[2025-11-10T17:17:12.584+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-lang3;3.12.0!commons-lang3.jar (230ms)
+[2025-11-10T17:17:12.668+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-text/1.4/commons-text-1.4.jar ...
+[2025-11-10T17:17:12.772+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-text;1.4!commons-text.jar (187ms)
+[2025-11-10T17:17:12.863+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-reload4j/1.7.36/slf4j-reload4j-1.7.36.jar ...
+[2025-11-10T17:17:12.943+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.slf4j#slf4j-reload4j;1.7.36!slf4j-reload4j.jar (170ms)
+[2025-11-10T17:17:13.028+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/avro/avro/1.7.7/avro-1.7.7.jar ...
+[2025-11-10T17:17:13.153+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.avro#avro;1.7.7!avro.jar(bundle) (210ms)
+[2025-11-10T17:17:13.245+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/re2j/re2j/1.1/re2j-1.1.jar ...
+[2025-11-10T17:17:13.358+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.re2j#re2j;1.1!re2j.jar (203ms)
+[2025-11-10T17:17:13.451+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/2.5.0/protobuf-java-2.5.0.jar ...
+[2025-11-10T17:17:13.598+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.protobuf#protobuf-java;2.5.0!protobuf-java.jar(bundle) (239ms)
+[2025-11-10T17:17:13.691+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.9/gson-2.8.9.jar ...
+[2025-11-10T17:17:13.805+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.code.gson#gson;2.8.9!gson.jar (206ms)
+[2025-11-10T17:17:13.894+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/3.3.4/hadoop-auth-3.3.4.jar ...
+[2025-11-10T17:17:13.993+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-auth;3.3.4!hadoop-auth.jar (187ms)
+[2025-11-10T17:17:14.079+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/curator/curator-client/4.2.0/curator-client-4.2.0.jar ...
+[2025-11-10T17:17:14.488+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.curator#curator-client;4.2.0!curator-client.jar(bundle) (494ms)
+[2025-11-10T17:17:14.576+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/curator/curator-recipes/4.2.0/curator-recipes-4.2.0.jar ...
+[2025-11-10T17:17:14.690+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.curator#curator-recipes;4.2.0!curator-recipes.jar(bundle) (197ms)
+[2025-11-10T17:17:14.779+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar ...
+[2025-11-10T17:17:14.865+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.code.findbugs#jsr305;3.0.2!jsr305.jar (174ms)
+[2025-11-10T17:17:14.952+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.21/commons-compress-1.21.jar ...
+[2025-11-10T17:17:15.191+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-compress;1.21!commons-compress.jar (325ms)
+[2025-11-10T17:17:15.277+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-core/1.0.1/kerb-core-1.0.1.jar ...
+[2025-11-10T17:17:15.387+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-core;1.0.1!kerb-core.jar (195ms)
+[2025-11-10T17:17:15.471+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.12.7/jackson-databind-2.12.7.jar ...
+[2025-11-10T17:17:15.698+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.core#jackson-databind;2.12.7!jackson-databind.jar(bundle) (310ms)
+[2025-11-10T17:17:15.785+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1.jar ...
+[2025-11-10T17:17:15.894+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.woodstox#stax2-api;4.2.1!stax2-api.jar(bundle) (195ms)
+[2025-11-10T17:17:15.987+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/woodstox/woodstox-core/5.3.0/woodstox-core-5.3.0.jar ...
+[2025-11-10T17:17:15.602+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.woodstox#woodstox-core;5.3.0!woodstox-core.jar(bundle) (-291ms)
+[2025-11-10T17:17:15.693+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/dnsjava/dnsjava/2.1.7/dnsjava-2.1.7.jar ...
+[2025-11-10T17:17:15.813+0000] {docker.py:429} INFO - [SUCCESSFUL ] dnsjava#dnsjava;2.1.7!dnsjava.jar (210ms)
+[2025-11-10T17:17:15.898+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/guava/failureaccess/1.0/failureaccess-1.0.jar ...
+[2025-11-10T17:17:15.988+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.guava#failureaccess;1.0!failureaccess.jar (174ms)
+[2025-11-10T17:17:16.076+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar ...
+[2025-11-10T17:17:16.168+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.guava#listenablefuture;9999.0-empty-to-avoid-conflict-with-guava!listenablefuture.jar (179ms)
+[2025-11-10T17:17:16.251+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/checkerframework/checker-qual/2.5.2/checker-qual-2.5.2.jar ...
+[2025-11-10T17:17:16.353+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.checkerframework#checker-qual;2.5.2!checker-qual.jar (185ms)
+[2025-11-10T17:17:16.446+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/1.1/j2objc-annotations-1.1.jar ...
+[2025-11-10T17:17:16.533+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.j2objc#j2objc-annotations;1.1!j2objc-annotations.jar (179ms)
+[2025-11-10T17:17:16.618+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.17/animal-sniffer-annotations-1.17.jar ...
+[2025-11-10T17:17:16.706+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.mojo#animal-sniffer-annotations;1.17!animal-sniffer-annotations.jar (172ms)
+[2025-11-10T17:17:16.799+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar ...
+[2025-11-10T17:17:16.917+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.httpcomponents#httpcore;4.4.13!httpcore.jar (210ms)
+[2025-11-10T17:17:17.011+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-security/9.4.43.v20210629/jetty-security-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:17.133+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-security;9.4.43.v20210629!jetty-security.jar (215ms)
+[2025-11-10T17:17:17.220+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util-ajax/9.4.43.v20210629/jetty-util-ajax-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:17.318+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-util-ajax;9.4.43.v20210629!jetty-util-ajax.jar (184ms)
+[2025-11-10T17:17:17.415+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-xml/9.4.43.v20210629/jetty-xml-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:17.517+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-xml;9.4.43.v20210629!jetty-xml.jar (199ms)
+[2025-11-10T17:17:17.615+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.13/jackson-core-asl-1.9.13.jar ...
+[2025-11-10T17:17:17.722+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.jackson#jackson-core-asl;1.9.13!jackson-core-asl.jar (204ms)
+[2025-11-10T17:17:17.828+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar ...
+[2025-11-10T17:17:17.994+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.codehaus.jackson#jackson-mapper-asl;1.9.13!jackson-mapper-asl.jar (271ms)
+[2025-11-10T17:17:18.079+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.3/paranamer-2.3.jar ...
+[2025-11-10T17:17:18.169+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.thoughtworks.paranamer#paranamer;2.3!paranamer.jar (174ms)
+[2025-11-10T17:17:18.260+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/nimbusds/nimbus-jose-jwt/9.8.1/nimbus-jose-jwt-9.8.1.jar ...
+[2025-11-10T17:17:18.388+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.nimbusds#nimbus-jose-jwt;9.8.1!nimbus-jose-jwt.jar (218ms)
+[2025-11-10T17:17:18.477+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/net/minidev/json-smart/2.4.7/json-smart-2.4.7.jar ...
+[2025-11-10T17:17:18.575+0000] {docker.py:429} INFO - [SUCCESSFUL ] net.minidev#json-smart;2.4.7!json-smart.jar(bundle) (188ms)
+[2025-11-10T17:17:18.662+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/curator/curator-framework/4.2.0/curator-framework-4.2.0.jar ...
+[2025-11-10T17:17:18.831+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.curator#curator-framework;4.2.0!curator-framework.jar(bundle) (255ms)
+[2025-11-10T17:17:18.915+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-simplekdc/1.0.1/kerb-simplekdc-1.0.1.jar ...
+[2025-11-10T17:17:19.008+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-simplekdc;1.0.1!kerb-simplekdc.jar (177ms)
+[2025-11-10T17:17:19.095+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar ...
+[2025-11-10T17:17:19.175+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.github.stephenc.jcip#jcip-annotations;1.0-1!jcip-annotations.jar (166ms)
+[2025-11-10T17:17:19.263+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/net/minidev/accessors-smart/2.4.7/accessors-smart-2.4.7.jar ...
+[2025-11-10T17:17:19.353+0000] {docker.py:429} INFO - [SUCCESSFUL ] net.minidev#accessors-smart;2.4.7!accessors-smart.jar(bundle) (177ms)
+[2025-11-10T17:17:19.475+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar ...
+[2025-11-10T17:17:19.568+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.ow2.asm#asm;5.0.4!asm.jar (214ms)
+[2025-11-10T17:17:19.663+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-client/1.0.1/kerb-client-1.0.1.jar ...
+[2025-11-10T17:17:19.762+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-client;1.0.1!kerb-client.jar (193ms)
+[2025-11-10T17:17:19.856+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-admin/1.0.1/kerb-admin-1.0.1.jar ...
+[2025-11-10T17:17:19.952+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-admin;1.0.1!kerb-admin.jar (188ms)
+[2025-11-10T17:17:20.054+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-config/1.0.1/kerby-config-1.0.1.jar ...
+[2025-11-10T17:17:20.141+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-config;1.0.1!kerby-config.jar (189ms)
+[2025-11-10T17:17:20.227+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-common/1.0.1/kerb-common-1.0.1.jar ...
+[2025-11-10T17:17:20.316+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-common;1.0.1!kerb-common.jar (175ms)
+[2025-11-10T17:17:20.400+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-util/1.0.1/kerb-util-1.0.1.jar ...
+[2025-11-10T17:17:20.486+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-util;1.0.1!kerb-util.jar (169ms)
+[2025-11-10T17:17:20.581+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/token-provider/1.0.1/token-provider-1.0.1.jar ...
+[2025-11-10T17:17:20.670+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#token-provider;1.0.1!token-provider.jar (183ms)
+[2025-11-10T17:17:20.755+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-pkix/1.0.1/kerby-pkix-1.0.1.jar ...
+[2025-11-10T17:17:20.857+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-pkix;1.0.1!kerby-pkix.jar (186ms)
+[2025-11-10T17:17:20.942+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-asn1/1.0.1/kerby-asn1-1.0.1.jar ...
+[2025-11-10T17:17:21.038+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-asn1;1.0.1!kerby-asn1.jar (180ms)
+[2025-11-10T17:17:21.127+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-util/1.0.1/kerby-util-1.0.1.jar ...
+[2025-11-10T17:17:21.220+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-util;1.0.1!kerby-util.jar (182ms)
+[2025-11-10T17:17:21.307+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-crypto/1.0.1/kerb-crypto-1.0.1.jar ...
+[2025-11-10T17:17:21.437+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-crypto;1.0.1!kerb-crypto.jar (216ms)
+[2025-11-10T17:17:21.527+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-server/1.0.1/kerb-server-1.0.1.jar ...
+[2025-11-10T17:17:21.626+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-server;1.0.1!kerb-server.jar (188ms)
+[2025-11-10T17:17:21.714+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerby-xdr/1.0.1/kerby-xdr-1.0.1.jar ...
+[2025-11-10T17:17:21.806+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerby-xdr;1.0.1!kerby-xdr.jar (181ms)
+[2025-11-10T17:17:21.901+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kerby/kerb-identity/1.0.1/kerb-identity-1.0.1.jar ...
+[2025-11-10T17:17:21.989+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kerby#kerb-identity;1.0.1!kerb-identity.jar (183ms)
+[2025-11-10T17:17:22.080+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.12.7/jackson-annotations-2.12.7.jar ...
+[2025-11-10T17:17:22.177+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.core#jackson-annotations;2.12.7!jackson-annotations.jar(bundle) (186ms)
+[2025-11-10T17:17:22.264+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.12.7/jackson-core-2.12.7.jar ...
+[2025-11-10T17:17:22.392+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.core#jackson-core;2.12.7!jackson-core.jar(bundle) (214ms)
+[2025-11-10T17:17:22.487+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar ...
+[2025-11-10T17:17:22.579+0000] {docker.py:429} INFO - [SUCCESSFUL ] jakarta.activation#jakarta.activation-api;1.2.1!jakarta.activation-api.jar (187ms)
+[2025-11-10T17:17:22.670+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/servlet/jsp/jsp-api/2.1/jsp-api-2.1.jar ...
+[2025-11-10T17:17:22.775+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.servlet.jsp#jsp-api;2.1!jsp-api.jar (195ms)
+[2025-11-10T17:17:22.863+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.2.11/jaxb-api-2.2.11.jar ...
+[2025-11-10T17:17:22.964+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.xml.bind#jaxb-api;2.2.11!jaxb-api.jar (188ms)
+[2025-11-10T17:17:23.056+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/websocket/websocket-client/9.4.43.v20210629/websocket-client-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:23.148+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty.websocket#websocket-client;9.4.43.v20210629!websocket-client.jar (183ms)
+[2025-11-10T17:17:23.238+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/jline/jline/3.9.0/jline-3.9.0.jar ...
+[2025-11-10T17:17:23.393+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.jline#jline;3.9.0!jline.jar (244ms)
+[2025-11-10T17:17:23.481+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-client/9.4.43.v20210629/jetty-client-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:23.597+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-client;9.4.43.v20210629!jetty-client.jar (199ms)
+[2025-11-10T17:17:23.683+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-util/9.4.43.v20210629/jetty-util-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:23.822+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-util;9.4.43.v20210629!jetty-util.jar (224ms)
+[2025-11-10T17:17:23.917+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-io/9.4.43.v20210629/jetty-io-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:24.016+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-io;9.4.43.v20210629!jetty-io.jar (194ms)
+[2025-11-10T17:17:24.101+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/websocket/websocket-common/9.4.43.v20210629/websocket-common-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:24.203+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty.websocket#websocket-common;9.4.43.v20210629!websocket-common.jar (186ms)
+[2025-11-10T17:17:24.293+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-http/9.4.43.v20210629/jetty-http-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:24.403+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty#jetty-http;9.4.43.v20210629!jetty-http.jar (199ms)
+[2025-11-10T17:17:24.486+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/eclipse/jetty/websocket/websocket-api/9.4.43.v20210629/websocket-api-9.4.43.v20210629.jar ...
+[2025-11-10T17:17:24.575+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.eclipse.jetty.websocket#websocket-api;9.4.43.v20210629!websocket-api.jar (171ms)
+[2025-11-10T17:17:24.661+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-yarn-common/3.3.4/hadoop-yarn-common-3.3.4.jar ...
+[2025-11-10T17:17:25.053+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-yarn-common;3.3.4!hadoop-yarn-common.jar (477ms)
+[2025-11-10T17:17:25.144+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar ...
+[2025-11-10T17:17:25.238+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.servlet#javax.servlet-api;3.1.0!javax.servlet-api.jar (181ms)
+[2025-11-10T17:17:25.323+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/sun/jersey/jersey-core/1.19/jersey-core-1.19.jar ...
+[2025-11-10T17:17:25.449+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.sun.jersey#jersey-core;1.19!jersey-core.jar (209ms)
+[2025-11-10T17:17:25.532+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/sun/jersey/jersey-client/1.19/jersey-client-1.19.jar ...
+[2025-11-10T17:17:25.633+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.sun.jersey#jersey-client;1.19!jersey-client.jar (183ms)
+[2025-11-10T17:17:25.718+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-jaxb-annotations/2.12.7/jackson-module-jaxb-annotations-2.12.7.jar ...
+[2025-11-10T17:17:25.808+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.7!jackson-module-jaxb-annotations.jar(bundle) (174ms)
+[2025-11-10T17:17:25.894+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-json-provider/2.12.7/jackson-jaxrs-json-provider-2.12.7.jar ...
+[2025-11-10T17:17:25.981+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.7!jackson-jaxrs-json-provider.jar(bundle) (172ms)
+[2025-11-10T17:17:26.067+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar ...
+[2025-11-10T17:17:26.156+0000] {docker.py:429} INFO - [SUCCESSFUL ] javax.ws.rs#jsr311-api;1.1.1!jsr311-api.jar (174ms)
+[2025-11-10T17:17:26.261+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar ...
+[2025-11-10T17:17:26.354+0000] {docker.py:429} INFO - [SUCCESSFUL ] jakarta.xml.bind#jakarta.xml.bind-api;2.3.2!jakarta.xml.bind-api.jar (198ms)
+[2025-11-10T17:17:26.438+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/fasterxml/jackson/jaxrs/jackson-jaxrs-base/2.12.7/jackson-jaxrs-base-2.12.7.jar ...
+[2025-11-10T17:17:26.530+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.7!jackson-jaxrs-base.jar(bundle) (175ms)
+[2025-11-10T17:17:26.617+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-mapreduce-client-common/3.3.4/hadoop-mapreduce-client-common-3.3.4.jar ...
+[2025-11-10T17:17:26.776+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-mapreduce-client-common;3.3.4!hadoop-mapreduce-client-common.jar (245ms)
+[2025-11-10T17:17:26.776+0000] {docker.py:429} INFO - :: resolution report :: resolve 91575ms :: artifacts dl 30346ms
+[2025-11-10T17:17:26.777+0000] {docker.py:429} INFO - :: modules in use:
+[2025-11-10T17:17:26.777+0000] {docker.py:429} INFO - ch.qos.reload4j#reload4j;1.2.22 from central in [default]
+	com.fasterxml.jackson.core#jackson-annotations;2.12.7 from central in [default]
+[2025-11-10T17:17:26.778+0000] {docker.py:429} INFO - com.fasterxml.jackson.core#jackson-core;2.12.7 from central in [default]
+[2025-11-10T17:17:26.778+0000] {docker.py:429} INFO - com.fasterxml.jackson.core#jackson-databind;2.12.7 from central in [default]
+[2025-11-10T17:17:26.779+0000] {docker.py:429} INFO - com.fasterxml.jackson.jaxrs#jackson-jaxrs-base;2.12.7 from central in [default]
+[2025-11-10T17:17:26.779+0000] {docker.py:429} INFO - com.fasterxml.jackson.jaxrs#jackson-jaxrs-json-provider;2.12.7 from central in [default]
+[2025-11-10T17:17:26.779+0000] {docker.py:429} INFO - com.fasterxml.jackson.module#jackson-module-jaxb-annotations;2.12.7 from central in [default]
+[2025-11-10T17:17:26.780+0000] {docker.py:429} INFO - com.fasterxml.woodstox#woodstox-core;5.3.0 from central in [default]
+[2025-11-10T17:17:26.780+0000] {docker.py:429} INFO - com.github.stephenc.jcip#jcip-annotations;1.0-1 from central in [default]
+[2025-11-10T17:17:26.780+0000] {docker.py:429} INFO - com.google.code.findbugs#jsr305;3.0.2 from central in [default]
+[2025-11-10T17:17:26.781+0000] {docker.py:429} INFO - com.google.code.gson#gson;2.8.9 from central in [default]
+[2025-11-10T17:17:26.781+0000] {docker.py:429} INFO - com.google.guava#failureaccess;1.0 from central in [default]
+	com.google.guava#guava;27.0-jre from central in [default]
+[2025-11-10T17:17:26.781+0000] {docker.py:429} INFO - com.google.guava#listenablefuture;9999.0-empty-to-avoid-conflict-with-guava from central in [default]
+[2025-11-10T17:17:26.782+0000] {docker.py:429} INFO - com.google.j2objc#j2objc-annotations;1.1 from central in [default]
+	com.google.protobuf#protobuf-java;2.5.0 from central in [default]
+[2025-11-10T17:17:26.782+0000] {docker.py:429} INFO - com.google.re2j#re2j;1.1 from central in [default]
+[2025-11-10T17:17:26.783+0000] {docker.py:429} INFO - com.nimbusds#nimbus-jose-jwt;9.8.1 from central in [default]
+[2025-11-10T17:17:26.783+0000] {docker.py:429} INFO - com.sun.jersey#jersey-client;1.19 from central in [default]
+	com.sun.jersey#jersey-core;1.19 from central in [default]
+[2025-11-10T17:17:26.783+0000] {docker.py:429} INFO - com.sun.jersey#jersey-servlet;1.19 from central in [default]
+[2025-11-10T17:17:26.784+0000] {docker.py:429} INFO - com.thoughtworks.paranamer#paranamer;2.3 from central in [default]
+	commons-beanutils#commons-beanutils;1.9.4 from central in [default]
+[2025-11-10T17:17:26.784+0000] {docker.py:429} INFO - commons-cli#commons-cli;1.2 from central in [default]
+[2025-11-10T17:17:26.784+0000] {docker.py:429} INFO - commons-codec#commons-codec;1.15 from central in [default]
+[2025-11-10T17:17:26.784+0000] {docker.py:429} INFO - commons-collections#commons-collections;3.2.2 from central in [default]
+[2025-11-10T17:17:26.785+0000] {docker.py:429} INFO - commons-io#commons-io;2.8.0 from central in [default]
+	commons-logging#commons-logging;1.1.3 from central in [default]
+[2025-11-10T17:17:26.785+0000] {docker.py:429} INFO - commons-net#commons-net;3.6 from central in [default]
+	dnsjava#dnsjava;2.1.7 from central in [default]
+[2025-11-10T17:17:26.785+0000] {docker.py:429} INFO - jakarta.activation#jakarta.activation-api;1.2.1 from central in [default]
+[2025-11-10T17:17:26.785+0000] {docker.py:429} INFO - jakarta.xml.bind#jakarta.xml.bind-api;2.3.2 from central in [default]
+[2025-11-10T17:17:26.786+0000] {docker.py:429} INFO - javax.servlet#javax.servlet-api;3.1.0 from central in [default]
+	javax.servlet.jsp#jsp-api;2.1 from central in [default]
+[2025-11-10T17:17:26.786+0000] {docker.py:429} INFO - javax.ws.rs#jsr311-api;1.1.1 from central in [default]
+[2025-11-10T17:17:26.786+0000] {docker.py:429} INFO - javax.xml.bind#jaxb-api;2.2.11 from central in [default]
+[2025-11-10T17:17:26.787+0000] {docker.py:429} INFO - net.minidev#accessors-smart;2.4.7 from central in [default]
+[2025-11-10T17:17:26.787+0000] {docker.py:429} INFO - net.minidev#json-smart;2.4.7 from central in [default]
+[2025-11-10T17:17:26.787+0000] {docker.py:429} INFO - org.apache.avro#avro;1.7.7 from central in [default]
+[2025-11-10T17:17:26.787+0000] {docker.py:429} INFO - org.apache.commons#commons-compress;1.21 from central in [default]
+[2025-11-10T17:17:26.788+0000] {docker.py:429} INFO - org.apache.commons#commons-configuration2;2.1.1 from central in [default]
+[2025-11-10T17:17:26.788+0000] {docker.py:429} INFO - org.apache.commons#commons-lang3;3.12.0 from central in [default]
+[2025-11-10T17:17:26.788+0000] {docker.py:429} INFO - org.apache.commons#commons-math3;3.1.1 from central in [default]
+[2025-11-10T17:17:26.789+0000] {docker.py:429} INFO - org.apache.commons#commons-pool2;2.11.1 from central in [default]
+[2025-11-10T17:17:26.789+0000] {docker.py:429} INFO - org.apache.commons#commons-text;1.4 from central in [default]
+[2025-11-10T17:17:26.789+0000] {docker.py:429} INFO - org.apache.curator#curator-client;4.2.0 from central in [default]
+[2025-11-10T17:17:26.790+0000] {docker.py:429} INFO - org.apache.curator#curator-framework;4.2.0 from central in [default]
+[2025-11-10T17:17:26.790+0000] {docker.py:429} INFO - org.apache.curator#curator-recipes;4.2.0 from central in [default]
+[2025-11-10T17:17:26.790+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-annotations;3.3.4 from central in [default]
+[2025-11-10T17:17:26.791+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-auth;3.3.4 from central in [default]
+[2025-11-10T17:17:26.791+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-client;3.3.4 from central in [default]
+[2025-11-10T17:17:26.792+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-client-api;3.3.4 from central in [default]
+	org.apache.hadoop#hadoop-client-runtime;3.3.4 from central in [default]
+[2025-11-10T17:17:26.792+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-common;3.3.4 from central in [default]
+[2025-11-10T17:17:26.792+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-hdfs-client;3.3.4 from central in [default]
+[2025-11-10T17:17:26.792+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-mapreduce-client-common;3.3.4 from central in [default]
+[2025-11-10T17:17:26.793+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-mapreduce-client-core;3.3.4 from central in [default]
+	org.apache.hadoop#hadoop-mapreduce-client-jobclient;3.3.4 from central in [default]
+[2025-11-10T17:17:26.793+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-yarn-api;3.3.4 from central in [default]
+[2025-11-10T17:17:26.793+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-yarn-client;3.3.4 from central in [default]
+[2025-11-10T17:17:26.793+0000] {docker.py:429} INFO - org.apache.hadoop#hadoop-yarn-common;3.3.4 from central in [default]
+[2025-11-10T17:17:26.794+0000] {docker.py:429} INFO - org.apache.hadoop.thirdparty#hadoop-shaded-guava;1.1.1 from central in [default]
+	org.apache.hadoop.thirdparty#hadoop-shaded-protobuf_3_7;1.1.1 from central in [default]
+[2025-11-10T17:17:26.794+0000] {docker.py:429} INFO - org.apache.httpcomponents#httpclient;4.5.13 from central in [default]
+[2025-11-10T17:17:26.794+0000] {docker.py:429} INFO - org.apache.httpcomponents#httpcore;4.4.13 from central in [default]
+	org.apache.kafka#kafka-clients;3.4.1 from central in [default]
+[2025-11-10T17:17:26.795+0000] {docker.py:429} INFO - org.apache.kerby#kerb-admin;1.0.1 from central in [default]
+[2025-11-10T17:17:26.795+0000] {docker.py:429} INFO - org.apache.kerby#kerb-client;1.0.1 from central in [default]
+[2025-11-10T17:17:26.795+0000] {docker.py:429} INFO - org.apache.kerby#kerb-common;1.0.1 from central in [default]
+	org.apache.kerby#kerb-core;1.0.1 from central in [default]
+[2025-11-10T17:17:26.796+0000] {docker.py:429} INFO - org.apache.kerby#kerb-crypto;1.0.1 from central in [default]
+[2025-11-10T17:17:26.796+0000] {docker.py:429} INFO - org.apache.kerby#kerb-identity;1.0.1 from central in [default]
+[2025-11-10T17:17:26.796+0000] {docker.py:429} INFO - org.apache.kerby#kerb-server;1.0.1 from central in [default]
+[2025-11-10T17:17:26.797+0000] {docker.py:429} INFO - org.apache.kerby#kerb-simplekdc;1.0.1 from central in [default]
+[2025-11-10T17:17:26.797+0000] {docker.py:429} INFO - org.apache.kerby#kerb-util;1.0.1 from central in [default]
+	org.apache.kerby#kerby-asn1;1.0.1 from central in [default]
+[2025-11-10T17:17:26.797+0000] {docker.py:429} INFO - org.apache.kerby#kerby-config;1.0.1 from central in [default]
+[2025-11-10T17:17:26.798+0000] {docker.py:429} INFO - org.apache.kerby#kerby-pkix;1.0.1 from central in [default]
+[2025-11-10T17:17:26.798+0000] {docker.py:429} INFO - org.apache.kerby#kerby-util;1.0.1 from central in [default]
+[2025-11-10T17:17:26.798+0000] {docker.py:429} INFO - org.apache.kerby#kerby-xdr;1.0.1 from central in [default]
+[2025-11-10T17:17:26.799+0000] {docker.py:429} INFO - org.apache.kerby#token-provider;1.0.1 from central in [default]
+[2025-11-10T17:17:26.799+0000] {docker.py:429} INFO - org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 from central in [default]
+	org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 from central in [default]
+[2025-11-10T17:17:26.799+0000] {docker.py:429} INFO - org.checkerframework#checker-qual;2.5.2 from central in [default]
+	org.codehaus.jackson#jackson-core-asl;1.9.13 from central in [default]
+[2025-11-10T17:17:26.799+0000] {docker.py:429} INFO - org.codehaus.jackson#jackson-mapper-asl;1.9.13 from central in [default]
+[2025-11-10T17:17:26.800+0000] {docker.py:429} INFO - org.codehaus.mojo#animal-sniffer-annotations;1.17 from central in [default]
+[2025-11-10T17:17:26.800+0000] {docker.py:429} INFO - org.codehaus.woodstox#stax2-api;4.2.1 from central in [default]
+[2025-11-10T17:17:26.801+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-client;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.801+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-http;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.801+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-io;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.801+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-security;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.802+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-servlet;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.802+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-util;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.803+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-util-ajax;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.803+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-webapp;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.803+0000] {docker.py:429} INFO - org.eclipse.jetty#jetty-xml;9.4.43.v20210629 from central in [default]
+	org.eclipse.jetty.websocket#websocket-api;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.803+0000] {docker.py:429} INFO - org.eclipse.jetty.websocket#websocket-client;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.804+0000] {docker.py:429} INFO - org.eclipse.jetty.websocket#websocket-common;9.4.43.v20210629 from central in [default]
+[2025-11-10T17:17:26.804+0000] {docker.py:429} INFO - org.jline#jline;3.9.0 from central in [default]
+[2025-11-10T17:17:26.804+0000] {docker.py:429} INFO - org.lz4#lz4-java;1.8.0 from central in [default]
+	org.ow2.asm#asm;5.0.4 from central in [default]
+[2025-11-10T17:17:26.805+0000] {docker.py:429} INFO - org.slf4j#slf4j-api;2.0.7 from central in [default]
+	org.slf4j#slf4j-reload4j;1.7.36 from central in [default]
+	org.xerial.snappy#snappy-java;1.1.10.3 from central in [default]
+[2025-11-10T17:17:26.805+0000] {docker.py:429} INFO - :: evicted modules:
+[2025-11-10T17:17:26.805+0000] {docker.py:429} INFO - com.google.code.findbugs#jsr305;3.0.0 by [com.google.code.findbugs#jsr305;3.0.2] in [default]
+	org.slf4j#slf4j-api;1.7.36 by [org.slf4j#slf4j-api;2.0.7] in [default]
+	org.xerial.snappy#snappy-java;1.1.8.2 by [org.xerial.snappy#snappy-java;1.1.10.3] in [default]
+[2025-11-10T17:17:26.805+0000] {docker.py:429} INFO - ---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+[2025-11-10T17:17:26.806+0000] {docker.py:429} INFO - |      default     |  109  |  107  |  107  |   3   ||  106  |  106  |
+	---------------------------------------------------------------------
+[2025-11-10T17:17:26.806+0000] {docker.py:429} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-d93c067b-cc67-4b9a-9109-cb1f31bdf9d7
+	confs: [default]
+[2025-11-10T17:17:27.006+0000] {docker.py:429} INFO - 106 artifacts copied, 0 already retrieved (105153kB/208ms)
+[2025-11-10T17:17:27.200+0000] {docker.py:429} INFO - 25/11/10 17:17:27 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-11-10T17:17:29.390+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkContext: Running Spark version 3.5.0
+[2025-11-10T17:17:29.393+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkContext: OS info Linux, 5.15.167.4-microsoft-standard-WSL2, amd64
+[2025-11-10T17:17:29.393+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkContext: Java version 11.0.20.1
+[2025-11-10T17:17:29.405+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO ResourceUtils: ==============================================================
+[2025-11-10T17:17:29.406+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO ResourceUtils: No custom resources configured for spark.driver.
+[2025-11-10T17:17:29.406+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO ResourceUtils: ==============================================================
+[2025-11-10T17:17:29.407+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkContext: Submitted application: train-risk-model
+[2025-11-10T17:17:29.426+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+[2025-11-10T17:17:29.439+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO ResourceProfile: Limiting resource is cpu
+[2025-11-10T17:17:29.440+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO ResourceProfileManager: Added ResourceProfile id: 0
+[2025-11-10T17:17:29.488+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SecurityManager: Changing view acls to: root
+[2025-11-10T17:17:29.489+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SecurityManager: Changing modify acls to: root
+[2025-11-10T17:17:29.489+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SecurityManager: Changing view acls groups to:
+[2025-11-10T17:17:29.489+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SecurityManager: Changing modify acls groups to:
+[2025-11-10T17:17:29.489+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: root; groups with view permissions: EMPTY; users with modify permissions: root; groups with modify permissions: EMPTY
+[2025-11-10T17:17:29.699+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO Utils: Successfully started service 'sparkDriver' on port 43041.
+[2025-11-10T17:17:29.728+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkEnv: Registering MapOutputTracker
+[2025-11-10T17:17:29.760+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkEnv: Registering BlockManagerMaster
+[2025-11-10T17:17:29.773+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+[2025-11-10T17:17:29.774+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+[2025-11-10T17:17:29.778+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+[2025-11-10T17:17:29.801+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO DiskBlockManager: Created local directory at /tmp/blockmgr-e4a346c7-1605-4213-ab5d-4d88678d2a2a
+[2025-11-10T17:17:29.815+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO MemoryStore: MemoryStore started with capacity 434.4 MiB
+[2025-11-10T17:17:29.827+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SparkEnv: Registering OutputCommitCoordinator
+[2025-11-10T17:17:29.959+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO JettyUtils: Start Jetty 0.0.0.0:4040 for SparkUI
+[2025-11-10T17:17:30.026+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+[2025-11-10T17:17:30.060+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.5.0.jar at spark://0977dfbb40de:43041/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.5.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.061+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-client-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.061+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.5.0.jar at spark://0977dfbb40de:43041/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.5.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.061+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-3.4.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kafka_kafka-clients-3.4.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.062+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.11.1.jar at spark://0977dfbb40de:43041/jars/org.apache.commons_commons-pool2-2.11.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.062+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-runtime-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-client-runtime-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.063+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.lz4_lz4-java-1.8.0.jar at spark://0977dfbb40de:43041/jars/org.lz4_lz4-java-1.8.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.063+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.10.3.jar at spark://0977dfbb40de:43041/jars/org.xerial.snappy_snappy-java-1.1.10.3.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.063+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.slf4j_slf4j-api-2.0.7.jar at spark://0977dfbb40de:43041/jars/org.slf4j_slf4j-api-2.0.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.064+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-api-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-client-api-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.064+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/commons-logging_commons-logging-1.1.3.jar at spark://0977dfbb40de:43041/jars/commons-logging_commons-logging-1.1.3.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.065+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-common-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-common-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.065+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-hdfs-client-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-hdfs-client-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.065+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-api-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-yarn-api-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.066+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-client-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-yarn-client-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.066+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-core-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-mapreduce-client-core-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.066+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-jobclient-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-mapreduce-client-jobclient-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.067+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-annotations-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-annotations-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.067+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop.thirdparty_hadoop-shaded-protobuf_3_7-1.1.1.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop.thirdparty_hadoop-shaded-protobuf_3_7-1.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.067+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop.thirdparty_hadoop-shaded-guava-1.1.1.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop.thirdparty_hadoop-shaded-guava-1.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.068+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.guava_guava-27.0-jre.jar at spark://0977dfbb40de:43041/jars/com.google.guava_guava-27.0-jre.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.068+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/commons-cli_commons-cli-1.2.jar at spark://0977dfbb40de:43041/jars/commons-cli_commons-cli-1.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.068+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-math3-3.1.1.jar at spark://0977dfbb40de:43041/jars/org.apache.commons_commons-math3-3.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.069+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.httpcomponents_httpclient-4.5.13.jar at spark://0977dfbb40de:43041/jars/org.apache.httpcomponents_httpclient-4.5.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.069+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/commons-codec_commons-codec-1.15.jar at spark://0977dfbb40de:43041/jars/commons-codec_commons-codec-1.15.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.069+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/commons-io_commons-io-2.8.0.jar at spark://0977dfbb40de:43041/jars/commons-io_commons-io-2.8.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.069+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/commons-net_commons-net-3.6.jar at spark://0977dfbb40de:43041/jars/commons-net_commons-net-3.6.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.070+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/commons-collections_commons-collections-3.2.2.jar at spark://0977dfbb40de:43041/jars/commons-collections_commons-collections-3.2.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.070+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-servlet-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-servlet-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.071+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-webapp-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-webapp-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.071+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.sun.jersey_jersey-servlet-1.19.jar at spark://0977dfbb40de:43041/jars/com.sun.jersey_jersey-servlet-1.19.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.072+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/ch.qos.reload4j_reload4j-1.2.22.jar at spark://0977dfbb40de:43041/jars/ch.qos.reload4j_reload4j-1.2.22.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.072+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/commons-beanutils_commons-beanutils-1.9.4.jar at spark://0977dfbb40de:43041/jars/commons-beanutils_commons-beanutils-1.9.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.072+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-configuration2-2.1.1.jar at spark://0977dfbb40de:43041/jars/org.apache.commons_commons-configuration2-2.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.072+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-lang3-3.12.0.jar at spark://0977dfbb40de:43041/jars/org.apache.commons_commons-lang3-3.12.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.073+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-text-1.4.jar at spark://0977dfbb40de:43041/jars/org.apache.commons_commons-text-1.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.073+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.slf4j_slf4j-reload4j-1.7.36.jar at spark://0977dfbb40de:43041/jars/org.slf4j_slf4j-reload4j-1.7.36.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.073+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.avro_avro-1.7.7.jar at spark://0977dfbb40de:43041/jars/org.apache.avro_avro-1.7.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.074+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.re2j_re2j-1.1.jar at spark://0977dfbb40de:43041/jars/com.google.re2j_re2j-1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.074+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.protobuf_protobuf-java-2.5.0.jar at spark://0977dfbb40de:43041/jars/com.google.protobuf_protobuf-java-2.5.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.074+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.code.gson_gson-2.8.9.jar at spark://0977dfbb40de:43041/jars/com.google.code.gson_gson-2.8.9.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.075+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-auth-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-auth-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.075+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.curator_curator-client-4.2.0.jar at spark://0977dfbb40de:43041/jars/org.apache.curator_curator-client-4.2.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.075+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.curator_curator-recipes-4.2.0.jar at spark://0977dfbb40de:43041/jars/org.apache.curator_curator-recipes-4.2.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.076+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.code.findbugs_jsr305-3.0.2.jar at spark://0977dfbb40de:43041/jars/com.google.code.findbugs_jsr305-3.0.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.076+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.commons_commons-compress-1.21.jar at spark://0977dfbb40de:43041/jars/org.apache.commons_commons-compress-1.21.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.077+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-core-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-core-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.077+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.fasterxml.jackson.core_jackson-databind-2.12.7.jar at spark://0977dfbb40de:43041/jars/com.fasterxml.jackson.core_jackson-databind-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.077+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.codehaus.woodstox_stax2-api-4.2.1.jar at spark://0977dfbb40de:43041/jars/org.codehaus.woodstox_stax2-api-4.2.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.078+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.fasterxml.woodstox_woodstox-core-5.3.0.jar at spark://0977dfbb40de:43041/jars/com.fasterxml.woodstox_woodstox-core-5.3.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.078+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/dnsjava_dnsjava-2.1.7.jar at spark://0977dfbb40de:43041/jars/dnsjava_dnsjava-2.1.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.078+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.guava_failureaccess-1.0.jar at spark://0977dfbb40de:43041/jars/com.google.guava_failureaccess-1.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.079+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.guava_listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar at spark://0977dfbb40de:43041/jars/com.google.guava_listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.checkerframework_checker-qual-2.5.2.jar at spark://0977dfbb40de:43041/jars/org.checkerframework_checker-qual-2.5.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.079+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar at spark://0977dfbb40de:43041/jars/com.google.j2objc_j2objc-annotations-1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.079+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.17.jar at spark://0977dfbb40de:43041/jars/org.codehaus.mojo_animal-sniffer-annotations-1.17.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.079+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.httpcomponents_httpcore-4.4.13.jar at spark://0977dfbb40de:43041/jars/org.apache.httpcomponents_httpcore-4.4.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.080+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-security-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-security-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.080+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-util-ajax-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-util-ajax-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.080+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-xml-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-xml-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.080+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.codehaus.jackson_jackson-core-asl-1.9.13.jar at spark://0977dfbb40de:43041/jars/org.codehaus.jackson_jackson-core-asl-1.9.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.081+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar at spark://0977dfbb40de:43041/jars/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.081+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.thoughtworks.paranamer_paranamer-2.3.jar at spark://0977dfbb40de:43041/jars/com.thoughtworks.paranamer_paranamer-2.3.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.081+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.nimbusds_nimbus-jose-jwt-9.8.1.jar at spark://0977dfbb40de:43041/jars/com.nimbusds_nimbus-jose-jwt-9.8.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.081+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/net.minidev_json-smart-2.4.7.jar at spark://0977dfbb40de:43041/jars/net.minidev_json-smart-2.4.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.082+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.curator_curator-framework-4.2.0.jar at spark://0977dfbb40de:43041/jars/org.apache.curator_curator-framework-4.2.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.082+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-simplekdc-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-simplekdc-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.082+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.github.stephenc.jcip_jcip-annotations-1.0-1.jar at spark://0977dfbb40de:43041/jars/com.github.stephenc.jcip_jcip-annotations-1.0-1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.082+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/net.minidev_accessors-smart-2.4.7.jar at spark://0977dfbb40de:43041/jars/net.minidev_accessors-smart-2.4.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.083+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.ow2.asm_asm-5.0.4.jar at spark://0977dfbb40de:43041/jars/org.ow2.asm_asm-5.0.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.083+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-client-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-client-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.084+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-admin-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-admin-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.084+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerby-config-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerby-config-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.084+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-common-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-common-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.084+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-util-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-util-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.085+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_token-provider-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_token-provider-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.085+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerby-pkix-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerby-pkix-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.085+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerby-asn1-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerby-asn1-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.086+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerby-util-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerby-util-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.086+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-crypto-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-crypto-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.086+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-server-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-server-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.087+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerby-xdr-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerby-xdr-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.087+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.kerby_kerb-identity-1.0.1.jar at spark://0977dfbb40de:43041/jars/org.apache.kerby_kerb-identity-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.087+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.fasterxml.jackson.core_jackson-annotations-2.12.7.jar at spark://0977dfbb40de:43041/jars/com.fasterxml.jackson.core_jackson-annotations-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.088+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.fasterxml.jackson.core_jackson-core-2.12.7.jar at spark://0977dfbb40de:43041/jars/com.fasterxml.jackson.core_jackson-core-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.088+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/jakarta.activation_jakarta.activation-api-1.2.1.jar at spark://0977dfbb40de:43041/jars/jakarta.activation_jakarta.activation-api-1.2.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.088+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/javax.servlet.jsp_jsp-api-2.1.jar at spark://0977dfbb40de:43041/jars/javax.servlet.jsp_jsp-api-2.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.089+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/javax.xml.bind_jaxb-api-2.2.11.jar at spark://0977dfbb40de:43041/jars/javax.xml.bind_jaxb-api-2.2.11.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.089+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-client-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty.websocket_websocket-client-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.090+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.jline_jline-3.9.0.jar at spark://0977dfbb40de:43041/jars/org.jline_jline-3.9.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.090+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-client-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-client-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.090+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-util-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-util-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.091+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-io-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-io-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.091+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-common-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty.websocket_websocket-common-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.091+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty_jetty-http-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty_jetty-http-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.092+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-api-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/jars/org.eclipse.jetty.websocket_websocket-api-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.092+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-common-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-yarn-common-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.092+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/javax.servlet_javax.servlet-api-3.1.0.jar at spark://0977dfbb40de:43041/jars/javax.servlet_javax.servlet-api-3.1.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.093+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.sun.jersey_jersey-core-1.19.jar at spark://0977dfbb40de:43041/jars/com.sun.jersey_jersey-core-1.19.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.093+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.sun.jersey_jersey-client-1.19.jar at spark://0977dfbb40de:43041/jars/com.sun.jersey_jersey-client-1.19.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.093+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.fasterxml.jackson.module_jackson-module-jaxb-annotations-2.12.7.jar at spark://0977dfbb40de:43041/jars/com.fasterxml.jackson.module_jackson-module-jaxb-annotations-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.093+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-json-provider-2.12.7.jar at spark://0977dfbb40de:43041/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-json-provider-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.094+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/javax.ws.rs_jsr311-api-1.1.1.jar at spark://0977dfbb40de:43041/jars/javax.ws.rs_jsr311-api-1.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.094+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/jakarta.xml.bind_jakarta.xml.bind-api-2.3.2.jar at spark://0977dfbb40de:43041/jars/jakarta.xml.bind_jakarta.xml.bind-api-2.3.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.094+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-base-2.12.7.jar at spark://0977dfbb40de:43041/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-base-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.094+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added JAR file:///root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-common-3.3.4.jar at spark://0977dfbb40de:43041/jars/org.apache.hadoop_hadoop-mapreduce-client-common-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.095+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.5.0.jar at spark://0977dfbb40de:43041/files/org.apache.spark_spark-sql-kafka-0-10_2.12-3.5.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.095+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.spark_spark-sql-kafka-0-10_2.12-3.5.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.spark_spark-sql-kafka-0-10_2.12-3.5.0.jar
+[2025-11-10T17:17:30.095+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-client-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.096+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-client-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-client-3.3.4.jar
+[2025-11-10T17:17:30.096+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.5.0.jar at spark://0977dfbb40de:43041/files/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.5.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.097+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.5.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.spark_spark-token-provider-kafka-0-10_2.12-3.5.0.jar
+[2025-11-10T17:17:30.097+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kafka_kafka-clients-3.4.1.jar at spark://0977dfbb40de:43041/files/org.apache.kafka_kafka-clients-3.4.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.097+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kafka_kafka-clients-3.4.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kafka_kafka-clients-3.4.1.jar
+[2025-11-10T17:17:30.109+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-pool2-2.11.1.jar at spark://0977dfbb40de:43041/files/org.apache.commons_commons-pool2-2.11.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.110+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-pool2-2.11.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.commons_commons-pool2-2.11.1.jar
+[2025-11-10T17:17:30.113+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-runtime-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-client-runtime-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.114+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-client-runtime-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-client-runtime-3.3.4.jar
+[2025-11-10T17:17:30.168+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.lz4_lz4-java-1.8.0.jar at spark://0977dfbb40de:43041/files/org.lz4_lz4-java-1.8.0.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.lz4_lz4-java-1.8.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.lz4_lz4-java-1.8.0.jar
+[2025-11-10T17:17:30.172+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.10.3.jar at spark://0977dfbb40de:43041/files/org.xerial.snappy_snappy-java-1.1.10.3.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.173+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.xerial.snappy_snappy-java-1.1.10.3.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.xerial.snappy_snappy-java-1.1.10.3.jar
+[2025-11-10T17:17:30.179+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.slf4j_slf4j-api-2.0.7.jar at spark://0977dfbb40de:43041/files/org.slf4j_slf4j-api-2.0.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.180+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.slf4j_slf4j-api-2.0.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.slf4j_slf4j-api-2.0.7.jar
+[2025-11-10T17:17:30.183+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-client-api-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-client-api-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.184+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-client-api-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-client-api-3.3.4.jar
+[2025-11-10T17:17:30.220+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/commons-logging_commons-logging-1.1.3.jar at spark://0977dfbb40de:43041/files/commons-logging_commons-logging-1.1.3.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/commons-logging_commons-logging-1.1.3.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/commons-logging_commons-logging-1.1.3.jar
+[2025-11-10T17:17:30.223+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-common-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-common-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.224+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-common-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-common-3.3.4.jar
+[2025-11-10T17:17:30.235+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-hdfs-client-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-hdfs-client-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.236+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-hdfs-client-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-hdfs-client-3.3.4.jar
+[2025-11-10T17:17:30.247+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-api-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-yarn-api-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.248+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-api-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-yarn-api-3.3.4.jar
+[2025-11-10T17:17:30.256+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-client-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-yarn-client-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.257+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-client-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-yarn-client-3.3.4.jar
+[2025-11-10T17:17:30.261+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-core-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-mapreduce-client-core-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.261+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-core-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-mapreduce-client-core-3.3.4.jar
+[2025-11-10T17:17:30.267+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-jobclient-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-mapreduce-client-jobclient-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.267+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-jobclient-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-mapreduce-client-jobclient-3.3.4.jar
+[2025-11-10T17:17:30.270+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-annotations-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-annotations-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.270+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-annotations-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-annotations-3.3.4.jar
+[2025-11-10T17:17:30.273+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop.thirdparty_hadoop-shaded-protobuf_3_7-1.1.1.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop.thirdparty_hadoop-shaded-protobuf_3_7-1.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.274+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop.thirdparty_hadoop-shaded-protobuf_3_7-1.1.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop.thirdparty_hadoop-shaded-protobuf_3_7-1.1.1.jar
+[2025-11-10T17:17:30.280+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop.thirdparty_hadoop-shaded-guava-1.1.1.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop.thirdparty_hadoop-shaded-guava-1.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.280+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop.thirdparty_hadoop-shaded-guava-1.1.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop.thirdparty_hadoop-shaded-guava-1.1.1.jar
+[2025-11-10T17:17:30.289+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.guava_guava-27.0-jre.jar at spark://0977dfbb40de:43041/files/com.google.guava_guava-27.0-jre.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.290+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.guava_guava-27.0-jre.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.guava_guava-27.0-jre.jar
+[2025-11-10T17:17:30.299+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/commons-cli_commons-cli-1.2.jar at spark://0977dfbb40de:43041/files/commons-cli_commons-cli-1.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.300+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/commons-cli_commons-cli-1.2.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/commons-cli_commons-cli-1.2.jar
+[2025-11-10T17:17:30.303+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-math3-3.1.1.jar at spark://0977dfbb40de:43041/files/org.apache.commons_commons-math3-3.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.303+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-math3-3.1.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.commons_commons-math3-3.1.1.jar
+[2025-11-10T17:17:30.311+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.httpcomponents_httpclient-4.5.13.jar at spark://0977dfbb40de:43041/files/org.apache.httpcomponents_httpclient-4.5.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.311+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.httpcomponents_httpclient-4.5.13.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.httpcomponents_httpclient-4.5.13.jar
+[2025-11-10T17:17:30.316+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/commons-codec_commons-codec-1.15.jar at spark://0977dfbb40de:43041/files/commons-codec_commons-codec-1.15.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.316+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/commons-codec_commons-codec-1.15.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/commons-codec_commons-codec-1.15.jar
+[2025-11-10T17:17:30.320+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/commons-io_commons-io-2.8.0.jar at spark://0977dfbb40de:43041/files/commons-io_commons-io-2.8.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.320+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/commons-io_commons-io-2.8.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/commons-io_commons-io-2.8.0.jar
+[2025-11-10T17:17:30.324+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/commons-net_commons-net-3.6.jar at spark://0977dfbb40de:43041/files/commons-net_commons-net-3.6.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.325+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/commons-net_commons-net-3.6.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/commons-net_commons-net-3.6.jar
+[2025-11-10T17:17:30.327+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/commons-collections_commons-collections-3.2.2.jar at spark://0977dfbb40de:43041/files/commons-collections_commons-collections-3.2.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.328+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/commons-collections_commons-collections-3.2.2.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/commons-collections_commons-collections-3.2.2.jar
+[2025-11-10T17:17:30.332+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-servlet-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-servlet-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.332+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-servlet-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-servlet-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.335+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-webapp-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-webapp-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.336+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-webapp-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-webapp-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.339+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.sun.jersey_jersey-servlet-1.19.jar at spark://0977dfbb40de:43041/files/com.sun.jersey_jersey-servlet-1.19.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.340+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.sun.jersey_jersey-servlet-1.19.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.sun.jersey_jersey-servlet-1.19.jar
+[2025-11-10T17:17:30.343+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/ch.qos.reload4j_reload4j-1.2.22.jar at spark://0977dfbb40de:43041/files/ch.qos.reload4j_reload4j-1.2.22.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.344+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/ch.qos.reload4j_reload4j-1.2.22.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/ch.qos.reload4j_reload4j-1.2.22.jar
+[2025-11-10T17:17:30.347+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/commons-beanutils_commons-beanutils-1.9.4.jar at spark://0977dfbb40de:43041/files/commons-beanutils_commons-beanutils-1.9.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.347+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/commons-beanutils_commons-beanutils-1.9.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/commons-beanutils_commons-beanutils-1.9.4.jar
+[2025-11-10T17:17:30.350+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-configuration2-2.1.1.jar at spark://0977dfbb40de:43041/files/org.apache.commons_commons-configuration2-2.1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.351+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-configuration2-2.1.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.commons_commons-configuration2-2.1.1.jar
+[2025-11-10T17:17:30.355+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-lang3-3.12.0.jar at spark://0977dfbb40de:43041/files/org.apache.commons_commons-lang3-3.12.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.355+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-lang3-3.12.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.commons_commons-lang3-3.12.0.jar
+[2025-11-10T17:17:30.359+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-text-1.4.jar at spark://0977dfbb40de:43041/files/org.apache.commons_commons-text-1.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.360+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-text-1.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.commons_commons-text-1.4.jar
+[2025-11-10T17:17:30.363+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.slf4j_slf4j-reload4j-1.7.36.jar at spark://0977dfbb40de:43041/files/org.slf4j_slf4j-reload4j-1.7.36.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.364+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.slf4j_slf4j-reload4j-1.7.36.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.slf4j_slf4j-reload4j-1.7.36.jar
+[2025-11-10T17:17:30.366+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.avro_avro-1.7.7.jar at spark://0977dfbb40de:43041/files/org.apache.avro_avro-1.7.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.366+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.avro_avro-1.7.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.avro_avro-1.7.7.jar
+[2025-11-10T17:17:30.371+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.re2j_re2j-1.1.jar at spark://0977dfbb40de:43041/files/com.google.re2j_re2j-1.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.371+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.re2j_re2j-1.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.re2j_re2j-1.1.jar
+[2025-11-10T17:17:30.375+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.protobuf_protobuf-java-2.5.0.jar at spark://0977dfbb40de:43041/files/com.google.protobuf_protobuf-java-2.5.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.375+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.protobuf_protobuf-java-2.5.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.protobuf_protobuf-java-2.5.0.jar
+[2025-11-10T17:17:30.378+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.code.gson_gson-2.8.9.jar at spark://0977dfbb40de:43041/files/com.google.code.gson_gson-2.8.9.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.379+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.code.gson_gson-2.8.9.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.code.gson_gson-2.8.9.jar
+[2025-11-10T17:17:30.382+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-auth-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-auth-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.382+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-auth-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-auth-3.3.4.jar
+[2025-11-10T17:17:30.385+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.curator_curator-client-4.2.0.jar at spark://0977dfbb40de:43041/files/org.apache.curator_curator-client-4.2.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.385+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.curator_curator-client-4.2.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.curator_curator-client-4.2.0.jar
+[2025-11-10T17:17:30.393+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.curator_curator-recipes-4.2.0.jar at spark://0977dfbb40de:43041/files/org.apache.curator_curator-recipes-4.2.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.393+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.curator_curator-recipes-4.2.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.curator_curator-recipes-4.2.0.jar
+[2025-11-10T17:17:30.396+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.code.findbugs_jsr305-3.0.2.jar at spark://0977dfbb40de:43041/files/com.google.code.findbugs_jsr305-3.0.2.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.code.findbugs_jsr305-3.0.2.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.code.findbugs_jsr305-3.0.2.jar
+[2025-11-10T17:17:30.399+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.commons_commons-compress-1.21.jar at spark://0977dfbb40de:43041/files/org.apache.commons_commons-compress-1.21.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.400+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.commons_commons-compress-1.21.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.commons_commons-compress-1.21.jar
+[2025-11-10T17:17:30.404+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-core-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-core-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.404+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-core-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-core-1.0.1.jar
+[2025-11-10T17:17:30.407+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.fasterxml.jackson.core_jackson-databind-2.12.7.jar at spark://0977dfbb40de:43041/files/com.fasterxml.jackson.core_jackson-databind-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.407+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.fasterxml.jackson.core_jackson-databind-2.12.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.fasterxml.jackson.core_jackson-databind-2.12.7.jar
+[2025-11-10T17:17:30.413+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.codehaus.woodstox_stax2-api-4.2.1.jar at spark://0977dfbb40de:43041/files/org.codehaus.woodstox_stax2-api-4.2.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.413+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.codehaus.woodstox_stax2-api-4.2.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.codehaus.woodstox_stax2-api-4.2.1.jar
+[2025-11-10T17:17:30.416+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.fasterxml.woodstox_woodstox-core-5.3.0.jar at spark://0977dfbb40de:43041/files/com.fasterxml.woodstox_woodstox-core-5.3.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.416+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.fasterxml.woodstox_woodstox-core-5.3.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.fasterxml.woodstox_woodstox-core-5.3.0.jar
+[2025-11-10T17:17:30.420+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/dnsjava_dnsjava-2.1.7.jar at spark://0977dfbb40de:43041/files/dnsjava_dnsjava-2.1.7.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/dnsjava_dnsjava-2.1.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/dnsjava_dnsjava-2.1.7.jar
+[2025-11-10T17:17:30.423+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.guava_failureaccess-1.0.jar at spark://0977dfbb40de:43041/files/com.google.guava_failureaccess-1.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.424+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.guava_failureaccess-1.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.guava_failureaccess-1.0.jar
+[2025-11-10T17:17:30.426+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.guava_listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar at spark://0977dfbb40de:43041/files/com.google.guava_listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.426+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.guava_listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.guava_listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar
+[2025-11-10T17:17:30.429+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.checkerframework_checker-qual-2.5.2.jar at spark://0977dfbb40de:43041/files/org.checkerframework_checker-qual-2.5.2.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.429+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.checkerframework_checker-qual-2.5.2.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.checkerframework_checker-qual-2.5.2.jar
+[2025-11-10T17:17:30.432+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar at spark://0977dfbb40de:43041/files/com.google.j2objc_j2objc-annotations-1.1.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.google.j2objc_j2objc-annotations-1.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.google.j2objc_j2objc-annotations-1.1.jar
+[2025-11-10T17:17:30.434+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.17.jar at spark://0977dfbb40de:43041/files/org.codehaus.mojo_animal-sniffer-annotations-1.17.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.435+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.codehaus.mojo_animal-sniffer-annotations-1.17.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.codehaus.mojo_animal-sniffer-annotations-1.17.jar
+[2025-11-10T17:17:30.437+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.httpcomponents_httpcore-4.4.13.jar at spark://0977dfbb40de:43041/files/org.apache.httpcomponents_httpcore-4.4.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.437+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.httpcomponents_httpcore-4.4.13.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.httpcomponents_httpcore-4.4.13.jar
+[2025-11-10T17:17:30.440+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-security-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-security-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.441+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-security-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-security-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.443+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-util-ajax-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-util-ajax-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.444+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-util-ajax-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-util-ajax-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.446+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-xml-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-xml-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.447+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-xml-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-xml-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.449+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.codehaus.jackson_jackson-core-asl-1.9.13.jar at spark://0977dfbb40de:43041/files/org.codehaus.jackson_jackson-core-asl-1.9.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.449+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.codehaus.jackson_jackson-core-asl-1.9.13.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.codehaus.jackson_jackson-core-asl-1.9.13.jar
+[2025-11-10T17:17:30.452+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar at spark://0977dfbb40de:43041/files/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.453+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.codehaus.jackson_jackson-mapper-asl-1.9.13.jar
+[2025-11-10T17:17:30.457+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.thoughtworks.paranamer_paranamer-2.3.jar at spark://0977dfbb40de:43041/files/com.thoughtworks.paranamer_paranamer-2.3.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.457+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.thoughtworks.paranamer_paranamer-2.3.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.thoughtworks.paranamer_paranamer-2.3.jar
+[2025-11-10T17:17:30.460+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.nimbusds_nimbus-jose-jwt-9.8.1.jar at spark://0977dfbb40de:43041/files/com.nimbusds_nimbus-jose-jwt-9.8.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.460+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.nimbusds_nimbus-jose-jwt-9.8.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.nimbusds_nimbus-jose-jwt-9.8.1.jar
+[2025-11-10T17:17:30.463+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/net.minidev_json-smart-2.4.7.jar at spark://0977dfbb40de:43041/files/net.minidev_json-smart-2.4.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.464+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/net.minidev_json-smart-2.4.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/net.minidev_json-smart-2.4.7.jar
+[2025-11-10T17:17:30.466+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.curator_curator-framework-4.2.0.jar at spark://0977dfbb40de:43041/files/org.apache.curator_curator-framework-4.2.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.467+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.curator_curator-framework-4.2.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.curator_curator-framework-4.2.0.jar
+[2025-11-10T17:17:30.470+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-simplekdc-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-simplekdc-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.470+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-simplekdc-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-simplekdc-1.0.1.jar
+[2025-11-10T17:17:30.472+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.github.stephenc.jcip_jcip-annotations-1.0-1.jar at spark://0977dfbb40de:43041/files/com.github.stephenc.jcip_jcip-annotations-1.0-1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.473+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.github.stephenc.jcip_jcip-annotations-1.0-1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.github.stephenc.jcip_jcip-annotations-1.0-1.jar
+[2025-11-10T17:17:30.474+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/net.minidev_accessors-smart-2.4.7.jar at spark://0977dfbb40de:43041/files/net.minidev_accessors-smart-2.4.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.475+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/net.minidev_accessors-smart-2.4.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/net.minidev_accessors-smart-2.4.7.jar
+[2025-11-10T17:17:30.477+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.ow2.asm_asm-5.0.4.jar at spark://0977dfbb40de:43041/files/org.ow2.asm_asm-5.0.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.478+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.ow2.asm_asm-5.0.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.ow2.asm_asm-5.0.4.jar
+[2025-11-10T17:17:30.480+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-client-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-client-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.480+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-client-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-client-1.0.1.jar
+[2025-11-10T17:17:30.483+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-admin-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-admin-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.483+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-admin-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-admin-1.0.1.jar
+[2025-11-10T17:17:30.486+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerby-config-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerby-config-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.486+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerby-config-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerby-config-1.0.1.jar
+[2025-11-10T17:17:30.489+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-common-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-common-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.489+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-common-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-common-1.0.1.jar
+[2025-11-10T17:17:30.492+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-util-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-util-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.492+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-util-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-util-1.0.1.jar
+[2025-11-10T17:17:30.495+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_token-provider-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_token-provider-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.496+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_token-provider-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_token-provider-1.0.1.jar
+[2025-11-10T17:17:30.498+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerby-pkix-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerby-pkix-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.498+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerby-pkix-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerby-pkix-1.0.1.jar
+[2025-11-10T17:17:30.501+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerby-asn1-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerby-asn1-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.502+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerby-asn1-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerby-asn1-1.0.1.jar
+[2025-11-10T17:17:30.504+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerby-util-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerby-util-1.0.1.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerby-util-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerby-util-1.0.1.jar
+[2025-11-10T17:17:30.506+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-crypto-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-crypto-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.507+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-crypto-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-crypto-1.0.1.jar
+[2025-11-10T17:17:30.509+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-server-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-server-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.510+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-server-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-server-1.0.1.jar
+[2025-11-10T17:17:30.513+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerby-xdr-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerby-xdr-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.513+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerby-xdr-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerby-xdr-1.0.1.jar
+[2025-11-10T17:17:30.515+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.kerby_kerb-identity-1.0.1.jar at spark://0977dfbb40de:43041/files/org.apache.kerby_kerb-identity-1.0.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.515+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.kerby_kerb-identity-1.0.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.kerby_kerb-identity-1.0.1.jar
+[2025-11-10T17:17:30.518+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.fasterxml.jackson.core_jackson-annotations-2.12.7.jar at spark://0977dfbb40de:43041/files/com.fasterxml.jackson.core_jackson-annotations-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.518+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.fasterxml.jackson.core_jackson-annotations-2.12.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.fasterxml.jackson.core_jackson-annotations-2.12.7.jar
+[2025-11-10T17:17:30.520+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.fasterxml.jackson.core_jackson-core-2.12.7.jar at spark://0977dfbb40de:43041/files/com.fasterxml.jackson.core_jackson-core-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.521+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.fasterxml.jackson.core_jackson-core-2.12.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.fasterxml.jackson.core_jackson-core-2.12.7.jar
+[2025-11-10T17:17:30.524+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/jakarta.activation_jakarta.activation-api-1.2.1.jar at spark://0977dfbb40de:43041/files/jakarta.activation_jakarta.activation-api-1.2.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.524+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/jakarta.activation_jakarta.activation-api-1.2.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/jakarta.activation_jakarta.activation-api-1.2.1.jar
+[2025-11-10T17:17:30.526+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/javax.servlet.jsp_jsp-api-2.1.jar at spark://0977dfbb40de:43041/files/javax.servlet.jsp_jsp-api-2.1.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.527+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/javax.servlet.jsp_jsp-api-2.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/javax.servlet.jsp_jsp-api-2.1.jar
+[2025-11-10T17:17:30.529+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/javax.xml.bind_jaxb-api-2.2.11.jar at spark://0977dfbb40de:43041/files/javax.xml.bind_jaxb-api-2.2.11.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.530+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/javax.xml.bind_jaxb-api-2.2.11.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/javax.xml.bind_jaxb-api-2.2.11.jar
+[2025-11-10T17:17:30.532+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-client-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty.websocket_websocket-client-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.532+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-client-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty.websocket_websocket-client-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.535+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.jline_jline-3.9.0.jar at spark://0977dfbb40de:43041/files/org.jline_jline-3.9.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.535+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.jline_jline-3.9.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.jline_jline-3.9.0.jar
+[2025-11-10T17:17:30.539+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-client-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-client-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.539+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-client-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-client-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.542+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-util-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-util-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.542+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-util-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-util-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.546+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-io-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-io-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.546+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-io-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-io-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.549+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-common-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty.websocket_websocket-common-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.550+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-common-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty.websocket_websocket-common-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.553+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty_jetty-http-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty_jetty-http-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.554+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty_jetty-http-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty_jetty-http-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.556+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-api-9.4.43.v20210629.jar at spark://0977dfbb40de:43041/files/org.eclipse.jetty.websocket_websocket-api-9.4.43.v20210629.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.557+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.eclipse.jetty.websocket_websocket-api-9.4.43.v20210629.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.eclipse.jetty.websocket_websocket-api-9.4.43.v20210629.jar
+[2025-11-10T17:17:30.559+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-common-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-yarn-common-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.560+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-yarn-common-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-yarn-common-3.3.4.jar
+[2025-11-10T17:17:30.567+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/javax.servlet_javax.servlet-api-3.1.0.jar at spark://0977dfbb40de:43041/files/javax.servlet_javax.servlet-api-3.1.0.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.568+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/javax.servlet_javax.servlet-api-3.1.0.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/javax.servlet_javax.servlet-api-3.1.0.jar
+[2025-11-10T17:17:30.570+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.sun.jersey_jersey-core-1.19.jar at spark://0977dfbb40de:43041/files/com.sun.jersey_jersey-core-1.19.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.571+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.sun.jersey_jersey-core-1.19.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.sun.jersey_jersey-core-1.19.jar
+[2025-11-10T17:17:30.574+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.sun.jersey_jersey-client-1.19.jar at spark://0977dfbb40de:43041/files/com.sun.jersey_jersey-client-1.19.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.574+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.sun.jersey_jersey-client-1.19.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.sun.jersey_jersey-client-1.19.jar
+[2025-11-10T17:17:30.577+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.fasterxml.jackson.module_jackson-module-jaxb-annotations-2.12.7.jar at spark://0977dfbb40de:43041/files/com.fasterxml.jackson.module_jackson-module-jaxb-annotations-2.12.7.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.fasterxml.jackson.module_jackson-module-jaxb-annotations-2.12.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.fasterxml.jackson.module_jackson-module-jaxb-annotations-2.12.7.jar
+[2025-11-10T17:17:30.579+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-json-provider-2.12.7.jar at spark://0977dfbb40de:43041/files/com.fasterxml.jackson.jaxrs_jackson-jaxrs-json-provider-2.12.7.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.580+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-json-provider-2.12.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.fasterxml.jackson.jaxrs_jackson-jaxrs-json-provider-2.12.7.jar
+[2025-11-10T17:17:30.582+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/javax.ws.rs_jsr311-api-1.1.1.jar at spark://0977dfbb40de:43041/files/javax.ws.rs_jsr311-api-1.1.1.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/javax.ws.rs_jsr311-api-1.1.1.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/javax.ws.rs_jsr311-api-1.1.1.jar
+[2025-11-10T17:17:30.585+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/jakarta.xml.bind_jakarta.xml.bind-api-2.3.2.jar at spark://0977dfbb40de:43041/files/jakarta.xml.bind_jakarta.xml.bind-api-2.3.2.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/jakarta.xml.bind_jakarta.xml.bind-api-2.3.2.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/jakarta.xml.bind_jakarta.xml.bind-api-2.3.2.jar
+[2025-11-10T17:17:30.588+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-base-2.12.7.jar at spark://0977dfbb40de:43041/files/com.fasterxml.jackson.jaxrs_jackson-jaxrs-base-2.12.7.jar with timestamp 1762795049380
+25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/com.fasterxml.jackson.jaxrs_jackson-jaxrs-base-2.12.7.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/com.fasterxml.jackson.jaxrs_jackson-jaxrs-base-2.12.7.jar
+[2025-11-10T17:17:30.591+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO SparkContext: Added file file:///root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-common-3.3.4.jar at spark://0977dfbb40de:43041/files/org.apache.hadoop_hadoop-mapreduce-client-common-3.3.4.jar with timestamp 1762795049380
+[2025-11-10T17:17:30.592+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO Utils: Copying /root/.ivy2/jars/org.apache.hadoop_hadoop-mapreduce-client-common-3.3.4.jar to /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/userFiles-e197ae5d-e28b-47ab-894f-e22d5a9f0412/org.apache.hadoop_hadoop-mapreduce-client-common-3.3.4.jar
+[2025-11-10T17:17:30.666+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO StandaloneAppClient$ClientEndpoint: Connecting to master spark://spark-master:7077...
+[2025-11-10T17:17:30.707+0000] {docker.py:429} INFO - 25/11/10 17:17:30 INFO TransportClientFactory: Successfully created connection to spark-master/172.18.0.15:7077 after 25 ms (0 ms spent in bootstraps)
+[2025-11-10T17:17:28.447+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO StandaloneSchedulerBackend: Connected to Spark cluster with app ID app-20251110171730-0000
+[2025-11-10T17:17:28.456+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 38353.
+[2025-11-10T17:17:28.457+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO NettyBlockTransferService: Server created on 0977dfbb40de:38353
+[2025-11-10T17:17:28.459+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO BlockManager: Using org.apache.spark.storage.RandomBlockReplicationPolicy for block replication policy
+[2025-11-10T17:17:28.468+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO BlockManagerMaster: Registering BlockManager BlockManagerId(driver, 0977dfbb40de, 38353, None)
+[2025-11-10T17:17:28.470+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO StandaloneAppClient$ClientEndpoint: Executor added: app-20251110171730-0000/0 on worker-20251110170607-172.18.0.16-41709 (172.18.0.16:41709) with 1 core(s)
+[2025-11-10T17:17:28.472+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO StandaloneSchedulerBackend: Granted executor ID app-20251110171730-0000/0 on hostPort 172.18.0.16:41709 with 1 core(s), 1024.0 MiB RAM
+25/11/10 17:17:28 INFO BlockManagerMasterEndpoint: Registering block manager 0977dfbb40de:38353 with 434.4 MiB RAM, BlockManagerId(driver, 0977dfbb40de, 38353, None)
+[2025-11-10T17:17:28.475+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO BlockManagerMaster: Registered BlockManager BlockManagerId(driver, 0977dfbb40de, 38353, None)
+[2025-11-10T17:17:28.476+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO BlockManager: Initialized BlockManager: BlockManagerId(driver, 0977dfbb40de, 38353, None)
+[2025-11-10T17:17:28.636+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO StandaloneAppClient$ClientEndpoint: Executor updated: app-20251110171730-0000/0 is now RUNNING
+[2025-11-10T17:17:28.652+0000] {docker.py:429} INFO - 25/11/10 17:17:28 INFO StandaloneSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.0
+[2025-11-10T17:17:29.125+0000] {docker.py:429} INFO - INFO:train_job:Reading training data from hdfs://namenode:9000/data/raw/stock_data
+[2025-11-10T17:17:29.133+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SharedState: Setting hive.metastore.warehouse.dir ('null') to the value of spark.sql.warehouse.dir.
+[2025-11-10T17:17:29.135+0000] {docker.py:429} INFO - 25/11/10 17:17:29 INFO SharedState: Warehouse path is 'file:/app/spark-warehouse'.
+[2025-11-10T17:17:31.193+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Registered executor NettyRpcEndpointRef(spark-client://Executor) (172.18.0.16:50200) with ID 0,  ResourceProfileId 0
+[2025-11-10T17:17:31.273+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO InMemoryFileIndex: It took 704 ms to list leaf files for 1 paths.
+[2025-11-10T17:17:31.280+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO BlockManagerMasterEndpoint: Registering block manager 172.18.0.16:41643 with 434.4 MiB RAM, BlockManagerId(0, 172.18.0.16, 41643, None)
+[2025-11-10T17:17:31.821+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO SparkContext: Starting job: parquet at <unknown>:0
+[2025-11-10T17:17:31.837+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO DAGScheduler: Got job 0 (parquet at <unknown>:0) with 1 output partitions
+[2025-11-10T17:17:31.837+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO DAGScheduler: Final stage: ResultStage 0 (parquet at <unknown>:0)
+[2025-11-10T17:17:31.838+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO DAGScheduler: Parents of final stage: List()
+[2025-11-10T17:17:31.839+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO DAGScheduler: Missing parents: List()
+[2025-11-10T17:17:31.843+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[1] at parquet at <unknown>:0), which has no missing parents
+[2025-11-10T17:17:31.889+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 147.7 KiB, free 434.3 MiB)
+[2025-11-10T17:17:31.923+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 49.2 KiB, free 434.2 MiB)
+[2025-11-10T17:17:31.925+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 0977dfbb40de:38353 (size: 49.2 KiB, free: 434.4 MiB)
+[2025-11-10T17:17:31.928+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:1580
+[2025-11-10T17:17:31.945+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (MapPartitionsRDD[1] at parquet at <unknown>:0) (first 15 tasks are for partitions Vector(0))
+[2025-11-10T17:17:31.945+0000] {docker.py:429} INFO - 25/11/10 17:17:31 INFO TaskSchedulerImpl: Adding task set 0.0 with 1 tasks resource profile 0
+[2025-11-10T17:17:33.361+0000] {docker.py:429} INFO - 25/11/10 17:17:33 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0) (172.18.0.16, executor 0, partition 0, PROCESS_LOCAL, 27746 bytes)
+[2025-11-10T17:17:33.569+0000] {docker.py:429} INFO - 25/11/10 17:17:33 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 172.18.0.16:41643 (size: 49.2 KiB, free: 434.4 MiB)
+[2025-11-10T17:17:34.842+0000] {docker.py:429} INFO - 25/11/10 17:17:34 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 1500 ms on 172.18.0.16 (executor 0) (1/1)
+[2025-11-10T17:17:34.843+0000] {docker.py:429} INFO - 25/11/10 17:17:34 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool
+[2025-11-10T17:17:34.852+0000] {docker.py:429} INFO - 25/11/10 17:17:34 INFO DAGScheduler: ResultStage 0 (parquet at <unknown>:0) finished in 2.997 s
+[2025-11-10T17:17:34.854+0000] {docker.py:429} INFO - 25/11/10 17:17:34 INFO DAGScheduler: Job 0 is finished. Cancelling potential speculative or zombie tasks for this job
+[2025-11-10T17:17:34.855+0000] {docker.py:429} INFO - 25/11/10 17:17:34 INFO TaskSchedulerImpl: Killing all running tasks in stage 0: Stage finished
+[2025-11-10T17:17:34.856+0000] {docker.py:429} INFO - 25/11/10 17:17:34 INFO DAGScheduler: Job 0 finished: parquet at <unknown>:0, took 3.036190 s
+[2025-11-10T17:17:35.273+0000] {docker.py:429} INFO - 25/11/10 17:17:35 INFO BlockManagerInfo: Removed broadcast_0_piece0 on 0977dfbb40de:38353 in memory (size: 49.2 KiB, free: 434.4 MiB)
+[2025-11-10T17:17:35.278+0000] {docker.py:429} INFO - 25/11/10 17:17:35 INFO BlockManagerInfo: Removed broadcast_0_piece0 on 172.18.0.16:41643 in memory (size: 49.2 KiB, free: 434.4 MiB)
+[2025-11-10T17:17:36.043+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO DataSourceStrategy: Pruning directories with:
+[2025-11-10T17:17:36.045+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO FileSourceStrategy: Pushed Filters:
+[2025-11-10T17:17:36.046+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO FileSourceStrategy: Post-Scan Filters:
+[2025-11-10T17:17:36.320+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO CodeGenerator: Code generated in 155.47416 ms
+[2025-11-10T17:17:36.344+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 246.7 KiB, free 434.2 MiB)
+[2025-11-10T17:17:36.354+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 47.9 KiB, free 434.1 MiB)
+[2025-11-10T17:17:36.355+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 0977dfbb40de:38353 (size: 47.9 KiB, free: 434.4 MiB)
+[2025-11-10T17:17:36.356+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO SparkContext: Created broadcast 1 from toPandas at /app/train_job.py:49
+[2025-11-10T17:17:36.376+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO FileSourceScanExec: Planning scan with bin packing, max size: 134217728 bytes, open cost is considered as scanning 4194304 bytes.
+[2025-11-10T17:17:36.433+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO SparkContext: Starting job: toPandas at /app/train_job.py:49
+[2025-11-10T17:17:36.434+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO DAGScheduler: Got job 1 (toPandas at /app/train_job.py:49) with 8 output partitions
+25/11/10 17:17:36 INFO DAGScheduler: Final stage: ResultStage 1 (toPandas at /app/train_job.py:49)
+25/11/10 17:17:36 INFO DAGScheduler: Parents of final stage: List()
+[2025-11-10T17:17:36.434+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO DAGScheduler: Missing parents: List()
+[2025-11-10T17:17:36.435+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO DAGScheduler: Submitting ResultStage 1 (MapPartitionsRDD[5] at toPandas at /app/train_job.py:49), which has no missing parents
+[2025-11-10T17:17:36.442+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 20.7 KiB, free 434.1 MiB)
+[2025-11-10T17:17:36.442+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 7.3 KiB, free 434.1 MiB)
+[2025-11-10T17:17:36.443+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 0977dfbb40de:38353 (size: 7.3 KiB, free: 434.3 MiB)
+[2025-11-10T17:17:36.444+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1580
+[2025-11-10T17:17:36.444+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO DAGScheduler: Submitting 8 missing tasks from ResultStage 1 (MapPartitionsRDD[5] at toPandas at /app/train_job.py:49) (first 15 tasks are for partitions Vector(0, 1, 2, 3, 4, 5, 6, 7))
+25/11/10 17:17:36 INFO TaskSchedulerImpl: Adding task set 1.0 with 8 tasks resource profile 0
+[2025-11-10T17:17:36.451+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 1) (172.18.0.16, executor 0, partition 0, ANY, 35237 bytes)
+[2025-11-10T17:17:36.485+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 172.18.0.16:41643 (size: 7.3 KiB, free: 434.4 MiB)
+[2025-11-10T17:17:36.849+0000] {docker.py:429} INFO - 25/11/10 17:17:36 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 172.18.0.16:41643 (size: 47.9 KiB, free: 434.3 MiB)
+[2025-11-10T17:17:37.642+0000] {docker.py:429} INFO - 25/11/10 17:17:37 INFO TaskSetManager: Starting task 1.0 in stage 1.0 (TID 2) (172.18.0.16, executor 0, partition 1, ANY, 35228 bytes)
+[2025-11-10T17:17:37.643+0000] {docker.py:429} INFO - 25/11/10 17:17:37 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 1) in 1195 ms on 172.18.0.16 (executor 0) (1/8)
+[2025-11-10T17:17:38.036+0000] {docker.py:429} INFO - 25/11/10 17:17:38 INFO TaskSetManager: Starting task 2.0 in stage 1.0 (TID 3) (172.18.0.16, executor 0, partition 2, ANY, 35251 bytes)
+[2025-11-10T17:17:38.037+0000] {docker.py:429} INFO - 25/11/10 17:17:38 INFO TaskSetManager: Finished task 1.0 in stage 1.0 (TID 2) in 395 ms on 172.18.0.16 (executor 0) (2/8)
+[2025-11-10T17:17:38.391+0000] {docker.py:429} INFO - 25/11/10 17:17:38 INFO TaskSetManager: Starting task 3.0 in stage 1.0 (TID 4) (172.18.0.16, executor 0, partition 3, ANY, 35239 bytes)
+[2025-11-10T17:17:38.392+0000] {docker.py:429} INFO - 25/11/10 17:17:38 INFO TaskSetManager: Finished task 2.0 in stage 1.0 (TID 3) in 357 ms on 172.18.0.16 (executor 0) (3/8)
+[2025-11-10T17:17:38.697+0000] {docker.py:429} INFO - 25/11/10 17:17:38 INFO TaskSetManager: Starting task 4.0 in stage 1.0 (TID 5) (172.18.0.16, executor 0, partition 4, ANY, 35230 bytes)
+[2025-11-10T17:17:38.697+0000] {docker.py:429} INFO - 25/11/10 17:17:38 INFO TaskSetManager: Finished task 3.0 in stage 1.0 (TID 4) in 307 ms on 172.18.0.16 (executor 0) (4/8)
+[2025-11-10T17:17:39.010+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO TaskSetManager: Starting task 5.0 in stage 1.0 (TID 6) (172.18.0.16, executor 0, partition 5, ANY, 35240 bytes)
+[2025-11-10T17:17:39.011+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO TaskSetManager: Finished task 4.0 in stage 1.0 (TID 5) in 314 ms on 172.18.0.16 (executor 0) (5/8)
+[2025-11-10T17:17:39.322+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO TaskSetManager: Starting task 6.0 in stage 1.0 (TID 7) (172.18.0.16, executor 0, partition 6, ANY, 35238 bytes)
+[2025-11-10T17:17:39.323+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO TaskSetManager: Finished task 5.0 in stage 1.0 (TID 6) in 313 ms on 172.18.0.16 (executor 0) (6/8)
+[2025-11-10T17:17:39.616+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO TaskSetManager: Starting task 7.0 in stage 1.0 (TID 8) (172.18.0.16, executor 0, partition 7, ANY, 33916 bytes)
+[2025-11-10T17:17:39.617+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO TaskSetManager: Finished task 6.0 in stage 1.0 (TID 7) in 294 ms on 172.18.0.16 (executor 0) (7/8)
+[2025-11-10T17:17:39.834+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO TaskSetManager: Finished task 7.0 in stage 1.0 (TID 8) in 220 ms on 172.18.0.16 (executor 0) (8/8)
+25/11/10 17:17:39 INFO TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool
+[2025-11-10T17:17:39.835+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO DAGScheduler: ResultStage 1 (toPandas at /app/train_job.py:49) finished in 3.394 s
+[2025-11-10T17:17:39.835+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO DAGScheduler: Job 1 is finished. Cancelling potential speculative or zombie tasks for this job
+25/11/10 17:17:39 INFO TaskSchedulerImpl: Killing all running tasks in stage 1: Stage finished
+[2025-11-10T17:17:39.836+0000] {docker.py:429} INFO - 25/11/10 17:17:39 INFO DAGScheduler: Job 1 finished: toPandas at /app/train_job.py:49, took 3.402929 s
+[2025-11-10T17:17:39.909+0000] {docker.py:429} INFO - INFO:train_job:Computing features from raw data...
+[2025-11-10T17:17:39.926+0000] {docker.py:429} INFO - INFO:train_job:Training Random Forest model...
+[2025-11-10T17:17:39.931+0000] {docker.py:429} INFO - ERROR:train_job:Failed during model training or saving: Found array with 0 sample(s) (shape=(0, 3)) while a minimum of 1 is required by RandomForestClassifier.
+Traceback (most recent call last):
+  File "/app/train_job.py", line 111, in <module>
+    model.fit(X_train, y_train)
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/ensemble/_forest.py", line 348, in fit
+    X, y = self._validate_data(
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/base.py", line 622, in _validate_data
+    X, y = check_X_y(X, y, **check_params)
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/utils/validation.py", line 1146, in check_X_y
+    X = check_array(
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/utils/validation.py", line 967, in check_array
+    raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 3)) while a minimum of 1 is required by RandomForestClassifier.
+Traceback (most recent call last):
+  File "/app/train_job.py", line 111, in <module>
+[2025-11-10T17:17:39.932+0000] {docker.py:429} INFO - model.fit(X_train, y_train)
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/base.py", line 1152, in wrapper
+[2025-11-10T17:17:39.932+0000] {docker.py:429} INFO - return fit_method(estimator, *args, **kwargs)
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/ensemble/_forest.py", line 348, in fit
+[2025-11-10T17:17:39.932+0000] {docker.py:429} INFO - X, y = self._validate_data(
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/base.py", line 622, in _validate_data
+[2025-11-10T17:17:39.933+0000] {docker.py:429} INFO - X, y = check_X_y(X, y, **check_params)
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/utils/validation.py", line 1146, in check_X_y
+[2025-11-10T17:17:39.933+0000] {docker.py:429} INFO - X = check_array(
+  File "/usr/local/lib/python3.8/dist-packages/sklearn/utils/validation.py", line 967, in check_array
+[2025-11-10T17:17:39.933+0000] {docker.py:429} INFO - raise ValueError(
+ValueError: Found array with 0 sample(s) (shape=(0, 3)) while a minimum of 1 is required by RandomForestClassifier.
+[2025-11-10T17:17:40.148+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO SparkContext: Invoking stop() from shutdown hook
+[2025-11-10T17:17:40.149+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO SparkContext: SparkContext is stopping with exitCode 0.
+[2025-11-10T17:17:40.158+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO SparkUI: Stopped Spark web UI at http://0977dfbb40de:4040
+[2025-11-10T17:17:40.162+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO StandaloneSchedulerBackend: Shutting down all executors
+[2025-11-10T17:17:40.163+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO StandaloneSchedulerBackend$StandaloneDriverEndpoint: Asking each executor to shut down
+[2025-11-10T17:17:40.177+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+[2025-11-10T17:17:40.190+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO MemoryStore: MemoryStore cleared
+[2025-11-10T17:17:40.191+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO BlockManager: BlockManager stopped
+[2025-11-10T17:17:40.194+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO BlockManagerMaster: BlockManagerMaster stopped
+[2025-11-10T17:17:40.196+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+[2025-11-10T17:17:40.217+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO SparkContext: Successfully stopped SparkContext
+[2025-11-10T17:17:40.217+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO ShutdownHookManager: Shutdown hook called
+[2025-11-10T17:17:40.218+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO ShutdownHookManager: Deleting directory /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da/pyspark-d39678d2-2afe-45ac-a1ad-567e65a01138
+[2025-11-10T17:17:40.220+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO ShutdownHookManager: Deleting directory /tmp/spark-21027b50-f3bb-42c5-819a-8352dcdb6a3e
+[2025-11-10T17:17:40.222+0000] {docker.py:429} INFO - 25/11/10 17:17:40 INFO ShutdownHookManager: Deleting directory /tmp/spark-87f449a4-110a-4d40-8d0d-1b5cda0842da
+[2025-11-10T17:17:40.765+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 265, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: http+docker://localhost/v1.51/containers/create
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 364, in _run_image
+    return self._run_image_with_mounts([*self.mounts, tmp_mount], add_tmp_variable=True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 391, in _run_image_with_mounts
+    self.container = self.cli.create_container(
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/container.py", line 439, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/container.py", line 456, in create_container_from_config
+    return self._result(res, True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 271, in _result
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 267, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 400 Client Error for http+docker://localhost/v1.51/containers/create: Bad Request ("invalid mount config for type "bind": bind source path does not exist: /tmp/airflowtmphs6nvxiv")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 502, in execute
+    return self._run_image()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 373, in _run_image
+    return self._run_image_with_mounts(self.mounts, add_tmp_variable=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 437, in _run_image_with_mounts
+    raise DockerContainerFailedException(f"Docker container failed: {result!r}", logs=log_lines)
+airflow.providers.docker.exceptions.DockerContainerFailedException: Docker container failed: {'StatusCode': 1}
+[2025-11-10T17:17:40.772+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=spark_batch_pipeline, task_id=train_model, execution_date=20251109T000000, start_date=20251110T171522, end_date=20251110T171740
+[2025-11-10T17:17:40.796+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 15 for task train_model (Docker container failed: {'StatusCode': 1}; 271)
+[2025-11-10T17:17:40.821+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-10T17:17:40.839+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

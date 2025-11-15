@@ -1,0 +1,110 @@
+🚀 Tổng quan Dự án: Pipeline Dự đoán Rủi ro Cổ phiếu Streaming Đa Công ty
+Dự án này là một hệ thống MLOps (Vận hành Máy học) end-to-end, có khả năng thu thập, xử lý, và dự đoán rủi ro (giá giảm mạnh) cho nhiều mã cổ phiếu cùng lúc.
+
+Hệ thống được chia làm hai luồng (workflow) chính chạy song song:
+
+Luồng Batch (Huấn luyện): Được điều phối bởi Airflow. Luồng này chạy định kỳ (hàng ngày) để thu thập tất cả dữ liệu lịch sử từ Kafka, lưu vào HDFS, sau đó huấn luyện một model Machine Learning mới và lưu trữ model đó.
+
+Luồng Streaming (Dự đoán): Chạy liên tục 24/7. Luồng này thu thập dữ liệu giá mới nhất, sử dụng model đã được huấn luyện (từ Luồng Batch) để đưa ra dự đoán rủi ro theo thời gian thực, và lưu kết quả vào Redis để một API có thể truy vấn.
+
+1. 🏗️ Hạ tầng & Điều phối (docker-compose.yml & airflow/)
+Đây là "xương sống" và "bộ não" lập lịch của dự án.
+
+docker-compose.yml:
+
+Chức năng: Định nghĩa và khởi chạy tất cả các service (container) trong dự án. Nó giống như bản thiết kế của một thành phố, chỉ rõ các "tòa nhà" (Spark, Kafka, HDFS, Redis, Python...) và "đường" (network) nối chúng lại.
+
+Tương tác: Nó đảm bảo các service có thể "nói chuyện" với nhau (ví dụ: model-service có thể tìm thấy kafka tại địa chỉ kafka:9092). Nó cũng mount (gắn) các thư mục code (như ./model_service) vào bên trong container, giúp cho train_job và model_service có thể chia sẻ chung các file model.
+
+dags/spark_batch_dag.py:
+
+Chức năng: Đây là file "lập lịch" của Airflow. Nó định nghĩa một chuỗi công việc (DAG).
+
+Tương tác: Nó ra lệnh: "Mỗi ngày một lần, hãy chạy Task 1 (save_to_hdfs). Nếu nó thành công, hãy chạy Task 2 (train_model)." Nó sử dụng DockerOperator để thực thi các job này.
+
+2. 🌊 Luồng Dữ liệu (Producer, Batch, Stream)
+Đây là "hệ tuần hoàn" của dự án, mô tả cách dữ liệu di chuyển.
+
+kafka-producer/producer.py
+Chức năng: Là nguồn dữ liệu (Data Ingestion) duy nhất.
+
+Tương tác:
+
+Retry Logic: Khi khởi động, nó có một vòng lặp "retry" (thử lại) để kiên nhẫn chờ cho đến khi kafka sẵn sàng, giải quyết lỗi ECONNREFUSED.
+
+Batch Send: Gửi 1 năm dữ liệu lịch sử của nhiều công ty (ví dụ: AAPL, MSFT...) vào topic Kafka historical_prices.
+
+Stream Send: Bắt đầu một vòng lặp vô hạn, cứ mỗi 60 (hoặc 5) giây lại lấy dữ liệu mới nhất của các công ty đó và gửi vào topic daily_prices.
+
+Schema (Cấu trúc): Nó gửi cùng một schema (cấu trúc) {timestamp, Ticker, Open, High, Low, Close, Volume} đến CẢ HAI topic, đảm bảo tính nhất quán.
+
+spark-jobs/save_to_hdfs_job.py (Chạy bởi Airflow)
+Chức năng: Lưu trữ dữ liệu lịch sử (Historian).
+
+Tương tác: Khi được Airflow kích hoạt, nó:
+
+Kết nối với Kafka và đọc toàn bộ dữ liệu từ topic historical_prices.
+
+Áp dụng schema 7 cột (bao gồm cả Ticker).
+
+Lưu tất cả dữ liệu này xuống HDFS (hdfs://namenode:9000/data/raw/stock_data) dưới dạng file Parquet.
+
+spark-jobs/train_job.py (Chạy bởi Airflow) - [2025-11-12, 14:57:25 UTC]]
+Chức năng: Huấn luyện model (Model Trainer).
+
+Tương tác:
+
+Chạy sau khi save_to_hdfs thành công.
+
+Đọc file Parquet từ HDFS.
+
+Tính toán Feature (Quan trọng): Thực hiện groupby('Ticker').apply(...) để tính các feature (như Volatility_Cluster) riêng biệt cho từng công ty.
+
+Mã hóa Feature (Quan trọng): Thực hiện "One-Hot Encoding" để biến các cột chữ (như AAPL, MSFT) thành các cột số (như Ticker_AAPL: 1, Ticker_MSFT: 0).
+
+Huấn luyện RandomForestClassifier trên bộ dữ liệu đã xử lý.
+
+Lưu 2 file quan trọng vào thư mục /models (tức là model_service/): risk_model.joblib (model) và model_features.json (danh sách các cột đã mã hóa).
+
+3. ⚡ Phục vụ & Dự đoán (Serving & Prediction)
+Đây là "mặt tiền" của dự án, nơi model được sử dụng.
+
+model_service/serve.py
+Chức năng: Bộ não dự đoán thời gian thực (Real-time Brain).
+
+Tương tác (Khi khởi động):
+
+Tải model từ risk_model.joblib.
+
+Tải danh sách feature từ model_features.json (để biết cách mã hóa One-Hot).
+
+Kết nối Kafka và lắng nghe topic daily_prices.
+
+Kết nối Redis.
+
+Tương tác (Khi chạy):
+
+Nhận một tin nhắn (ví dụ: MSFT) từ daily_prices.
+
+Tìm "cửa sổ" (window) dữ liệu của MSFT trong một dict (từ điển); nếu chưa có, tạo một cửa sổ mới.
+
+Khi cửa sổ của MSFT có đủ 22 tin nhắn, nó bắt đầu tính feature (giống hệt train_job).
+
+Nó thực hiện One-Hot Encoding (biến MSFT thành Ticker_MSFT: 1...) dựa trên file model_features.json.
+
+Nó đưa các feature này vào model để dự đoán (ví dụ: {"Ticker": "MSFT", "prediction": 0, "probability": 0.07}).
+
+Nó gửi kết quả dự đoán này vào topic predictions.
+
+Nó cũng cung cấp API (GET /latest_prediction và GET /recent_predictions) cho UI.
+
+prediction_saver/saver.py
+Chức năng: Lưu trữ dự đoán (Prediction Scribe).
+
+Tương tác:
+
+Kết nối Kafka (với code retry) và lắng nghe topic predictions.
+
+Khi nhận được một JSON dự đoán từ model_service, nó sẽ lưu JSON đó vào Redis (cả hai: ghi đè latest_prediction và đẩy vào danh sách recent_predictions_list).
+
+Đây là service cung cấp dữ liệu cho API GET /latest_prediction và GET /recent_predictions.

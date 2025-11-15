@@ -1,0 +1,101 @@
+[2025-11-15T13:01:08.640+0000] {processor.py:161} INFO - Started process (PID=176) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:01:08.641+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:01:08.642+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:01:08.642+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:01:08.661+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:01:08.680+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:01:08.680+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:01:08.699+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:01:08.699+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:01:08.717+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.079 seconds
+[2025-11-15T13:01:39.627+0000] {processor.py:161} INFO - Started process (PID=182) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:01:39.628+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:01:39.629+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:01:39.628+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:01:39.647+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:01:39.799+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:01:39.799+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:01:39.834+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:01:39.834+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:01:39.856+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.233 seconds
+[2025-11-15T13:02:10.211+0000] {processor.py:161} INFO - Started process (PID=187) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:02:10.212+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:02:10.213+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:02:10.213+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:02:10.241+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:02:10.270+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:02:10.269+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:02:10.294+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:02:10.293+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:02:10.313+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.106 seconds
+[2025-11-15T13:02:40.859+0000] {processor.py:161} INFO - Started process (PID=192) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:02:40.860+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:02:40.861+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:02:40.861+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:02:40.884+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:02:40.908+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:02:40.908+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:02:40.928+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:02:40.927+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:02:40.944+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.088 seconds
+[2025-11-15T13:03:11.812+0000] {processor.py:161} INFO - Started process (PID=197) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:03:11.813+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:03:11.816+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:03:11.815+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:03:11.883+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:03:11.921+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:03:11.921+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:03:11.983+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:03:11.983+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:03:12.012+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.203 seconds
+[2025-11-15T13:03:42.660+0000] {processor.py:161} INFO - Started process (PID=202) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:03:42.661+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:03:42.662+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:03:42.661+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:03:42.681+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:03:42.709+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:03:42.709+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:03:42.746+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:03:42.745+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:03:42.773+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.116 seconds
+[2025-11-15T13:04:13.628+0000] {processor.py:161} INFO - Started process (PID=207) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:04:13.630+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:04:13.633+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:04:13.632+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:04:13.676+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:04:13.732+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:04:13.731+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:04:13.767+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:04:13.767+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:04:13.792+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.173 seconds
+[2025-11-15T13:09:36.280+0000] {processor.py:161} INFO - Started process (PID=212) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:09:36.284+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:09:36.293+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:09:36.291+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:09:36.511+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:09:39.754+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:09:39.754+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:09:39.966+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:09:39.965+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:09:40.028+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.837 seconds
+[2025-11-15T13:10:10.519+0000] {processor.py:161} INFO - Started process (PID=217) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:10:10.520+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:10:10.521+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:10:10.521+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:10:10.542+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:10:10.600+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:10:10.600+0000] {taskinstance.py:2700} ERROR - {'DAG Id': 'spark_batch_pipeline', 'Task Id': 'save_to_hdfs', 'Run Id': 'scheduled__2025-11-14T00:00:00+00:00', 'Hostname': '7c2e23c1954d'}
+[2025-11-15T13:10:10.640+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:10:10.640+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=spark_batch_pipeline, task_id=save_to_hdfs, execution_date=20251114T000000, start_date=20251115T130108, end_date=20251115T131010
+[2025-11-15T13:10:10.653+0000] {processor.py:791} INFO - Executed failure callback for <TaskInstance: spark_batch_pipeline.save_to_hdfs scheduled__2025-11-14T00:00:00+00:00 [failed]> in state failed
+[2025-11-15T13:10:10.672+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:10:10.672+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:10:10.693+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:10:10.693+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:10:10.714+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.199 seconds
+[2025-11-15T13:12:12.053+0000] {processor.py:161} INFO - Started process (PID=187) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:12:12.055+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:12:12.057+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:12:12.056+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:12:12.095+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:12:12.127+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:12:12.126+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:12:12.161+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:12:12.160+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:12:12.183+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.134 seconds
+[2025-11-15T13:12:43.001+0000] {processor.py:161} INFO - Started process (PID=192) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:12:43.002+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:12:43.003+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:12:43.003+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:12:43.024+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:12:43.158+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:12:43.158+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:12:43.178+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:12:43.177+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:12:43.196+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.199 seconds
+[2025-11-15T13:13:14.032+0000] {processor.py:161} INFO - Started process (PID=197) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:13:14.034+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:13:14.035+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:13:14.035+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:13:14.059+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:13:14.085+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:13:14.084+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:13:14.107+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:13:14.107+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:13:14.124+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.095 seconds
+[2025-11-15T13:13:44.382+0000] {processor.py:161} INFO - Started process (PID=202) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:13:44.382+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:13:44.383+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:13:44.383+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:13:44.396+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:13:44.414+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:13:44.414+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:13:44.431+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:13:44.431+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:13:44.445+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.065 seconds
+[2025-11-15T13:14:14.503+0000] {processor.py:161} INFO - Started process (PID=207) to work on /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:14:14.504+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/spark_batch_dag.py for tasks to queue
+[2025-11-15T13:14:14.505+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:14:14.505+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:14:14.521+0000] {processor.py:840} INFO - DAG(s) 'spark_batch_pipeline' retrieved from /opt/airflow/dags/spark_batch_dag.py
+[2025-11-15T13:14:14.540+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:14:14.540+0000] {dag.py:3036} INFO - Sync 1 DAGs
+[2025-11-15T13:14:14.560+0000] {logging_mixin.py:188} INFO - [2025-11-15T13:14:14.560+0000] {dag.py:3823} INFO - Setting next_dagrun for spark_batch_pipeline to 2025-11-15 00:00:00+00:00, run_after=2025-11-16 00:00:00+00:00
+[2025-11-15T13:14:14.576+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/spark_batch_dag.py took 0.075 seconds
