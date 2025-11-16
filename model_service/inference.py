@@ -21,6 +21,9 @@ import threading
 import uvicorn
 import time
 
+import redis
+import json
+
 # CẤU HÌNH LOGGING
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("RealTimeRiskModel")
@@ -36,6 +39,11 @@ INPUT_TOPIC = f"daily_prices_{COMPANY}"
 OUTPUT_TOPIC = os.environ.get("OUTPUT_TOPIC", "predictions")
 
 WINDOW_SIZE = 3
+
+#cấu hình redis
+REDIS_HOST = os.getenv("REDIS_HOST", "redis")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 
 # KHỞI TẠO SPARK SESSION
 # Set là 1 thì mới chạy song song được
@@ -171,6 +179,20 @@ def prediction_worker():
         pred = predict_from_buffer()
         if pred:
             logger.info(f"✅ Realtime Prediction: {pred}")
+            try:
+                # GHI VÀO REDIS
+                # Đẩy vào một LIST, đặt tên theo công ty
+                list_key = f"predictions:{COMPANY}"
+
+                # Convert 'Date' sang string để lưu JSON
+                pred['Date'] = pred['Date'].isoformat() 
+
+                r.lpush(list_key, json.dumps(pred))
+                # Giới hạn danh sách chỉ lưu 1000 dự đoán mới nhất
+                r.ltrim(list_key, 0, 999) 
+            except Exception as e:
+                logger.error(f"❌ Không thể ghi vào Redis: {e}")
+
         time.sleep(1) # 1 giây check buffer 1 lần
 
 # Start threads     

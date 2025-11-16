@@ -12,3 +12,4 @@ requests>=2.31.0
 # Thêm phần này
 py4j==0.10.9.5
 python-multipart
+redis

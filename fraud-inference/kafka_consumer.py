@@ -4,9 +4,16 @@ import json
 import os
 import time
 
+import redis
+
 BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "kafka:9092")
 TOPIC = "fraud_transactions"
 PREDICT_API = "http://fraud-inference:8060/predict" # sửa app thành fraud-inference
+
+# Cấu hình Redis
+REDIS_HOST = os.getenv("REDIS_HOST", "redis")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
 
 def main():
     consumer = KafkaConsumer(
@@ -23,6 +30,18 @@ def main():
         transaction = msg.value
         res = requests.post(PREDICT_API, json=transaction)
         print(f"🔎 Transaction {transaction.get('TransactionID')} => {res.json()}")
+        prediction_result = res.json()
+
+        try:
+            # GHI VÀO REDIS
+            list_key = "fraud:predictions"
+            # Thêm TransactionID vào kết quả để dễ tra cứu
+            prediction_result['TransactionID'] = transaction.get('TransactionID')
+
+            r.lpush(list_key, json.dumps(prediction_result))
+            r.ltrim(list_key, 0, 999) # Giới hạn 1000 dự đoán mới nhất
+        except Exception as e:
+            print(f"❌ Không thể ghi vào Redis: {e}")
 
 if __name__ == "__main__":
     try:
