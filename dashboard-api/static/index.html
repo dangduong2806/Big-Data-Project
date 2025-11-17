@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Risk & Fraud Detection Dashboard</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.10.3/Recharts.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        
+        .flow-animation {
+            animation: flow 3s linear infinite;
+        }
+        
+        @keyframes flow {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .alert-blink {
+            animation: blink 1s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useCallback } = React;
+        const { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = Recharts;
+
+        // // Mock data generators (thay thế bằng API calls thực tế)
+        // const generateMockStockData = () => {
+        //     return ['GSPC', 'XOM', 'CVX', 'BP'].map(company => ({
+        //         company,
+        //         prediction: Math.random() > 0.5 ? 1 : 0,
+        //         probability: Math.random(),
+        //         dailyReturn: (Math.random() - 0.5) * 4,
+        //         volatilityCluster: Math.random(),
+        //         volumeVolatility: Math.random(),
+        //         timestamp: new Date().toISOString()
+        //     }));
+        // };
+
+        const generateMockFraudData = () => {
+            return Array(5).fill(0).map((_, i) => ({
+                transactionId: `TXN${Math.floor(Math.random() * 10000)}`,
+                amount: Math.random() * 1000,
+                isFraud: Math.random() > 0.7 ? 1 : 0,
+                probability: Math.random(),
+                timestamp: new Date(Date.now() - i * 60000).toISOString()
+            }));
+        };
+
+        const generatePriceHistory = () => {
+            return Array(20).fill(0).map((_, i) => ({
+                time: `${i}:00`,
+                price: 4500 + Math.random() * 200,
+                risk: Math.random()
+            }));
+        };
+
+        // Header Component
+        const Header = ({ currentView, setCurrentView, setShowSystemHealth }) => (
+            <div className="bg-white shadow-lg">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="flex justify-between items-center py-4">
+                        <div className="flex items-center">
+                            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg flex items-center justify-center mr-4">
+                                <span className="text-white text-2xl font-bold">RT</span>
+                            </div>
+                            <h1 className="text-2xl font-bold gradient-text">Real-Time Analytics Platform</h1>
+                        </div>
+                        <div className="flex space-x-3">
+                            <button
+                                onClick={() => setCurrentView('overview')}
+                                className={`px-4 py-2 rounded-lg font-medium transition ${
+                                    currentView === 'overview' 
+                                    ? 'bg-purple-600 text-white' 
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                            >
+                                📊 Overview
+                            </button>
+                            <button
+                                onClick={() => setCurrentView('market')}
+                                className={`px-4 py-2 rounded-lg font-medium transition ${
+                                    currentView === 'market' 
+                                    ? 'bg-purple-600 text-white' 
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                            >
+                                📈 Market Risk
+                            </button>
+                            <button
+                                onClick={() => setCurrentView('fraud')}
+                                className={`px-4 py-2 rounded-lg font-medium transition ${
+                                    currentView === 'fraud' 
+                                    ? 'bg-purple-600 text-white' 
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                            >
+                                🔍 Fraud Detection
+                            </button>
+                            <button
+                                onClick={() => setCurrentView('system')}
+                                className={`px-4 py-2 rounded-lg font-medium transition ${
+                                    currentView === 'system' 
+                                    ? 'bg-purple-600 text-white' 
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                            >
+                                ⚙️ System Monitor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Overview Dashboard
+        const OverviewDashboard = () => {
+            const [metrics, setMetrics] = useState({
+                stockRisk: 'LOW',
+                fraudAlerts: 0,
+                kafkaQueue: 0,
+                airflowStatus: 'success'
+            });
+
+            useEffect(() => {
+                const fetchMarketData = () => {
+                    fetch('/api/market-risk') // Gọi API thật
+                        .then(res => res.json())
+                        .then(data => {
+                            // Cập nhật lại tên biến nếu cần
+                            const formattedData = data.map(d => ({
+                                company: d.Company,
+                                prediction: d.Prediction,
+                                probability: d.Probability,
+                                dailyReturn: d.Daily_Return,
+                                volatilityCluster: d.Volatility_Cluster,
+                                volumeVolatility: d.Volume_Based_Volatility,
+                                timestamp: d.Date
+                            }));
+                            setPredictions(formattedData);
+                        })
+                        .catch(err => console.error("Lỗi fetch market data:", err));
+                };
+                
+                fetchMarketData(); // Chạy lần đầu
+                const interval = setInterval(fetchMarketData, 3000); // Cập nhật mỗi 3 giây
+                return () => clearInterval(interval);
+            }, []);
+
+            return (
+                <div className="space-y-6">
+                    {/* Metrics Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className={`card-hover bg-white rounded-xl p-6 shadow-lg ${metrics.stockRisk === 'HIGH' ? 'border-l-4 border-red-500' : 'border-l-4 border-green-500'}`}>
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-gray-500 text-sm font-medium">Stock Risk Status</p>
+                                    <p className={`text-3xl font-bold mt-2 ${metrics.stockRisk === 'HIGH' ? 'text-red-600' : 'text-green-600'}`}>
+                                        {metrics.stockRisk}
+                                    </p>
+                                </div>
+                                <div className={`text-4xl ${metrics.stockRisk === 'HIGH' ? 'pulse-animation' : ''}`}>
+                                    {metrics.stockRisk === 'HIGH' ? '📉' : '📈'}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="card-hover bg-white rounded-xl p-6 shadow-lg border-l-4 border-blue-500">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-gray-500 text-sm font-medium">Fraud Alerts (24h)</p>
+                                    <p className="text-3xl font-bold mt-2 text-blue-600">{metrics.fraudAlerts}</p>
+                                </div>
+                                <div className="text-4xl">🚨</div>
+                            </div>
+                        </div>
+
+                        <div className="card-hover bg-white rounded-xl p-6 shadow-lg border-l-4 border-orange-500">
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-gray-500 text-sm font-medium">Kafka Queue Size</p>
+                                    <p className="text-3xl font-bold mt-2 text-orange-600">{metrics.kafkaQueue}</p>
+                                    <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                        <div className="bg-orange-500 h-2 rounded-full" style={{width: `${(metrics.kafkaQueue / 1000) * 100}%`}}></div>
+                                    </div>
+                                </div>
+                                <div className="text-4xl">📨</div>
+                            </div>
+                        </div>
+
+                        <div className={`card-hover bg-white rounded-xl p-6 shadow-lg border-l-4 ${metrics.airflowStatus === 'success' ? 'border-purple-500' : 'border-red-500'}`}>
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p className="text-gray-500 text-sm font-medium">Airflow DAG Status</p>
+                                    <p className={`text-3xl font-bold mt-2 ${metrics.airflowStatus === 'success' ? 'text-purple-600' : 'text-red-600'}`}>
+                                        {metrics.airflowStatus === 'success' ? '✓' : '✖'}
+                                    </p>
+                                </div>
+                                <div className="text-4xl">🔄</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Stream Monitor */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h2 className="text-xl font-bold mb-6 text-gray-800">Real-time Stream Monitor</h2>
+                        <div className="space-y-8">
+                            {/* Market Stream */}
+                            <div>
+                                <p className="text-sm font-medium text-gray-600 mb-3">Market Risk Stream</p>
+                                <div className="flex items-center space-x-4">
+                                    <div className="bg-blue-100 px-4 py-2 rounded-lg text-blue-800 font-medium">Kafka Producer</div>
+                                    <div className="flex-1 relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div className="absolute w-4 h-4 bg-blue-500 rounded-full -mt-1 flow-animation"></div>
+                                    </div>
+                                    <div className="bg-purple-100 px-4 py-2 rounded-lg text-purple-800 font-medium">Model Service</div>
+                                    <div className="flex-1 relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div className="absolute w-4 h-4 bg-purple-500 rounded-full -mt-1 flow-animation"></div>
+                                    </div>
+                                    <div className="bg-green-100 px-4 py-2 rounded-lg text-green-800 font-medium">Redis</div>
+                                </div>
+                            </div>
+
+                            {/* Fraud Stream */}
+                            <div>
+                                <p className="text-sm font-medium text-gray-600 mb-3">Fraud Detection Stream</p>
+                                <div className="flex items-center space-x-4">
+                                    <div className="bg-blue-100 px-4 py-2 rounded-lg text-blue-800 font-medium">Fraud Producer</div>
+                                    <div className="flex-1 relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div className="absolute w-4 h-4 bg-blue-500 rounded-full -mt-1 flow-animation"></div>
+                                    </div>
+                                    <div className="bg-orange-100 px-4 py-2 rounded-lg text-orange-800 font-medium">Consumer</div>
+                                    <div className="flex-1 relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div className="absolute w-4 h-4 bg-orange-500 rounded-full -mt-1 flow-animation"></div>
+                                    </div>
+                                    <div className="bg-red-100 px-4 py-2 rounded-lg text-red-800 font-medium">Fraud API</div>
+                                    <div className="flex-1 relative h-2 bg-gray-200 rounded-full overflow-hidden">
+                                        <div className="absolute w-4 h-4 bg-red-500 rounded-full -mt-1 flow-animation"></div>
+                                    </div>
+                                    <div className="bg-green-100 px-4 py-2 rounded-lg text-green-800 font-medium">Redis</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Market Risk Dashboard
+        const MarketRiskDashboard = () => {
+            const [predictions, setPredictions] = useState([]); // Giữ nguyên
+            const [priceHistory, setPriceHistory] = useState([]); // Sửa: Khởi tạo rỗng
+            const [selectedCompany, setSelectedCompany] = useState('GSPC'); // Giữ nguyên
+
+            // useEffect MỚI: Tải cả 'predictions' và 'priceHistory'
+            useEffect(() => {
+                const fetchData = () => {
+                    // 1. Tải Predictions (API thật)
+                    fetch('/api/market-risk') 
+                        .then(res => res.json())
+                        .then(data => {
+                            if (!data || data.error) {
+                                console.error("Không nhận được dữ liệu market risk:", data);
+                                return; 
+                            }
+
+                            const formattedData = data.map(d => ({
+                                company: d.Company,
+                                prediction: d.Prediction,
+                                probability: d.Probability,
+                                dailyReturn: d.Daily_Return,
+                                volatilityCluster: d.Volatility_Cluster,
+                                volumeVolatility: d.Volume_Based_Volatility,
+                                timestamp: d.Date
+                            }));
+                            setPredictions(formattedData);
+                            
+                            // 2. Cập nhật Price History (từ dữ liệu mới)
+                            const companyData = formattedData.find(p => p.company === selectedCompany);
+                            if (companyData && companyData.timestamp !== "N/A") {
+                                const newPricePoint = {
+                                    time: new Date(companyData.timestamp).toLocaleTimeString(),
+                                    // Sửa: Dùng 'dailyReturn' làm proxy cho 'price' vì API chưa trả về 'Close'
+                                    price: companyData.dailyReturn, 
+                                    risk: companyData.probability
+                                };
+                                // Thêm vào mảng, giữ lại 19 điểm cũ
+                                setPriceHistory(prev => [...prev.slice(-19), newPricePoint]);
+                            }
+                        })
+                        .catch(err => console.error("Lỗi fetch market data:", err));
+                };
+                
+                fetchData(); // Chạy lần đầu
+                const interval = setInterval(fetchData, 3000); // Cập nhật mỗi 3 giây
+                return () => clearInterval(interval);
+            }, [selectedCompany]); // Thêm selectedCompany để nó fetch lại khi đổi công ty
+
+            return (
+                <div className="space-y-6">
+                    {/* Real-time Prediction Cards */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {predictions.map(pred => (
+                            <div 
+                                key={pred.company}
+                                className={`card-hover bg-white rounded-xl p-5 shadow-lg border-l-4 cursor-pointer ${
+                                    pred.probability > 0.7 ? 'border-red-500' : 
+                                    pred.probability > 0.4 ? 'border-orange-500' : 'border-green-500'
+                                } ${pred.probability > 0.8 ? 'alert-blink' : ''}`}
+                                onClick={() => setSelectedCompany(pred.company)}
+                            >
+                                <div className="flex justify-between items-start mb-3">
+                                    <h3 className="text-lg font-bold text-gray-800">{pred.company}</h3>
+                                    <span className={`px-2 py-1 rounded text-xs font-bold ${
+                                        pred.probability > 0.7 ? 'bg-red-100 text-red-800' : 
+                                        pred.probability > 0.4 ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'
+                                    }`}>
+                                        {pred.probability > 0.7 ? 'HIGH' : pred.probability > 0.4 ? 'MID' : 'LOW'}
+                                    </span>
+                                </div>
+                                <div className="space-y-2 text-sm">
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Risk Probability:</span>
+                                        <span className="font-bold">{(pred.probability * 100).toFixed(1)}%</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Daily Return:</span>
+                                        <span className={`font-bold ${pred.dailyReturn > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                            {pred.dailyReturn > 0 ? '+' : ''}{pred.dailyReturn.toFixed(2)}%
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Volatility:</span>
+                                        <span className="font-bold">{pred.volatilityCluster.toFixed(3)}</span>
+                                    </div>
+                                    <div className="text-xs text-gray-400 mt-2">
+                                        {new Date(pred.timestamp).toLocaleTimeString()}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Charts Section */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Price Chart */}
+                        <div className="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 className="text-lg font-bold mb-4 text-gray-800">Stock Price (Daily Return) - {selectedCompany}</h3>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <LineChart data={priceHistory}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="time" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Line type="monotone" dataKey="price" stroke="#8b5cf6" strokeWidth={2} dot={false} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        {/* Risk Probability Chart */}
+                        <div className="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 className="text-lg font-bold mb-4 text-gray-800">Risk Probability - {selectedCompany}</h3>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <AreaChart data={priceHistory}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="time" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Area type="monotone" dataKey="risk" stroke="#ef4444" fill="#fca5a5" />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    {/* Feature Breakdown */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800">Feature Breakdown - {selectedCompany}</h3>
+                        <div className="space-y-4">
+                            {predictions.filter(p => p.company === selectedCompany).map(pred => (
+                                <div key={pred.company} className="space-y-3">
+                                    <div>
+                                        <div className="flex justify-between mb-1">
+                                            <span className="text-sm font-medium">Daily Return</span>
+                                            <span className="text-sm font-bold">{pred.dailyReturn.toFixed(2)}%</span>
+                                        </div>
+                                        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                                            <div className={`h-2 rounded-full ${pred.dailyReturn > 0 ? 'bg-green-500' : 'bg-red-500'}`} 
+                                                 style={{width: `${Math.abs(pred.dailyReturn) * 10}%`}}></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between mb-1">
+                                            <span className="text-sm font-medium">Volatility Cluster</span>
+                                            <span className="text-sm font-bold">{pred.volatilityCluster.toFixed(3)}</span>
+                                        </div>
+                                        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                                            <div className="bg-orange-500 h-2 rounded-full" style={{width: `${pred.volatilityCluster * 100}%`}}></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between mb-1">
+                                            <span className="text-sm font-medium">Volume Based Volatility</span>
+                                            <span className="text-sm font-bold">{pred.volumeVolatility.toFixed(3)}</span>
+                                        </div>
+                                        <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                                            <div className="bg-purple-500 h-2 rounded-full" style={{width: `${pred.volumeVolatility * 100}%`}}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Model Status */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800">Model Information</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600">Model Name</p>
+                                <p className="font-bold text-lg">{selectedCompany}_risk_model</p>
+                            </div>
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600">Accuracy</p>
+                                <p className="font-bold text-lg text-green-600">89.3%</p>
+                            </div>
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600">Last Trained</p>
+                                <p className="font-bold text-lg">2025-11-15</p>
+                            </div>
+                        </div>
+                        <button className="mt-4 w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition">
+                            🔄 Trigger Retraining
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        // Fraud Detection Dashboard
+        const FraudDashboard = () => {
+            const [fraudAlerts, setFraudAlerts] = useState([]); // Sửa: Khởi tạo rỗng
+            const [selectedTransaction, setSelectedTransaction] = useState(null);
+            const [fraudDistribution, setFraudDistribution] = useState([]); // Sửa: Khởi tạo rỗng
+
+            useEffect(() => {
+                const fetchFraudData = () => {
+                    fetch('/api/fraud') // Gọi API thật
+                        .then(res => res.json())
+                        .then(data => {
+                            if (!data || data.error) {
+                                console.error("Không nhận được dữ liệu fraud:", data);
+                                return;
+                            }
+                            setFraudAlerts(data); // Data đã được format ở backend
+                        })
+                        .catch(err => console.error("Lỗi fetch fraud data:", err));
+                };
+
+                // Chúng ta vẫn có thể dùng mock data cho chart distribution
+                const generateMockDistribution = () => Array(10).fill(0).map((_, i) => ({
+                    range: `${i * 10}-${(i + 1) * 10}%`,
+                    count: Math.floor(Math.random() * 100)
+                }));
+                
+                fetchFraudData();
+                setFraudDistribution(generateMockDistribution()); // Vẫn dùng mock cho chart này
+                
+                const interval = setInterval(() => {
+                    fetchFraudData();
+                    setFraudDistribution(generateMockDistribution()); // Cập nhật chart
+                }, 3000); // Cập nhật mỗi 3 giây
+                
+                return () => clearInterval(interval);
+            }, []);
+
+            return (
+                <div className="space-y-6">
+                    {/* Fraud Alert Feed */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800">🚨 Real-time Fraud Alerts</h3>
+                        <div className="space-y-3 max-h-96 overflow-y-auto">
+                            {fraudAlerts.map(alert => (
+                                <div 
+                                    key={alert.transactionId}
+                                    className={`border rounded-lg p-4 cursor-pointer hover:shadow-md transition ${
+                                        alert.isFraud ? 'border-red-500 bg-red-50' : 'border-green-500 bg-green-50'
+                                    } ${alert.probability > 0.9 && alert.isFraud ? 'alert-blink' : ''}`}
+                                    onClick={() => setSelectedTransaction(alert)}
+                                >
+                                    <div className="flex justify-between items-start">
+                                        <div className="flex-1">
+                                            <div className="flex items-center space-x-2 mb-2">
+                                                <span className="font-bold text-lg">Transaction {alert.transactionId}</span>
+                                                <span className={`px-2 py-1 rounded text-xs font-bold ${
+                                                    alert.isFraud ? 'bg-red-600 text-white' : 'bg-green-600 text-white'
+                                                }`}>
+                                                    {alert.isFraud ? 'FRAUD' : 'LEGITIMATE'}
+                                                </span>
+                                            </div>
+                                            <div className="grid grid-cols-3 gap-4 text-sm">
+                                                <div>
+                                                    <span className="text-gray-600">Amount:</span>
+                                                    <span className="font-bold ml-2">${alert.amount.toFixed(2)}</span>
+                                                </div>
+                                                <div>
+                                                    <span className="text-gray-600">Probability:</span>
+                                                    <span className="font-bold ml-2">{(alert.probability * 100).toFixed(1)}%</span>
+                                                </div>
+                                                <div>
+                                                    <span className="text-gray-600">Time:</span>
+                                                    <span className="font-bold ml-2">{new Date(alert.timestamp).toLocaleTimeString()}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="text-3xl ml-4">
+                                            {alert.isFraud ? '⚠️' : '✅'}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Charts */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        {/* Fraud Distribution */}
+                        <div className="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 className="text-lg font-bold mb-4 text-gray-800">Fraud Probability Distribution</h3>
+                            <ResponsiveContainer width="100%" height={250}>
+                                <BarChart data={fraudDistribution}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="range" />
+                                    <YAxis />
+                                    <Tooltip />
+                                    <Bar dataKey="count" fill="#ef4444" />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        {/* Kafka Stream Monitor */}
+                        <div className="bg-white rounded-xl p-6 shadow-lg">
+                            <h3 className="text-lg font-bold mb-4 text-gray-800">Kafka Stream Activity</h3>
+                            <div className="space-y-4">
+                                <div className="border rounded-lg p-3 bg-gray-50">
+                                    <div className="flex justify-between mb-2">
+                                        <span className="text-sm font-medium">Transactions/sec</span>
+                                        <span className="text-lg font-bold text-blue-600">127</span>
+                                    </div>
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                        <div className="bg-blue-500 h-2 rounded-full animate-pulse" style={{width: '75%'}}></div>
+                                    </div>
+                                </div>
+                                <div className="border rounded-lg p-3 bg-gray-50">
+                                    <div className="flex justify-between mb-2">
+                                        <span className="text-sm font-medium">Consumer Lag</span>
+                                        <span className="text-lg font-bold text-orange-600">24</span>
+                                    </div>
+                                    <div className="w-full bg-gray-200 rounded-full h-2">
+                                        <div className="bg-orange-500 h-2 rounded-full" style={{width: '12%'}}></div>
+                                    </div>
+                                </div>
+                                <div className="bg-gray-900 text-green-400 p-3 rounded-lg font-mono text-xs max-h-32 overflow-y-auto">
+                                    <div>→ Received: TransactionID=TXN8822, amt=$241.00</div>
+                                    <div>→ Calling API /predict ...</div>
+                                    <div>→ Result: isFraud=1, prob=0.84</div>
+                                    <div className="text-blue-400">✓ Pushed to Redis</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Model Status */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800">Fraud Detection Model</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600">Model Type</p>
+                                <p className="font-bold text-lg">XGBoost</p>
+                            </div>
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600">Accuracy</p>
+                                <p className="font-bold text-lg text-green-600">94.7%</p>
+                            </div>
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600">Features Used</p>
+                                <p className="font-bold text-lg">47</p>
+                            </div>
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600">Last Trained</p>
+                                <p className="font-bold text-lg">2025-11-14</p>
+                            </div>
+                        </div>
+                        <button className="mt-4 w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition">
+                            🔄 Trigger Retraining
+                        </button>
+                    </div>
+
+                    {/* Transaction Details Modal */}
+                    {selectedTransaction && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={() => setSelectedTransaction(null)}>
+                            <div className="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-96 overflow-y-auto" onClick={e => e.stopPropagation()}>
+                                <div className="flex justify-between items-start mb-4">
+                                    <h3 className="text-xl font-bold">Transaction Details</h3>
+                                    <button onClick={() => setSelectedTransaction(null)} className="text-gray-500 hover:text-gray-700">✕</button>
+                                </div>
+                                <div className="space-y-3">
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="border rounded p-3">
+                                            <p className="text-sm text-gray-600">Transaction ID</p>
+                                            <p className="font-bold">{selectedTransaction.transactionId}</p>
+                                        </div>
+                                        <div className="border rounded p-3">
+                                            <p className="text-sm text-gray-600">Amount</p>
+                                            <p className="font-bold">${selectedTransaction.amount.toFixed(2)}</p>
+                                        </div>
+                                        <div className="border rounded p-3">
+                                            <p className="text-sm text-gray-600">Fraud Status</p>
+                                            <p className={`font-bold ${selectedTransaction.isFraud ? 'text-red-600' : 'text-green-600'}`}>
+                                                {selectedTransaction.isFraud ? 'FRAUD' : 'LEGITIMATE'}
+                                            </p>
+                                        </div>
+                                        <div className="border rounded p-3">
+                                            <p className="text-sm text-gray-600">Probability</p>
+                                            <p className="font-bold">{(selectedTransaction.probability * 100).toFixed(2)}%</p>
+                                        </div>
+                                    </div>
+                                    <div className="border rounded p-3">
+                                        <p className="text-sm text-gray-600 mb-2">Risk Assessment</p>
+                                        <div className="w-full bg-gray-200 rounded-full h-4">
+                                            <div 
+                                                className={`h-4 rounded-full ${selectedTransaction.probability > 0.7 ? 'bg-red-500' : 'bg-green-500'}`}
+                                                style={{width: `${selectedTransaction.probability * 100}%`}}
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // System Monitor Dashboard
+        const SystemMonitorDashboard = () => {
+            const [kafkaMetrics, setKafkaMetrics] = useState({
+                topics: [
+                    { name: 'historical_prices_GSPC', messages: 1523, lag: 12 },
+                    { name: 'daily_prices_XOM', messages: 892, lag: 5 },
+                    { name: 'fraud_transactions', messages: 2341, lag: 24 }
+                ]
+            });
+
+            const [sparkMetrics, setSparkMetrics] = useState({
+                workers: 3,
+                memory: 75,
+                jobs: 2,
+                executors: 8
+            });
+
+            const [airflowDags, setAirflowDags] = useState([
+                { name: 'market_risk_training_dag', tasks: ['save_to_hdfs_job', 'train_job'], status: 'success' },
+                { name: 'fraud_model_training_dag', tasks: ['train_fraud_model'], status: 'success' }
+            ]);
+
+            const [redisMetrics, setRedisMetrics] = useState({
+                keys: 247,
+                memory: 156,
+                mostActive: ['predictions:GSPC', 'fraud:predictions', 'predictions:XOM']
+            });
+
+            return (
+                <div className="space-y-6">
+                    {/* Kafka Monitoring */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <span className="text-2xl mr-2">📨</span> Kafka Monitoring
+                        </h3>
+                        <div className="overflow-x-auto">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="border-b">
+                                        <th className="text-left py-3 px-4 font-semibold">Topic Name</th>
+                                        <th className="text-left py-3 px-4 font-semibold">Messages/sec</th>
+                                        <th className="text-left py-3 px-4 font-semibold">Consumer Lag</th>
+                                        <th className="text-left py-3 px-4 font-semibold">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {kafkaMetrics.topics.map(topic => (
+                                        <tr key={topic.name} className="border-b hover:bg-gray-50">
+                                            <td className="py-3 px-4 font-mono text-sm">{topic.name}</td>
+                                            <td className="py-3 px-4">
+                                                <div className="flex items-center">
+                                                    <span className="font-bold mr-2">{topic.messages}</span>
+                                                    <div className="w-24 bg-gray-200 rounded-full h-2">
+                                                        <div className="bg-blue-500 h-2 rounded-full" style={{width: `${(topic.messages / 3000) * 100}%`}}></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="py-3 px-4">
+                                                <span className={`font-bold ${topic.lag > 20 ? 'text-red-600' : 'text-green-600'}`}>
+                                                    {topic.lag}
+                                                </span>
+                                            </td>
+                                            <td className="py-3 px-4">
+                                                <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-bold">
+                                                    ✓ Active
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {/* Spark Cluster Monitoring */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <span className="text-2xl mr-2">⚡</span> Spark Cluster Status
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div className="border rounded-lg p-4 bg-gradient-to-br from-purple-50 to-purple-100">
+                                <p className="text-sm text-gray-600 mb-2">Active Workers</p>
+                                <p className="text-3xl font-bold text-purple-600">{sparkMetrics.workers}</p>
+                                <p className="text-xs text-gray-500 mt-1">All online</p>
+                            </div>
+                            <div className="border rounded-lg p-4 bg-gradient-to-br from-blue-50 to-blue-100">
+                                <p className="text-sm text-gray-600 mb-2">Memory Usage</p>
+                                <p className="text-3xl font-bold text-blue-600">{sparkMetrics.memory}%</p>
+                                <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                    <div className="bg-blue-500 h-2 rounded-full" style={{width: `${sparkMetrics.memory}%`}}></div>
+                                </div>
+                            </div>
+                            <div className="border rounded-lg p-4 bg-gradient-to-br from-green-50 to-green-100">
+                                <p className="text-sm text-gray-600 mb-2">Running Jobs</p>
+                                <p className="text-3xl font-bold text-green-600">{sparkMetrics.jobs}</p>
+                                <p className="text-xs text-gray-500 mt-1">2 training, 0 queued</p>
+                            </div>
+                            <div className="border rounded-lg p-4 bg-gradient-to-br from-orange-50 to-orange-100">
+                                <p className="text-sm text-gray-600 mb-2">Active Executors</p>
+                                <p className="text-3xl font-bold text-orange-600">{sparkMetrics.executors}</p>
+                                <p className="text-xs text-gray-500 mt-1">Distributed processing</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Airflow DAG Timeline */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <span className="text-2xl mr-2">🔄</span> Airflow DAG Status
+                        </h3>
+                        <div className="space-y-4">
+                            {airflowDags.map(dag => (
+                                <div key={dag.name} className="border rounded-lg p-4">
+                                    <div className="flex justify-between items-center mb-3">
+                                        <h4 className="font-bold text-lg">{dag.name}</h4>
+                                        <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                                            dag.status === 'success' ? 'bg-green-100 text-green-800' :
+                                            dag.status === 'failed' ? 'bg-red-100 text-red-800' :
+                                            'bg-yellow-100 text-yellow-800'
+                                        }`}>
+                                            {dag.status === 'success' ? '✓ Success' : 
+                                             dag.status === 'failed' ? '✖ Failed' : '⏳ Running'}
+                                        </span>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        {dag.tasks.map((task, idx) => (
+                                            <React.Fragment key={task}>
+                                                <div className="flex-1 bg-green-100 border-2 border-green-500 rounded-lg p-3 text-center">
+                                                    <p className="text-sm font-medium text-green-800">{task}</p>
+                                                    <p className="text-xs text-green-600 mt-1">✓ Completed</p>
+                                                </div>
+                                                {idx < dag.tasks.length - 1 && (
+                                                    <div className="text-green-500 text-xl">→</div>
+                                                )}
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Redis Status */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <span className="text-2xl mr-2">💾</span> Redis Status
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="border rounded-lg p-4 bg-red-50">
+                                <p className="text-sm text-gray-600 mb-2">Total Keys</p>
+                                <p className="text-3xl font-bold text-red-600">{redisMetrics.keys}</p>
+                            </div>
+                            <div className="border rounded-lg p-4 bg-red-50">
+                                <p className="text-sm text-gray-600 mb-2">Memory Usage</p>
+                                <p className="text-3xl font-bold text-red-600">{redisMetrics.memory} MB</p>
+                                <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                                    <div className="bg-red-500 h-2 rounded-full" style={{width: '31%'}}></div>
+                                </div>
+                            </div>
+                            <div className="border rounded-lg p-4 bg-red-50">
+                                <p className="text-sm text-gray-600 mb-2">Operations/sec</p>
+                                <p className="text-3xl font-bold text-red-600">1,247</p>
+                            </div>
+                        </div>
+                        <div className="mt-4 border-t pt-4">
+                            <p className="text-sm font-semibold text-gray-700 mb-2">Most Active Lists:</p>
+                            <div className="space-y-2">
+                                {redisMetrics.mostActive.map(key => (
+                                    <div key={key} className="flex justify-between items-center bg-gray-50 rounded p-2">
+                                        <span className="font-mono text-sm">{key}</span>
+                                        <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">High Activity</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* HDFS Status */}
+                    <div className="bg-white rounded-xl p-6 shadow-lg">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 flex items-center">
+                            <span className="text-2xl mr-2">🗄️</span> HDFS Storage
+                        </h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600 mb-2">Data Storage</p>
+                                <p className="font-mono text-sm text-blue-600">/data/raw/stock_data</p>
+                                <p className="text-xs text-gray-500 mt-1">2.4 GB (Parquet)</p>
+                            </div>
+                            <div className="border rounded-lg p-4">
+                                <p className="text-sm text-gray-600 mb-2">Model Storage</p>
+                                <p className="font-mono text-sm text-purple-600">/models/</p>
+                                <p className="text-xs text-gray-500 mt-1">156 MB (4 models)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            const [currentView, setCurrentView] = useState('overview');
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <Header currentView={currentView} setCurrentView={setCurrentView} />
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        {currentView === 'overview' && <OverviewDashboard />}
+                        {currentView === 'market' && <MarketRiskDashboard />}
+                        {currentView === 'fraud' && <FraudDashboard />}
+                        {currentView === 'system' && <SystemMonitorDashboard />}
+                    </div>
+                    
+                    {/* Footer */}
+                    <div className="bg-white border-t mt-12">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                            <div className="flex justify-between items-center text-sm text-gray-600">
+                                <p>© 2025 Real-Time Analytics Platform - Market Risk & Fraud Detection</p>
+                                <div className="flex space-x-4">
+                                    <span className="flex items-center">
+                                        <span className="w-2 h-2 bg-green-500 rounded-full mr-2 pulse-animation"></span>
+                                        System Online
+                                    </span>
+                                    <span>Last Updated: {new Date().toLocaleTimeString()}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

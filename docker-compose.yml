@@ -364,6 +364,20 @@ services:
       bash -c "airflow db init && 
                airflow users create --role Admin --username admin --password admin --email admin@example.com --firstname admin --lastname admin"
 
+# API for UI-web
+  dashboard-api:
+    build: ./dashboard-api
+    ports:
+      - "8501:8000"  # Chúng ta sẽ truy cập dashboard tại http://localhost:8501
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+      - model-service-gspc # Chờ các model service chạy
+      - fraud-consumer     # Chờ fraud consumer chạy
+    volumes:
+      - ./dashboard-api:/app # Mount code để tự động reload khi sửa (tùy chọn)
+
 volumes:
   namenode:
   datanode:

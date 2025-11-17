@@ -4,6 +4,10 @@ A.     Market risk management
 3.      docker-compose up kafka-producer
 4.      docker-compose up spark-jobs
 5.      docker-compose up train-job
+** Đọc data vào các topic daily_prices của từng model
+docker-compose exec -it kafka-cli bash
+kafka-console-producer --bootstrap-server kafka:9092 --topic daily_prices_GSPC/XOM/CVX/BP
+Copy các data ở dưới.
 6.      docker-compose up model-service-gspc model-service-xom model-service-cvx model-service-bp
 
 B.     Fraud Detection
