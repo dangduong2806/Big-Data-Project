@@ -10,6 +10,7 @@ pydantic>=2.0.0
 requests>=2.31.0
 # pyspark>=3.5.0
 # Thêm phần này
-py4j==0.10.9.5
+# py4j==0.10.9.5
 python-multipart
 redis
+pyspark==3.5.0

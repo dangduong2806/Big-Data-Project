@@ -4,3 +4,4 @@ kafka-python>=2.0.0
 numpy>=1.24.0
 pyarrow>=14.0.1  # Cần thiết cho Spark 3.5 với DataFrame
 findspark>=2.0.1
+pyspark==3.5.0

@@ -1,0 +1,26 @@
+[2025-11-18T15:18:22.590+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: training_pipeline.kafka_producer manual__2025-11-18T15:18:21.335587+00:00 [queued]>
+[2025-11-18T15:18:22.596+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: training_pipeline.kafka_producer manual__2025-11-18T15:18:21.335587+00:00 [queued]>
+[2025-11-18T15:18:22.597+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-18T15:18:22.611+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): kafka_producer> on 2025-11-18 15:18:21.335587+00:00
+[2025-11-18T15:18:22.619+0000] {standard_task_runner.py:60} INFO - Started process 210 to run task
+[2025-11-18T15:18:22.622+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'training_pipeline', 'kafka_producer', 'manual__2025-11-18T15:18:21.335587+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/train.py', '--cfg-path', '/tmp/tmp4zo46roy']
+[2025-11-18T15:18:22.623+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask kafka_producer
+[2025-11-18T15:18:22.669+0000] {task_command.py:423} INFO - Running <TaskInstance: training_pipeline.kafka_producer manual__2025-11-18T15:18:21.335587+00:00 [running]> on host 82a620fda11f
+[2025-11-18T15:18:22.761+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='training_pipeline' AIRFLOW_CTX_TASK_ID='kafka_producer' AIRFLOW_CTX_EXECUTION_DATE='2025-11-18T15:18:21.335587+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-18T15:18:21.335587+00:00'
+[2025-11-18T15:18:22.775+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-18T15:18:22.777+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'docker start kafka-producer']
+[2025-11-18T15:18:22.793+0000] {subprocess.py:86} INFO - Output:
+[2025-11-18T15:18:22.917+0000] {subprocess.py:93} INFO - Error response from daemon: No such container: kafka-producer
+[2025-11-18T15:18:22.918+0000] {subprocess.py:93} INFO - Error: failed to start containers: kafka-producer
+[2025-11-18T15:18:22.919+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-11-18T15:18:22.930+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 212, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-11-18T15:18:22.933+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=training_pipeline, task_id=kafka_producer, execution_date=20251118T151821, start_date=20251118T151822, end_date=20251118T151822
+[2025-11-18T15:18:22.949+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 4 for task kafka_producer (Bash command failed. The command returned a non-zero exit code 1.; 210)
+[2025-11-18T15:18:22.995+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-18T15:18:23.011+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

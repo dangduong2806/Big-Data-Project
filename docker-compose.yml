@@ -96,6 +96,7 @@ services:
   # sửa phần này
   model-service-gspc:
     build: ./model_service
+    container_name: model-service-gspc
     ports:
       - "8000:8000"
     environment:
@@ -116,6 +117,7 @@ services:
     user: root
   model-service-xom:
     build: ./model_service
+    container_name: model-service-xom
     ports:
       - "8001:8000"
     environment:
@@ -136,6 +138,7 @@ services:
     user: root
   model-service-cvx:
     build: ./model_service
+    container_name: model-service-cvx
     ports:
       - "8002:8000"
     environment:
@@ -156,6 +159,7 @@ services:
     user: root
   model-service-bp:
     build: ./model_service
+    container_name: model-service-bp
     ports:
       - "8003:8000"
     environment:
@@ -177,6 +181,8 @@ services:
 
   kafka-producer:
     build: ./kafka-producer
+    image: kafka-producer:latest # Thêm tên image
+    container_name: kafka-producer
     environment:
       - BOOTSTRAP_SERVERS=kafka:9092
       - HISTORICAL_TOPIC_GSPC=historical_prices_GSPC
@@ -199,60 +205,60 @@ services:
     depends_on:
       - kafka
 
-  spark-jobs:
-    build: ./spark-jobs
-    depends_on:
-      - spark-master
-      - spark-worker # Thêm cái này ()
-      - namenode
-      - kafka
-      # Thêm cái này (không chắc)
-      - kafka-producer
-    environment:
-      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
-      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
-    volumes:
-      - ./spark-jobs:/app
-      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
-    command: >
-      /opt/spark/bin/spark-submit
-      --master spark://spark-master:7077
-      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
-      /app/save_to_hdfs_job.py
+  # spark-jobs:
+  #   build: ./spark-jobs
+  #   depends_on:
+  #     - spark-master
+  #     - spark-worker # Thêm cái này ()
+  #     - namenode
+  #     - kafka
+  #     # Thêm cái này (không chắc)
+  #     - kafka-producer
+  #   environment:
+  #     - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
+  #     - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
+  #   volumes:
+  #     - ./spark-jobs:/app
+  #     - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
+  #   command: >
+  #     /opt/spark/bin/spark-submit
+  #     --master spark://spark-master:7077
+  #     --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
+  #     /app/save_to_hdfs_job.py
 
-  train-job:
-    build: ./spark-jobs
-    depends_on:
-      - spark-master
-      - namenode
-      #- spark-jobs  Bỏ cái này
-    command: >
-      /opt/spark/bin/spark-submit
-      --master spark://spark-master:7077
-      --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
-      /app/train_job.py
-    volumes:
-      - ./model_service:/models
-      - ./spark-jobs:/app
-      - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
-    environment:
-      - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
-      - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
-      # Bỏ đường dẫn này
-      # - MODEL_SAVE_PATH=/models/risk_model.joblib
-    user: root
+  # train-job:
+  #   build: ./spark-jobs
+  #   depends_on:
+  #     - spark-master
+  #     - namenode
+  #     #- spark-jobs  Bỏ cái này
+  #   command: >
+  #     /opt/spark/bin/spark-submit
+  #     --master spark://spark-master:7077
+  #     --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.0,org.apache.hadoop:hadoop-client:3.3.4
+  #     /app/train_job.py
+  #   volumes:
+  #     - ./model_service:/models
+  #     - ./spark-jobs:/app
+  #     - hadoop_conf:/opt/hadoop/conf  # Mount cấu hình HDFS
+  #   environment:
+  #     - SPARK_HADOOP_FS_DEFAULTFS=hdfs://namenode:9000  # Cấu hình HDFS cho Spark
+  #     - HADOOP_CONF_DIR=/opt/hadoop/conf  # Đường dẫn đến cấu hình HDFS
+  #     # Bỏ đường dẫn này
+  #     # - MODEL_SAVE_PATH=/models/risk_model.joblib
+  #   user: root
 
   # Thêm fraud-detection
-  fraud-train:
-    build: ./fraud-train
-    container_name: fraud-train
-    environment:
-      DATA_PATH: /app/data/train_transaction.csv
-      MODEL_PATH: /app/model/fraud_xgb_pipeline.pkl
-    volumes:
-      - ./data:/app/data      # mount dữ liệu vào container
-      - ./model:/app/model    # mount thư mục model ra local
-    command: python train_fraud_model.py
+  # fraud-train:
+  #   build: ./fraud-train
+  #   container_name: fraud-train
+  #   environment:
+  #     DATA_PATH: /app/data/train_transaction.csv
+  #     MODEL_PATH: /app/model/fraud_xgb_pipeline.pkl
+  #   volumes:
+  #     - ./data:/app/data      # mount dữ liệu vào container
+  #     - ./model:/app/model    # mount thư mục model ra local
+  #   command: python train_fraud_model.py
     
   # Thêm fraud-inference
   fraud-inference:
@@ -267,11 +273,12 @@ services:
       - "8060:8060"
     depends_on:
       - kafka
-      - fraud-train
+      # - fraud-train
     user: root
   
   fraud-producer:
     build: ./fraud-inference
+    container_name: fraud-producer
     command: ["python", "kafka_producer.py"]
     depends_on:
       - kafka
@@ -280,6 +287,7 @@ services:
   
   fraud-consumer:
     build: ./fraud-inference
+    container_name: fraud-consumer
     command: ["python", "kafka_consumer.py"]
     depends_on:
       - kafka
@@ -294,7 +302,7 @@ services:
       - redis_data:/data
 
 
-#  Apache Airflow services
+# Setup các môi trường: database, airflow inint, webserver, scheduler của Apache Airflow services
   postgres-airflow:
     image: postgres:13
     environment:
@@ -322,14 +330,15 @@ services:
       airflow-init:
         # Chỉ khởi động SAU KHI airflow-init đã chạy xong và thành công
         condition: service_completed_successfully
-    environment:
+    environment: &airflow-common-env # Dùng anchor để tái sử dụng biến môi trường cho gọn
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow/airflow
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
-    volumes:
+    volumes: &airflow-common-volumes # Dùng anchor để tái sử dụng volumes
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - /var/run/docker.sock:/var/run/docker.sock 
+    restart: always 
 
   # === SCHEDULER ĐÃ CẬP NHẬT ===
   airflow-scheduler:
@@ -339,14 +348,18 @@ services:
       airflow-init:
         # Chỉ khởi động SAU KHI airflow-init đã chạy xong và thành công
         condition: service_completed_successfully
-    environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow/airflow
-      - AIRFLOW__CORE__LOAD_EXAMPLES=False
-    volumes:
+    environment: *airflow-common-env # Tái sử dụng environment ở trên
+    volumes: 
       - ./airflow/dags:/opt/airflow/dags
       - ./airflow/logs:/opt/airflow/logs
       - /var/run/docker.sock:/var/run/docker.sock
+      # Thêm phần này
+      # --- THÊM DÒNG NÀY ĐỂ AIRFLOW THẤY CODE SPARK ---
+      - ./spark-jobs:/app
+      - hadoop_conf:/opt/hadoop/conf  # Nếu script cần config HDFS 
+      # Thêm dòng này để airflow thấy code fraud train
+      - ./fraud-train:/app
+    restart: always
 
   # === SERVICE MỚI ĐỂ KHỞI TẠO DATABASE ===
   airflow-init:
@@ -355,14 +368,12 @@ services:
       postgres-airflow:
         # Chờ cho đến khi postgres-airflow "healthy"
         condition: service_healthy 
-    environment:
-      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres-airflow/airflow
-      - AIRFLOW__CORE__LOAD_EXAMPLES=False
-    # Lệnh này sẽ chạy db init VÀ tạo một user admin mặc định
+    environment: *airflow-common-env
+    # Dùng airflow db migrate thay vì init
     command: >
-      bash -c "airflow db init && 
+      bash -c "airflow db migrate && 
                airflow users create --role Admin --username admin --password admin --email admin@example.com --firstname admin --lastname admin"
+
 
 # API for UI-web
   dashboard-api:
