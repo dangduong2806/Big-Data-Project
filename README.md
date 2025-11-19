@@ -10,7 +10,9 @@
     + .\run.bat build => Build các images và Up các containers
     + .\run.bat up => Up các containers (khi đã build image rồi)
     + .\run.bat down => Xóa các containers.
-*-------------------------------------------------------------------------------------* 
+  
+----------------------------------------------------------------------------------------*
+      
 ** Vào localhost:8088 giao diện của Airflow để chạy 2 dag (USERNAME: xinchao, PASSWORD: xinchao): deploy_pipeline và training_pipeline. (Click vào hình tam giác ở cột Actions bên phải), có thể click vào từng dag để xem mọi thứ như: status (running/success/failed), graphs, logs, v.v của dag đó.
     Thứ tự chạy các dags: Khi dag training_pipeline chạy thành công -> chạy dag deploy_pipeline.
 
@@ -48,4 +50,5 @@ Test samples:
 
 
 ** Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.
+
 
