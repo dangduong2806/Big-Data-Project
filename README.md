@@ -28,9 +28,16 @@ Dự án này được thực hiện với mục tiêu mô phỏng lại kiến 
 
 Việc mô phỏng kiến trúc này không chỉ giúp hiểu rõ cách các tập đoàn tài chính toàn cầu vận hành hệ thống phân tích Big Data, mà còn chứng minh khả năng ứng dụng các công nghệ mã nguồn mở để xây dựng giải pháp phân tích dữ liệu quy mô lớn, có thể mở rộng và vận hành hiệu quả.
 
-** LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nhớ giải nén 2 file train_transaction và test_transaction) TRÊN MÁY CỦA BẠN VÀO HOST_DATA_PATH TRONG FILE .ENV (BẮT BUỘC VỚI DOCKEROPERATOR) 
+**3. Kiến trúc hệ thống:**  
+**a, Quản lý rủi ro thị trường - Market risk Management**
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/H%E1%BB%87%20th%E1%BB%91ng9.drawio.png)  
+**b, Phát hiện giao dịch gian lận - Fraud Detection**  
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/fraud39.drawio.png)  
+**4. Giao diện hệ thống:**  
+**5. Các thao tác chạy hệ thống:**  
+_LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nhớ giải nén 2 file train_transaction và test_transaction) TRÊN MÁY CỦA BẠN VÀO HOST_DATA_PATH TRONG FILE .ENV (BẮT BUỘC VỚI DOCKEROPERATOR)_ 
 
-*-----------------------------Cách chạy hệ thống---------------------------------------*
+*-----------------------------**Khởi động toàn bộ hệ thống**---------------------------------------*
 - Với hệ điều hành linux: dùng file Makefile: 
     + make build => Build các images và Up các containers
     + make up => Up các containers (khi đã build image rồi)
@@ -43,7 +50,7 @@ Việc mô phỏng kiến trúc này không chỉ giúp hiểu rõ cách các t�
   
 ----------------------------------------------------------------------------------------*
       
-** Vào localhost:8088 giao diện của Airflow để chạy 2 dag (USERNAME: xinchao, PASSWORD: xinchao): deploy_pipeline và training_pipeline. (Click vào hình tam giác ở cột Actions bên phải), có thể click vào từng dag để xem mọi thứ như: status (running/success/failed), graphs, logs, v.v của dag đó.
+** Vào localhost:8088 giao diện của Airflow với USERNAME: xinchao, và PASSWORD: xinchao để chạy 2 dag : deploy_pipeline và training_pipeline. (Click vào hình tam giác ở cột Actions bên phải), có thể click vào từng dag để xem mọi thứ như: status (running/success/failed), graphs, logs, v.v của dag đó.
     Thứ tự chạy các dags: Khi dag training_pipeline chạy thành công -> chạy dag deploy_pipeline.
 
 ** Song song với việc trên: Vào localhost:8080 giao diện của Apeche Spark để kiểm tra các job đã được nhận và đang thực thi như save_to_hdfs, train_risk_model, model_serivce_gspc/xom/bp/cvx.
@@ -80,6 +87,7 @@ Test samples:
 
 
 ** Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.
+
 
 
 
