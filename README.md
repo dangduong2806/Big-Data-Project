@@ -53,6 +53,9 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nh�
 ** Vào localhost:8088 giao diện của Airflow với USERNAME: xinchao, và PASSWORD: xinchao để chạy 2 dag : deploy_pipeline và training_pipeline. (Click vào hình tam giác ở cột Actions bên phải), có thể click vào từng dag để xem mọi thứ như: status (running/success/failed), graphs, logs, v.v của dag đó.
     Thứ tự chạy các dags: Khi dag training_pipeline chạy thành công -> chạy dag deploy_pipeline.
 
+**Màn hình hiển thị 2 dags đã chạy thành công:**  
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/Screenshot%202025-11-23%20004651.png)  
+
 ** Song song với việc trên: Vào localhost:8080 giao diện của Apeche Spark để kiểm tra các job đã được nhận và đang thực thi như save_to_hdfs, train_risk_model, model_serivce_gspc/xom/bp/cvx.
 
 ** Với lần đầu tiên chạy hệ thống, mở terminal trong visual code hoặc của docker desktop, chạy các lệnh dưới đây để truyền dữ liệu cho Kafka để deploy realtime inference.
@@ -61,7 +64,10 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nh�
         1. docker-compose exec -it kafka-cli bash
         2. kafka-topics --bootstrap-server kafka:9092 --list (xem các topic trong kafka (optional)) 
         3. kafka-console-producer --bootstrap-server kafka:9092 --topic daily_prices_GSPC/CVX/BP/XOM
-        4. Copy các data ở dưới ứng với từng công ty. (copy từng hàng 1 nhé)
+        4. Copy các data ở dưới ứng với từng công ty. (copy từng hàng một)
+
+ **Bốn mô hình cùng chạy inference real time song song:**  
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/Screenshot%202025-11-23%20004258.png)  
 
 Test samples:
 
@@ -87,6 +93,7 @@ Test samples:
 
 
 ** Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.
+
 
 
 
