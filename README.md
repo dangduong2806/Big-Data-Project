@@ -33,8 +33,17 @@ Việc mô phỏng kiến trúc này không chỉ giúp hiểu rõ cách các t�
 ![Logo](https://github.com/dangduong2806/Upload-images/blob/main/H%E1%BB%87%20th%E1%BB%91ng9.drawio.png)  
 **b, Phát hiện giao dịch gian lận - Fraud Detection**  
 ![Logo](https://github.com/dangduong2806/Upload-images/blob/main/fraud39.drawio.png)  
+
 **4. Giao diện hệ thống:**  
+
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/Screenshot%202025-11-23%20005507.png)  
+
+--------------------------------------------------------------------------------------------------------------
+
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/Screenshot%202025-11-23%20005823.png)  
+
 **5. Các thao tác chạy hệ thống:**  
+
 _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nhớ giải nén 2 file train_transaction và test_transaction) TRÊN MÁY CỦA BẠN VÀO HOST_DATA_PATH TRONG FILE .ENV (BẮT BUỘC VỚI DOCKEROPERATOR)_ 
 
 *-----------------------------**Khởi động toàn bộ hệ thống**---------------------------------------*
@@ -54,6 +63,7 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nh�
     Thứ tự chạy các dags: Khi dag training_pipeline chạy thành công -> chạy dag deploy_pipeline.
 
 **Màn hình hiển thị 2 dags đã chạy thành công:**  
+
 ![Logo](https://github.com/dangduong2806/Upload-images/blob/main/Screenshot%202025-11-23%20004651.png)  
 
 ** Song song với việc trên: Vào localhost:8080 giao diện của Apeche Spark để kiểm tra các job đã được nhận và đang thực thi như save_to_hdfs, train_risk_model, model_serivce_gspc/xom/bp/cvx.
@@ -67,6 +77,7 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nh�
         4. Copy các data ở dưới ứng với từng công ty. (copy từng hàng một)
 
  **Bốn mô hình cùng chạy inference real time song song:**  
+
 ![Logo](https://github.com/dangduong2806/Upload-images/blob/main/Screenshot%202025-11-23%20004258.png)  
 
 Test samples:
@@ -93,6 +104,7 @@ Test samples:
 
 
 ** Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.
+
 
 
 
