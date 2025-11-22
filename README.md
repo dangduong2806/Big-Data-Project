@@ -1,3 +1,12 @@
+# Market Risk Management and Fraud Detection System
+## Tên thành viên
+Group: 6
+1. 23020350 Nguyễn Đăng Dương
+2. 2302056 Bùi Hải Đăng
+3. 23020360 Trương Trọng Đức
+# Mô tả dự án
+## Url to our report: 
+
 ** LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nhớ giải nén 2 file train_transaction và test_transaction) TRÊN MÁY CỦA BẠN VÀO HOST_DATA_PATH TRONG FILE .ENV (BẮT BUỘC VỚI DOCKEROPERATOR) 
 
 *-----------------------------Cách chạy hệ thống---------------------------------------*
@@ -50,5 +59,6 @@ Test samples:
 
 
 ** Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.
+
 
 
