@@ -6,6 +6,19 @@ Group: 6
 3. 23020360 Trương Trọng Đức
 # Mô tả dự án
 ## Url to our report: 
+**1. Chủ đề:**  
+Dự án nhóm triển khai là về **quản lý rủi ro thị trường** và **phát hiện giao dịch gian lận**. Trong bối cảnh chuyển đổi số mạnh mẽ của ngành tài chính và ngân hàng, dữ liệu đã trở thành nguồn tài nguyên chiến lược giúp các tổ chức đưa ra quyết định nhanh chóng, chính xác và an toàn hơn. Đặc biệt, đối với các thị trường có tốc độ giao dịch lớn như tài chính toàn cầu, việc quản lý rủi ro thị trường và phát hiện gian lận đóng vai trò then chốt trong việc duy trì tính ổn định và uy tín của hệ thống ngân hàng. HSBC một trong những tập đoàn tài chính lớn nhất thế giới là ví dụ tiêu biểu về việc ứng dụng Big Data vào quản trị rủi ro và phòng chống gian lận. Với hàng triệu giao dịch phát sinh mỗi ngày trên toàn cầu, HSBC đối mặt với lượng dữ liệu khổng lồ đến từ: hệ thống giao dịch chứng khoán, hoạt động khách hàng, dữ liệu thị trường, tin tức tài chính và nhiều nguồn phi cấu trúc khác như mạng xã hội. Khối lượng và tốc độ dữ liệu này khiến các phương pháp phân tích truyền thống không còn đủ hiệu quả trong việc giám sát rủi ro theo thời gian thực. 
+
+**2. Tổng quan về dự án:**  
+Dự án này được thực hiện với mục tiêu mô phỏng lại kiến trúc Big Data phục vụ Market Risk Management và Fraud Detection, dựa trên các công nghệ phổ biến như:  
+– Apache Kafka –> thu thập và truyền dữ liệu giao dịch theo thời gian thực.  
+– Hadoop HDFS –> lưu trữ dữ liệu lớn và lịch sử.  
+– Apache Spark / PySpark –> xử lý dữ liệu batch và streaming.  
+– PySpark MLlib –> huấn luyện mô hình máy học phục vụ phát hiện gian lận.  
+– Apache Airflow –> điều phối pipeline xử lý dữ liệu.  
+– Redis –> lưu trữ kết quả phân tích tốc độ cao.  
+– Docker –> triển khai hệ thống theo mô hình container.  
+Việc mô phỏng kiến trúc này không chỉ giúp hiểu rõ cách các tập đoàn tài chính toàn cầu vận hành hệ thống phân tích Big Data, mà còn chứng minh khả năng ứng dụng các công nghệ mã nguồn mở để xây dựng giải pháp phân tích dữ liệu quy mô lớn, có thể mở rộng và vận hành hiệu quả.
 
 ** LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA (nhớ giải nén 2 file train_transaction và test_transaction) TRÊN MÁY CỦA BẠN VÀO HOST_DATA_PATH TRONG FILE .ENV (BẮT BUỘC VỚI DOCKEROPERATOR) 
 
@@ -59,6 +72,7 @@ Test samples:
 
 
 ** Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.
+
 
 
 
