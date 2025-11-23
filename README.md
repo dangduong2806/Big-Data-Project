@@ -9,7 +9,7 @@ Group: 6
 
 ## Our video demo: [video demo](https://drive.google.com/file/d/1v2FnzzGnVeigRWOw7cUKicK468AqOqco/view?usp=sharing) 
 
-## Our slides: [slides]()
+## Our slides: [slides](https://docs.google.com/presentation/d/1p2z9eA3EnYPRtfzS1FoVajqpLhHY5D5f/edit?usp=sharing&ouid=104564697792033262434&rtpof=true&sd=true)
 **1. Chủ đề:**  
 Dự án nhóm triển khai là về **quản lý rủi ro thị trường** và **phát hiện giao dịch gian lận**. Trong bối cảnh chuyển đổi số mạnh mẽ của ngành tài chính và ngân hàng, dữ liệu đã trở thành nguồn tài nguyên chiến lược giúp các tổ chức đưa ra quyết định nhanh chóng, chính xác và an toàn hơn. Đặc biệt, đối với các thị trường có tốc độ giao dịch lớn như tài chính toàn cầu, việc quản lý rủi ro thị trường và phát hiện gian lận đóng vai trò then chốt trong việc duy trì tính ổn định và uy tín của hệ thống ngân hàng. HSBC một trong những tập đoàn tài chính lớn nhất thế giới là ví dụ tiêu biểu về việc ứng dụng Big Data vào quản trị rủi ro và phòng chống gian lận. Với hàng triệu giao dịch phát sinh mỗi ngày trên toàn cầu, HSBC đối mặt với lượng dữ liệu khổng lồ đến từ: hệ thống giao dịch chứng khoán, hoạt động khách hàng, dữ liệu thị trường, tin tức tài chính và nhiều nguồn phi cấu trúc khác như mạng xã hội. Khối lượng và tốc độ dữ liệu này khiến các phương pháp phân tích truyền thống không còn đủ hiệu quả trong việc giám sát rủi ro theo thời gian thực. 
 
@@ -113,6 +113,7 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA TRÊN
 
 
 **Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.**
+
 
 
 
