@@ -1,0 +1,16 @@
+[2025-11-23T11:48:58.966+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: training_pipeline.delay_after_stop manual__2025-11-23T11:48:55.500725+00:00 [queued]>
+[2025-11-23T11:48:58.979+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: training_pipeline.delay_after_stop manual__2025-11-23T11:48:55.500725+00:00 [queued]>
+[2025-11-23T11:48:58.980+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-23T11:48:58.995+0000] {taskinstance.py:2191} INFO - Executing <Task(BashOperator): delay_after_stop> on 2025-11-23 11:48:55.500725+00:00
+[2025-11-23T11:48:59.001+0000] {standard_task_runner.py:60} INFO - Started process 228 to run task
+[2025-11-23T11:48:59.005+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'training_pipeline', 'delay_after_stop', 'manual__2025-11-23T11:48:55.500725+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/train.py', '--cfg-path', '/tmp/tmpz04snh83']
+[2025-11-23T11:48:59.008+0000] {standard_task_runner.py:88} INFO - Job 6: Subtask delay_after_stop
+[2025-11-23T11:48:59.076+0000] {task_command.py:423} INFO - Running <TaskInstance: training_pipeline.delay_after_stop manual__2025-11-23T11:48:55.500725+00:00 [running]> on host 6e60ab97c617
+[2025-11-23T11:48:59.160+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='training_pipeline' AIRFLOW_CTX_TASK_ID='delay_after_stop' AIRFLOW_CTX_EXECUTION_DATE='2025-11-23T11:48:55.500725+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-23T11:48:55.500725+00:00'
+[2025-11-23T11:48:59.162+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-11-23T11:48:59.164+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'sleep 7']
+[2025-11-23T11:48:59.176+0000] {subprocess.py:86} INFO - Output:
+[2025-11-23T11:49:06.180+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-11-23T11:49:06.205+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=training_pipeline, task_id=delay_after_stop, execution_date=20251123T114855, start_date=20251123T114858, end_date=20251123T114906
+[2025-11-23T11:49:06.228+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-23T11:49:06.250+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
