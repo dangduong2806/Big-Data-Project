@@ -30,9 +30,9 @@ Việc mô phỏng kiến trúc này không chỉ giúp hiểu rõ cách các t�
 
 **3. Kiến trúc hệ thống:**  
 **a, Quản lý rủi ro thị trường - Market risk Management**
-![Logo](https://github.com/dangduong2806/Upload-images/blob/main/H%E1%BB%87%20th%E1%BB%91ng9.drawio.png)  
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/h%E1%BB%87%20th%E1%BB%91ng%20last.drawio.png)  
 **b, Phát hiện giao dịch gian lận - Fraud Detection**  
-![Logo](https://github.com/dangduong2806/Upload-images/blob/main/fraud39.drawio.png)  
+![Logo](https://github.com/dangduong2806/Upload-images/blob/main/fraud%20last.drawio.png)  
 
 **4. Giao diện hệ thống:**  
 
@@ -108,6 +108,7 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA TRÊN
 
 
 **Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.**
+
 
 
 
