@@ -84,7 +84,7 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA TRÊN
 
 ![Logo](https://github.com/dangduong2806/Upload-images/blob/main/Screenshot%202025-11-23%20004258.png)  
 
-Test samples:
+**Test samples:**
 
 {"Date":"2025-11-10 01:33:41","Company":"GSPC","Open":181.23,"High":183.74,"Low":179.20,"Close":182.12,"Volume":105382000}
 {"Date":"2025-11-10 01:34:41","Company":"GSPC","Open":402.10,"High":408.90,"Low":399.50,"Close":405.60,"Volume":41230000}
@@ -107,7 +107,8 @@ Test samples:
 {"Date":"2025-11-10 02:50:41","Company":"XOM","Open":148.18,"High":150.94,"Low":147.12,"Close":149.50,"Volume":29907000}
 
 
-** Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.
+**Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.**
+
 
 
 
