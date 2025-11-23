@@ -1,0 +1,694 @@
+[2025-11-19T02:13:39.082+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: training_pipeline.train_risk_models manual__2025-11-19T02:08:18.251303+00:00 [queued]>
+[2025-11-19T02:13:39.090+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: training_pipeline.train_risk_models manual__2025-11-19T02:08:18.251303+00:00 [queued]>
+[2025-11-19T02:13:39.091+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-19T02:13:39.101+0000] {taskinstance.py:2191} INFO - Executing <Task(DockerOperator): train_risk_models> on 2025-11-19 02:08:18.251303+00:00
+[2025-11-19T02:13:39.107+0000] {standard_task_runner.py:60} INFO - Started process 332 to run task
+[2025-11-19T02:13:39.110+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'training_pipeline', 'train_risk_models', 'manual__2025-11-19T02:08:18.251303+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/train.py', '--cfg-path', '/tmp/tmpnepxdgxx']
+[2025-11-19T02:13:39.113+0000] {standard_task_runner.py:88} INFO - Job 8: Subtask train_risk_models
+[2025-11-19T02:13:39.176+0000] {task_command.py:423} INFO - Running <TaskInstance: training_pipeline.train_risk_models manual__2025-11-19T02:08:18.251303+00:00 [running]> on host 686346c59aae
+[2025-11-19T02:13:39.250+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='training_pipeline' AIRFLOW_CTX_TASK_ID='train_risk_models' AIRFLOW_CTX_EXECUTION_DATE='2025-11-19T02:08:18.251303+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-19T02:08:18.251303+00:00'
+[2025-11-19T02:13:39.320+0000] {docker.py:359} INFO - Starting docker container from image train-job:latest
+[2025-11-19T02:13:42.041+0000] {docker.py:429} INFO - Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+[2025-11-19T02:13:42.243+0000] {docker.py:429} INFO - 25/11/19 02:13:42 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-11-19T02:13:43.512+0000] {docker.py:429} INFO - INFO:train_job:Reading training data from hdfs://namenode:9000/data/raw/stock_data
+[2025-11-19T02:13:47.644+0000] {docker.py:429} INFO - [Stage 0:>                                                          (0 + 1) / 1]
+[2025-11-19T02:13:48.579+0000] {docker.py:429} INFO - 
+[2025-11-19T02:13:50.446+0000] {docker.py:429} INFO - [Stage 1:=====================>                                   (12 + 4) / 32]
+[2025-11-19T02:13:50.650+0000] {docker.py:429} INFO - [Stage 1:============================>                            (16 + 4) / 32]
+[2025-11-19T02:13:51.045+0000] {docker.py:429} INFO - [Stage 1:===================================>                     (20 + 4) / 32]
+[2025-11-19T02:13:51.246+0000] {docker.py:429} INFO - [Stage 1:==========================================>              (24 + 4) / 32]
+[2025-11-19T02:13:51.450+0000] {docker.py:429} INFO - [Stage 1:=================================================>       (28 + 4) / 32]
+[2025-11-19T02:13:51.648+0000] {docker.py:429} INFO - [Stage 1:===================================================>     (29 + 3) / 32]
+[2025-11-19T02:13:52.450+0000] {docker.py:429} INFO - [Stage 3:>                                                          (0 + 1) / 1]
+[2025-11-19T02:13:52.662+0000] {docker.py:429} INFO - 
+[2025-11-19T02:13:52.674+0000] {docker.py:429} INFO - INFO:train_job:Found 4 companies: ['XOM', 'BP', 'CVX', 'GSPC']
+INFO:train_job:====================== Training model for XOM ======================
+[2025-11-19T02:13:53.411+0000] {docker.py:429} INFO - INFO:train_job:XOM: raw data count = 250
+[2025-11-19T02:13:53.888+0000] {docker.py:429} INFO - 25/11/19 02:13:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:53.890+0000] {docker.py:429} INFO - 25/11/19 02:13:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:53.900+0000] {docker.py:429} INFO - 25/11/19 02:13:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:53.901+0000] {docker.py:429} INFO - 25/11/19 02:13:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:53.902+0000] {docker.py:429} INFO - 25/11/19 02:13:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:53.903+0000] {docker.py:429} INFO - 25/11/19 02:13:53 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:54.659+0000] {docker.py:429} INFO - [Stage 7:==============>                                            (2 + 4) / 8]
+[2025-11-19T02:13:54.857+0000] {docker.py:429} INFO - [Stage 7:=============================>                             (4 + 4) / 8]
+[2025-11-19T02:13:55.079+0000] {docker.py:429} INFO - 25/11/19 02:13:55 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:55.080+0000] {docker.py:429} INFO - 25/11/19 02:13:55 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:55.085+0000] {docker.py:429} INFO - 25/11/19 02:13:55 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:55.089+0000] {docker.py:429} INFO - 25/11/19 02:13:55 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:55.090+0000] {docker.py:429} INFO - 25/11/19 02:13:55 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:55.091+0000] {docker.py:429} INFO - 25/11/19 02:13:55 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:55.871+0000] {docker.py:429} INFO - [Stage 9:>                                                          (0 + 1) / 1]
+[2025-11-19T02:13:56.065+0000] {docker.py:429} INFO - 
+[2025-11-19T02:13:56.067+0000] {docker.py:429} INFO - INFO:train_job:Dữ liệu XOM chuẩn bị để train
+[2025-11-19T02:13:57.084+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.085+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.086+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.089+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.090+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.596+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.597+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.598+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.600+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:57.600+0000] {docker.py:429} INFO - 25/11/19 02:13:57 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:58.480+0000] {docker.py:429} INFO - [Stage 12:>                                                         (0 + 1) / 1]
+[2025-11-19T02:13:58.845+0000] {docker.py:429} INFO - 
+[2025-11-19T02:13:58.847+0000] {docker.py:429} INFO - INFO:train_job:Training Random Forest model...
+[2025-11-19T02:13:58.988+0000] {docker.py:429} INFO - 25/11/19 02:13:58 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:58.989+0000] {docker.py:429} INFO - 25/11/19 02:13:58 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:58.990+0000] {docker.py:429} INFO - 25/11/19 02:13:58 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:58.990+0000] {docker.py:429} INFO - 25/11/19 02:13:58 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:58.992+0000] {docker.py:429} INFO - 25/11/19 02:13:58 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:13:58 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:58.993+0000] {docker.py:429} INFO - 25/11/19 02:13:58 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.458+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.459+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.459+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.461+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.462+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.462+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.670+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.671+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.671+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.673+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.674+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:13:59.674+0000] {docker.py:429} INFO - 25/11/19 02:13:59 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.196+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.197+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.198+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.199+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.200+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.201+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.674+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.675+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.676+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.676+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.679+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:00.680+0000] {docker.py:429} INFO - 25/11/19 02:14:00 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:01.184+0000] {docker.py:429} INFO - 25/11/19 02:14:01 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:01.185+0000] {docker.py:429} INFO - 25/11/19 02:14:01 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:01.189+0000] {docker.py:429} INFO - 25/11/19 02:14:01 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:01.190+0000] {docker.py:429} INFO - 25/11/19 02:14:01 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:01.191+0000] {docker.py:429} INFO - 25/11/19 02:14:01 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:01.191+0000] {docker.py:429} INFO - 25/11/19 02:14:01 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:03.763+0000] {docker.py:429} INFO - 25/11/19 02:14:03 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:03.764+0000] {docker.py:429} INFO - 25/11/19 02:14:03 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:03.764+0000] {docker.py:429} INFO - 25/11/19 02:14:03 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:03.765+0000] {docker.py:429} INFO - 25/11/19 02:14:03 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:03.766+0000] {docker.py:429} INFO - 25/11/19 02:14:03 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:03 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:03.766+0000] {docker.py:429} INFO - 25/11/19 02:14:03 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.180+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.182+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.184+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.187+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.190+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.198+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.455+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.456+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.457+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.457+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.458+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.458+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.459+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.818+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.819+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.819+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.820+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.821+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.822+0000] {docker.py:429} INFO - 25/11/19 02:14:04 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:04.925+0000] {docker.py:429} INFO - INFO:train_job:Evaluating model on test set
+[2025-11-19T02:14:05.021+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.022+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.023+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.023+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.024+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.024+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.445+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.446+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.447+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:05.448+0000] {docker.py:429} INFO - 25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:05 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.033+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.034+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.037+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.038+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.038+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.487+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.488+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.489+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.490+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.490+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.491+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.796+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.797+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.798+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.798+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.799+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.799+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:06.800+0000] {docker.py:429} INFO - 25/11/19 02:14:06 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.192+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.194+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.194+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.195+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.195+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.196+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.415+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.416+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.417+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.417+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.418+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.418+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.790+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.791+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.792+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.792+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.793+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:07.793+0000] {docker.py:429} INFO - 25/11/19 02:14:07 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.013+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.014+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.015+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.015+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.016+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.016+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.325+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.326+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.326+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.327+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.327+0000] {docker.py:429} INFO - 25/11/19 02:14:08 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:08.485+0000] {docker.py:429} INFO - INFO:train_job:=== Evaluation Metrics for XOM ===
+INFO:train_job:AUC: 0.6273
+INFO:train_job:Accuracy: 0.7938
+INFO:train_job:Precision: 0.7119
+INFO:train_job:Recall: 0.7938
+INFO:train_job:F1 Score: 0.7366
+[2025-11-19T02:14:09.747+0000] {docker.py:429} INFO - INFO:train_job:Model training and saving completed successfully
+INFO:train_job:====================== Training model for BP ======================
+[2025-11-19T02:14:10.141+0000] {docker.py:429} INFO - INFO:train_job:BP: raw data count = 250
+[2025-11-19T02:14:10.251+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.253+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.254+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.255+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.255+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.605+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.606+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.607+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.607+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.608+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.608+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.680+0000] {docker.py:429} INFO - INFO:train_job:Dữ liệu BP chuẩn bị để train
+[2025-11-19T02:14:10.750+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.751+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.757+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:10.758+0000] {docker.py:429} INFO - 25/11/19 02:14:10 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.081+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.082+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.084+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.084+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.085+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.191+0000] {docker.py:429} INFO - INFO:train_job:Training Random Forest model...
+[2025-11-19T02:14:11.240+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.241+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.244+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.245+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.245+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.249+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.550+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.551+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.552+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.553+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.553+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.614+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.615+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.616+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.616+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.617+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.951+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.953+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.957+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.958+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:11.959+0000] {docker.py:429} INFO - 25/11/19 02:14:11 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.088+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.089+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.090+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.090+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.091+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.091+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.408+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.409+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.410+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.410+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:12.411+0000] {docker.py:429} INFO - 25/11/19 02:14:12 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.482+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.483+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.484+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.485+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.485+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.897+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.898+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.899+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.899+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.900+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.975+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.976+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.976+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.977+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.977+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.978+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:13.979+0000] {docker.py:429} INFO - 25/11/19 02:14:13 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.249+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.250+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.251+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.251+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.251+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.252+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.295+0000] {docker.py:429} INFO - INFO:train_job:Evaluating model on test set
+[2025-11-19T02:14:14.374+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.377+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.377+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.378+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.646+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.647+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.647+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.647+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.993+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.998+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:14.999+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.001+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.002+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.003+0000] {docker.py:429} INFO - 25/11/19 02:14:14 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.457+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.458+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.459+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.459+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.629+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.630+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.632+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.632+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.883+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.883+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.884+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:15.884+0000] {docker.py:429} INFO - 25/11/19 02:14:15 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.112+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.117+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.118+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.119+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.119+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.119+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.407+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.408+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.408+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.409+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.580+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.581+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.582+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.582+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.583+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.845+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.846+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.846+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.847+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.847+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.002+0000] {docker.py:429} INFO - INFO:train_job:=== Evaluation Metrics for BP ===
+INFO:train_job:AUC: 0.6196
+INFO:train_job:Accuracy: 0.8866
+INFO:train_job:Precision: 0.8996
+INFO:train_job:Recall: 0.8866
+INFO:train_job:F1 Score: 0.8421
+[2025-11-19T02:14:18.052+0000] {docker.py:429} INFO - INFO:train_job:Model training and saving completed successfully
+INFO:train_job:====================== Training model for CVX ======================
+[2025-11-19T02:14:18.356+0000] {docker.py:429} INFO - INFO:train_job:CVX: raw data count = 251
+[2025-11-19T02:14:18.036+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.037+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.037+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.038+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.038+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.809+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.810+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.811+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.811+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.812+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.865+0000] {docker.py:429} INFO - INFO:train_job:Dữ liệu CVX chuẩn bị để train
+[2025-11-19T02:14:16.913+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.914+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.915+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.916+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:16.916+0000] {docker.py:429} INFO - 25/11/19 02:14:16 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.182+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.184+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.185+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.185+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.252+0000] {docker.py:429} INFO - INFO:train_job:Training Random Forest model...
+[2025-11-19T02:14:17.296+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.296+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.298+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.299+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.299+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.300+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.301+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.579+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.579+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.580+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.581+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.633+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.634+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.635+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.636+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.927+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.928+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.928+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.929+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:17.929+0000] {docker.py:429} INFO - 25/11/19 02:14:17 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.038+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.040+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.041+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.041+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.042+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.301+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.302+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.303+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.303+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:18.303+0000] {docker.py:429} INFO - 25/11/19 02:14:18 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.255+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.257+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.258+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.259+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.261+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.634+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.635+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.636+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.636+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.694+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.695+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.696+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.697+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.697+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.698+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.956+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.957+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:19.958+0000] {docker.py:429} INFO - 25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:19 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.000+0000] {docker.py:429} INFO - INFO:train_job:Evaluating model on test set
+[2025-11-19T02:14:20.054+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.055+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.055+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.056+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.302+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.303+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.305+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.524+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.525+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.530+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.531+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.531+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.835+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.836+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.837+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:20.837+0000] {docker.py:429} INFO - 25/11/19 02:14:20 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.007+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.008+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.012+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.013+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.013+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.259+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.260+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.261+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.261+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.409+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.410+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.410+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.411+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.684+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.685+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.685+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.686+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.823+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.823+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.824+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.825+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:21.825+0000] {docker.py:429} INFO - 25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:21 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:22.058+0000] {docker.py:429} INFO - 25/11/19 02:14:22 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:22 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:22.059+0000] {docker.py:429} INFO - 25/11/19 02:14:22 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:22.059+0000] {docker.py:429} INFO - 25/11/19 02:14:22 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:22 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:22 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:22.180+0000] {docker.py:429} INFO - INFO:train_job:=== Evaluation Metrics for CVX ===
+INFO:train_job:AUC: 0.6403
+INFO:train_job:Accuracy: 0.8989
+INFO:train_job:Precision: 0.8080
+INFO:train_job:Recall: 0.8989
+INFO:train_job:F1 Score: 0.8510
+[2025-11-19T02:14:23.013+0000] {docker.py:429} INFO - INFO:train_job:Model training and saving completed successfully
+INFO:train_job:====================== Training model for GSPC ======================
+[2025-11-19T02:14:23.277+0000] {docker.py:429} INFO - INFO:train_job:GSPC: raw data count = 250
+[2025-11-19T02:14:23.379+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.380+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.649+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.651+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.653+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.656+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.658+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.797+0000] {docker.py:429} INFO - INFO:train_job:Dữ liệu GSPC chuẩn bị để train
+[2025-11-19T02:14:23.868+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.869+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.870+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:23.870+0000] {docker.py:429} INFO - 25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:23 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.209+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.210+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.211+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.211+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.283+0000] {docker.py:429} INFO - INFO:train_job:Training Random Forest model...
+[2025-11-19T02:14:24.321+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.323+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.323+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.324+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.324+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.594+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.595+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.595+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.596+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.643+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.644+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:24.645+0000] {docker.py:429} INFO - 25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:24 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.011+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.012+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.013+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.014+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.014+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.141+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.142+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.143+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.144+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.144+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.405+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.406+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:25.407+0000] {docker.py:429} INFO - 25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:25 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.310+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.311+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.311+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.312+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.577+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.578+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.579+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.579+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.633+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.636+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.637+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.637+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.638+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.907+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.908+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.909+0000] {docker.py:429} INFO - 25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:26 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:26.947+0000] {docker.py:429} INFO - INFO:train_job:Evaluating model on test set
+[2025-11-19T02:14:27.014+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.015+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.015+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.016+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.016+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.297+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.298+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.299+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.299+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.521+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.522+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.524+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.524+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.525+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.785+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.786+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.792+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.958+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.959+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.960+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.960+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:27.961+0000] {docker.py:429} INFO - 25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:27 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.199+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.200+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.200+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.340+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.340+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.341+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.342+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.590+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.590+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.592+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.728+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.729+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.730+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.730+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.730+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.731+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.997+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.998+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.999+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:28.999+0000] {docker.py:429} INFO - 25/11/19 02:14:28 WARN WindowExec: No Partition Defined for Window operation! Moving all data to a single partition, this can cause serious performance degradation.
+[2025-11-19T02:14:29.119+0000] {docker.py:429} INFO - INFO:train_job:=== Evaluation Metrics for GSPC ===
+INFO:train_job:AUC: 0.7184
+INFO:train_job:Accuracy: 0.8763
+INFO:train_job:Precision: 0.8607
+INFO:train_job:Recall: 0.8763
+INFO:train_job:F1 Score: 0.8681
+[2025-11-19T02:14:29.571+0000] {docker.py:429} INFO - INFO:train_job:Model training and saving completed successfully
+[2025-11-19T02:14:29.954+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=training_pipeline, task_id=train_risk_models, execution_date=20251119T020818, start_date=20251119T021339, end_date=20251119T021429
+[2025-11-19T02:14:29.971+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-19T02:14:29.990+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

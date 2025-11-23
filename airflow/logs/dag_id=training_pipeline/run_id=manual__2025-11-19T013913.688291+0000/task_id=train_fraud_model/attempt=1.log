@@ -1,0 +1,71 @@
+[2025-11-19T01:39:14.147+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: training_pipeline.train_fraud_model manual__2025-11-19T01:39:13.688291+00:00 [queued]>
+[2025-11-19T01:39:14.155+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: training_pipeline.train_fraud_model manual__2025-11-19T01:39:13.688291+00:00 [queued]>
+[2025-11-19T01:39:14.156+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-19T01:39:14.168+0000] {taskinstance.py:2191} INFO - Executing <Task(DockerOperator): train_fraud_model> on 2025-11-19 01:39:13.688291+00:00
+[2025-11-19T01:39:14.174+0000] {standard_task_runner.py:60} INFO - Started process 200 to run task
+[2025-11-19T01:39:14.178+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'training_pipeline', 'train_fraud_model', 'manual__2025-11-19T01:39:13.688291+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/train.py', '--cfg-path', '/tmp/tmp18yl9pl5']
+[2025-11-19T01:39:14.181+0000] {standard_task_runner.py:88} INFO - Job 4: Subtask train_fraud_model
+[2025-11-19T01:39:14.254+0000] {task_command.py:423} INFO - Running <TaskInstance: training_pipeline.train_fraud_model manual__2025-11-19T01:39:13.688291+00:00 [running]> on host 096f475fc754
+[2025-11-19T01:39:14.331+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='training_pipeline' AIRFLOW_CTX_TASK_ID='train_fraud_model' AIRFLOW_CTX_EXECUTION_DATE='2025-11-19T01:39:13.688291+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-19T01:39:13.688291+00:00'
+[2025-11-19T01:39:14.391+0000] {docker.py:359} INFO - Starting docker container from image fraud-train:latest
+[2025-11-19T01:39:14.400+0000] {docker.py:367} WARNING - Using remote engine or docker-in-docker and mounting temporary volume from host is not supported. Falling back to `mount_tmp_dir=False` mode. You can set `mount_tmp_dir` parameter to False to disable mounting and remove the warning
+[2025-11-19T01:39:14.809+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 265, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: http+docker://localhost/v1.51/containers/create
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 364, in _run_image
+    return self._run_image_with_mounts([*self.mounts, tmp_mount], add_tmp_variable=True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 391, in _run_image_with_mounts
+    self.container = self.cli.create_container(
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/container.py", line 439, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/container.py", line 456, in create_container_from_config
+    return self._result(res, True)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 271, in _result
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 267, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 400 Client Error for http+docker://localhost/v1.51/containers/create: Bad Request ("invalid mount config for type "bind": bind source path does not exist: /tmp/airflowtmpxjnkzz0_")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 265, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: http+docker://localhost/v1.51/containers/1891115aa72b3c91e57aee3bc42486c1a6019ba91e1336e5c5cbcecd6f77e7ce/start
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 502, in execute
+    return self._run_image()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 373, in _run_image
+    return self._run_image_with_mounts(self.mounts, add_tmp_variable=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/docker/operators/docker.py", line 423, in _run_image_with_mounts
+    self.cli.start(self.container["Id"])
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/utils/decorators.py", line 19, in wrapped
+    return f(self, resource_id, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/container.py", line 1135, in start
+    self._raise_for_status(res)
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/api/client.py", line 267, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.8/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.NotFound: 404 Client Error for http+docker://localhost/v1.51/containers/1891115aa72b3c91e57aee3bc42486c1a6019ba91e1336e5c5cbcecd6f77e7ce/start: Not Found ("failed to set up container networking: network btl_scale_default not found")
+[2025-11-19T01:39:14.823+0000] {taskinstance.py:1138} INFO - Marking task as FAILED. dag_id=training_pipeline, task_id=train_fraud_model, execution_date=20251119T013913, start_date=20251119T013914, end_date=20251119T013914
+[2025-11-19T01:39:14.845+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 4 for task train_fraud_model (404 Client Error for http+docker://localhost/v1.51/containers/1891115aa72b3c91e57aee3bc42486c1a6019ba91e1336e5c5cbcecd6f77e7ce/start: Not Found ("failed to set up container networking: network btl_scale_default not found"); 200)
+[2025-11-19T01:39:14.876+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2025-11-19T01:39:14.926+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check

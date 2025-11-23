@@ -75,16 +75,12 @@ for company in companies:
 
     # ensure datetime and sort
     try:
-        # df_company[time_col] = pd.to_datetime(df_company[time_col])
-        # df_company = df_company.sort_values(time_col)
         windowSpec = Window.orderBy(time_col)
     except Exception:
         logger.warning("Could not parse/convert time column %s; proceeding without sorting", time_col)
 
     # Feature columns that streaming producer already writes
     feature_cols = ['Daily_Return', 'Volatility_Cluster', 'Volume_Based_Volatility']
-
-    # If features exist already in HDFS, skip recomputing them to avoid duplication.
     
     # compute features based on Close and Volume
     # ensure Close and Volume exist
@@ -105,12 +101,6 @@ for company in companies:
     df_company = df_company.withColumn("Volume_Based_Volatility",
                                     F.stddev("Volume").over(rolling_window) / F.mean("Volume").over(rolling_window))
         
-    # create label: risk in next 3 days (>=5% drop)
-    # window_future = Window.orderBy("timestamp").rowsBetween(1, 5)  # 5 ngày tương lai
-    # df_company = df_company.withColumn("Future_Min_Return",
-    #                                    F.min((F.col("Close") - F.lag("Close", -1).over(windowSpec)) / F.col("Close")).over(window_future))
-    
-    # df_company = df_company.withColumn("Risk_Event", F.when(F.col("Future_Min_Return") <= -0.03, 1).otherwise(0))
     future_returns = [F.lead("Close", i).over(windowSpec) / F.col("Close") - 1 for i in range(1,3)]
     df_company = df_company.withColumn("Future_Min_Return", reduce(lambda a,b: F.least(a,b), future_returns))
     df_company = df_company.withColumn("Risk_Event", F.when(F.col("Future_Min_Return") <= -0.02, 1).otherwise(0))
@@ -179,9 +169,6 @@ for company in companies:
         logger.info(f"F1 Score: {f1:.4f}")
 
         # Save model to HDFS
-        # path = f"/models/{company}_risk_model.joblib"
-        # model_path = os.environ.get('MODEL_SAVE_PATH', path)
-        # os.makedirs(os.path.dirname(model_path), exist_ok=True)
         model_path = f"hdfs://namenode:9000/models/{company}_risk_model"
         model.write().overwrite().save(model_path)
         # joblib.dump(model, model_path)

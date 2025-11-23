@@ -58,8 +58,7 @@ companies = ["GSPC", "XOM", "CVX", "BP"]
 def main(company : str, spark):
     try:
         logging.info("Starting Spark Session creation...")
-        # Tạo Spark Session
-        # spark = create_spark_session()
+        
         if spark is not None:
             logging.info("Spark Session created successfully")
         

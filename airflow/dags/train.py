@@ -15,14 +15,6 @@ import os
 )
 def train_pipeline():
 
-    # 0 Task kafka-producer luôn chạy song song
-    # run_kafka_producer = DockerOperator(
-    #     task_id = "kafka_producer",
-    #     image = "kafka-producer:latest",
-    #     command = "python /app/producer.py",
-    #     docker_url="unix://var/run/docker.sock",
-    #     network_mode = "btl_scale_default"
-    # )
     run_kafka_producer = BashOperator(
         task_id = "kafka_producer",
         bash_command = "docker start kafka-producer"

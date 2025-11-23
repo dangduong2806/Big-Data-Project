@@ -1,0 +1,212 @@
+[2025-11-19T02:08:29.166+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: training_pipeline.save_to_hdfs manual__2025-11-19T02:08:18.251303+00:00 [queued]>
+[2025-11-19T02:08:29.173+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: training_pipeline.save_to_hdfs manual__2025-11-19T02:08:18.251303+00:00 [queued]>
+[2025-11-19T02:08:29.174+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 1
+[2025-11-19T02:08:29.183+0000] {taskinstance.py:2191} INFO - Executing <Task(DockerOperator): save_to_hdfs> on 2025-11-19 02:08:18.251303+00:00
+[2025-11-19T02:08:29.188+0000] {standard_task_runner.py:60} INFO - Started process 230 to run task
+[2025-11-19T02:08:29.191+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'training_pipeline', 'save_to_hdfs', 'manual__2025-11-19T02:08:18.251303+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/train.py', '--cfg-path', '/tmp/tmpnm0yzchc']
+[2025-11-19T02:08:29.194+0000] {standard_task_runner.py:88} INFO - Job 7: Subtask save_to_hdfs
+[2025-11-19T02:08:29.256+0000] {task_command.py:423} INFO - Running <TaskInstance: training_pipeline.save_to_hdfs manual__2025-11-19T02:08:18.251303+00:00 [running]> on host 686346c59aae
+[2025-11-19T02:08:29.324+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='training_pipeline' AIRFLOW_CTX_TASK_ID='save_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-11-19T02:08:18.251303+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-11-19T02:08:18.251303+00:00'
+[2025-11-19T02:08:29.395+0000] {docker.py:359} INFO - Starting docker container from image spark-jobs:latest
+[2025-11-19T02:08:31.685+0000] {docker.py:429} INFO - :: loading settings :: url = jar:file:/opt/spark/jars/ivy-2.5.1.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-11-19T02:08:31.794+0000] {docker.py:429} INFO - Ivy Default Cache set to: /root/.ivy2/cache
+The jars for the packages stored in: /root/.ivy2/jars
+[2025-11-19T02:08:31.798+0000] {docker.py:429} INFO - org.apache.spark#spark-sql-kafka-0-10_2.12 added as a dependency
+[2025-11-19T02:08:31.799+0000] {docker.py:429} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-9d4e1d06-b7e4-4130-bce7-98fdd14c05a5;1.0
+	confs: [default]
+[2025-11-19T02:08:34.126+0000] {docker.py:429} INFO - found org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 in central
+[2025-11-19T02:08:34.438+0000] {docker.py:429} INFO - found org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 in central
+[2025-11-19T02:08:34.673+0000] {docker.py:429} INFO - found org.apache.kafka#kafka-clients;3.4.1 in central
+[2025-11-19T02:08:34.919+0000] {docker.py:429} INFO - found org.lz4#lz4-java;1.8.0 in central
+[2025-11-19T02:08:35.166+0000] {docker.py:429} INFO - found org.xerial.snappy#snappy-java;1.1.10.3 in central
+[2025-11-19T02:08:35.903+0000] {docker.py:429} INFO - found org.slf4j#slf4j-api;2.0.7 in central
+[2025-11-19T02:08:38.038+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client-runtime;3.3.4 in central
+[2025-11-19T02:08:38.186+0000] {docker.py:429} INFO - found org.apache.hadoop#hadoop-client-api;3.3.4 in central
+[2025-11-19T02:08:39.784+0000] {docker.py:429} INFO - found commons-logging#commons-logging;1.1.3 in central
+[2025-11-19T02:08:39.897+0000] {docker.py:429} INFO - found com.google.code.findbugs#jsr305;3.0.0 in central
+[2025-11-19T02:08:40.031+0000] {docker.py:429} INFO - found org.apache.commons#commons-pool2;2.11.1 in central
+[2025-11-19T02:08:40.097+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.5.0/spark-sql-kafka-0-10_2.12-3.5.0.jar ...
+[2025-11-19T02:08:40.277+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0!spark-sql-kafka-0-10_2.12.jar (238ms)
+[2025-11-19T02:08:40.337+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.5.0/spark-token-provider-kafka-0-10_2.12-3.5.0.jar ...
+[2025-11-19T02:08:40.407+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0!spark-token-provider-kafka-0-10_2.12.jar (130ms)
+[2025-11-19T02:08:40.471+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.1/kafka-clients-3.4.1.jar ...
+[2025-11-19T02:08:40.858+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.kafka#kafka-clients;3.4.1!kafka-clients.jar (450ms)
+[2025-11-19T02:08:40.920+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.0/jsr305-3.0.0.jar ...
+[2025-11-19T02:08:40.982+0000] {docker.py:429} INFO - [SUCCESSFUL ] com.google.code.findbugs#jsr305;3.0.0!jsr305.jar (123ms)
+[2025-11-19T02:08:41.045+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar ...
+[2025-11-19T02:08:41.117+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.commons#commons-pool2;2.11.1!commons-pool2.jar (134ms)
+[2025-11-19T02:08:41.198+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-runtime/3.3.4/hadoop-client-runtime-3.3.4.jar ...
+[2025-11-19T02:08:42.947+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-runtime;3.3.4!hadoop-client-runtime.jar (1830ms)
+[2025-11-19T02:08:43.004+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/lz4/lz4-java/1.8.0/lz4-java-1.8.0.jar ...
+[2025-11-19T02:08:43.112+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.lz4#lz4-java;1.8.0!lz4-java.jar (163ms)
+[2025-11-19T02:08:43.169+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.10.3/snappy-java-1.1.10.3.jar ...
+[2025-11-19T02:08:43.355+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.xerial.snappy#snappy-java;1.1.10.3!snappy-java.jar(bundle) (243ms)
+[2025-11-19T02:08:43.408+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.7/slf4j-api-2.0.7.jar ...
+[2025-11-19T02:08:43.474+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.slf4j#slf4j-api;2.0.7!slf4j-api.jar (118ms)
+[2025-11-19T02:08:43.528+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-client-api/3.3.4/hadoop-client-api-3.3.4.jar ...
+[2025-11-19T02:08:44.589+0000] {docker.py:429} INFO - [SUCCESSFUL ] org.apache.hadoop#hadoop-client-api;3.3.4!hadoop-client-api.jar (1114ms)
+[2025-11-19T02:08:44.661+0000] {docker.py:429} INFO - downloading https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar ...
+[2025-11-19T02:08:44.752+0000] {docker.py:429} INFO - [SUCCESSFUL ] commons-logging#commons-logging;1.1.3!commons-logging.jar (162ms)
+[2025-11-19T02:08:44.753+0000] {docker.py:429} INFO - :: resolution report :: resolve 8238ms :: artifacts dl 4715ms
+	:: modules in use:
+[2025-11-19T02:08:44.754+0000] {docker.py:429} INFO - com.google.code.findbugs#jsr305;3.0.0 from central in [default]
+	commons-logging#commons-logging;1.1.3 from central in [default]
+	org.apache.commons#commons-pool2;2.11.1 from central in [default]
+	org.apache.hadoop#hadoop-client-api;3.3.4 from central in [default]
+	org.apache.hadoop#hadoop-client-runtime;3.3.4 from central in [default]
+[2025-11-19T02:08:44.755+0000] {docker.py:429} INFO - org.apache.kafka#kafka-clients;3.4.1 from central in [default]
+	org.apache.spark#spark-sql-kafka-0-10_2.12;3.5.0 from central in [default]
+	org.apache.spark#spark-token-provider-kafka-0-10_2.12;3.5.0 from central in [default]
+	org.lz4#lz4-java;1.8.0 from central in [default]
+[2025-11-19T02:08:44.755+0000] {docker.py:429} INFO - org.slf4j#slf4j-api;2.0.7 from central in [default]
+	org.xerial.snappy#snappy-java;1.1.10.3 from central in [default]
+[2025-11-19T02:08:44.756+0000] {docker.py:429} INFO - ---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+[2025-11-19T02:08:44.756+0000] {docker.py:429} INFO - |      default     |   11  |   11  |   11  |   0   ||   11  |   11  |
+	---------------------------------------------------------------------
+[2025-11-19T02:08:44.760+0000] {docker.py:429} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-9d4e1d06-b7e4-4130-bce7-98fdd14c05a5
+	confs: [default]
+[2025-11-19T02:08:44.831+0000] {docker.py:429} INFO - 11 artifacts copied, 0 already retrieved (56767kB/70ms)
+[2025-11-19T02:08:45.036+0000] {docker.py:429} INFO - 25/11/19 02:08:45 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-11-19T02:08:45.224+0000] {docker.py:429} INFO - Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+[2025-11-19T02:08:47.044+0000] {docker.py:429} INFO - 2025-11-19 02:08:47,042 - INFO - Starting Spark Session creation...
+2025-11-19 02:08:47,042 - INFO - Spark Session created successfully
+2025-11-19 02:08:47,042 - INFO - Reading data from Kafka topic 'historical_prices'...
+[2025-11-19T02:08:50.130+0000] {docker.py:429} INFO - 25/11/19 02:08:50 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:08:51.836+0000] {docker.py:429} INFO - [Stage 0:>                                                          (0 + 1) / 1]
+[2025-11-19T02:08:55.691+0000] {docker.py:429} INFO - 
+[2025-11-19T02:08:55.697+0000] {docker.py:429} INFO - 2025-11-19 02:08:55,696 - INFO - Read 250 records from Kafka
+2025-11-19 02:08:55,696 - INFO - Parsing JSON data with schema...
+[2025-11-19T02:08:55.936+0000] {docker.py:429} INFO - 25/11/19 02:08:55 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:08:56.648+0000] {docker.py:429} INFO - [Stage 3:>                                                          (0 + 1) / 1]
+[2025-11-19T02:08:56.743+0000] {docker.py:429} INFO - 
+[2025-11-19T02:08:56.746+0000] {docker.py:429} INFO - 2025-11-19 02:08:56,745 - INFO - Parsed 250 records successfully
+2025-11-19 02:08:56,745 - INFO - Processing timestamps and creating partitions...
+[2025-11-19T02:08:56.846+0000] {docker.py:429} INFO - 25/11/19 02:08:56 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:08:57.450+0000] {docker.py:429} INFO - [Stage 6:>                                                          (0 + 1) / 1]
+[2025-11-19T02:08:57.594+0000] {docker.py:429} INFO - 
+[2025-11-19T02:08:57.596+0000] {docker.py:429} INFO - 2025-11-19 02:08:57,595 - INFO - Processed 250 records with partitioning columns
+2025-11-19 02:08:57,595 - INFO - Sample of processed data:
+[2025-11-19T02:08:57.674+0000] {docker.py:429} INFO - 25/11/19 02:08:57 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:08:58.451+0000] {docker.py:429} INFO - [Stage 9:>                                                          (0 + 1) / 1]
+[2025-11-19T02:08:58.628+0000] {docker.py:429} INFO - 
+[2025-11-19T02:08:59.606+0000] {docker.py:429} INFO - 2025-11-19 02:08:59,605 - INFO - Writing data to HDFS...
+[2025-11-19T02:09:00.075+0000] {docker.py:429} INFO - 25/11/19 02:09:00 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:09:01.055+0000] {docker.py:429} INFO - [Stage 10:>                                                         (0 + 1) / 1]
+[2025-11-19T02:10:01.176+0000] {docker.py:429} INFO - [Stage 10:>                                                         (0 + 1) / 1]
+[2025-11-19T02:10:05.911+0000] {docker.py:429} INFO - 
+[2025-11-19T02:10:06.125+0000] {docker.py:429} INFO - 2025-11-19 02:10:06,124 - INFO - Data successfully written to HDFS
+[2025-11-19T02:10:06.127+0000] {docker.py:429} INFO - 2025-11-19 02:10:06,124 - INFO - Starting Spark Session creation...
+2025-11-19 02:10:06,124 - INFO - Spark Session created successfully
+2025-11-19 02:10:06,124 - INFO - Reading data from Kafka topic 'historical_prices'...
+[2025-11-19T02:10:06.176+0000] {docker.py:429} INFO - 25/11/19 02:10:06 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:10:07.083+0000] {docker.py:429} INFO - 2025-11-19 02:10:07,081 - INFO - Read 250 records from Kafka
+2025-11-19 02:10:07,081 - INFO - Parsing JSON data with schema...
+[2025-11-19T02:10:07.143+0000] {docker.py:429} INFO - 25/11/19 02:10:07 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:10:07.790+0000] {docker.py:429} INFO - [Stage 14:>                                                         (0 + 1) / 1]
+[2025-11-19T02:10:07.968+0000] {docker.py:429} INFO - 
+[2025-11-19T02:10:07.973+0000] {docker.py:429} INFO - 2025-11-19 02:10:07,967 - INFO - Parsed 250 records successfully
+[2025-11-19T02:10:07.974+0000] {docker.py:429} INFO - 2025-11-19 02:10:07,967 - INFO - Processing timestamps and creating partitions...
+[2025-11-19T02:10:08.081+0000] {docker.py:429} INFO - 25/11/19 02:10:08 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:10:08.933+0000] {docker.py:429} INFO - 2025-11-19 02:10:08,932 - INFO - Processed 250 records with partitioning columns
+[2025-11-19T02:10:08.934+0000] {docker.py:429} INFO - 2025-11-19 02:10:08,934 - INFO - Sample of processed data:
+[2025-11-19T02:10:09.071+0000] {docker.py:429} INFO - 25/11/19 02:10:09 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:10:09.822+0000] {docker.py:429} INFO - [Stage 20:>                                                         (0 + 1) / 1]
+[2025-11-19T02:10:09.890+0000] {docker.py:429} INFO - 
+[2025-11-19T02:10:09.899+0000] {docker.py:429} INFO - 2025-11-19 02:10:09,895 - INFO - Writing data to HDFS...
+[2025-11-19T02:10:09.939+0000] {docker.py:429} INFO - 25/11/19 02:10:09 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:10:10.625+0000] {docker.py:429} INFO - [Stage 21:>                                                         (0 + 1) / 1]
+[2025-11-19T02:11:10.756+0000] {docker.py:429} INFO - [Stage 21:>                                                         (0 + 1) / 1]
+[2025-11-19T02:11:25.201+0000] {docker.py:429} INFO - 
+[2025-11-19T02:11:25.231+0000] {docker.py:429} INFO - 2025-11-19 02:11:25,229 - INFO - Data successfully written to HDFS
+2025-11-19 02:11:25,230 - INFO - Starting Spark Session creation...
+[2025-11-19T02:11:25.232+0000] {docker.py:429} INFO - 2025-11-19 02:11:25,230 - INFO - Spark Session created successfully
+2025-11-19 02:11:25,230 - INFO - Reading data from Kafka topic 'historical_prices'...
+[2025-11-19T02:11:25.252+0000] {docker.py:429} INFO - 25/11/19 02:11:25 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:11:25.902+0000] {docker.py:429} INFO - 2025-11-19 02:11:25,900 - INFO - Read 251 records from Kafka
+2025-11-19 02:11:25,900 - INFO - Parsing JSON data with schema...
+[2025-11-19T02:11:25.943+0000] {docker.py:429} INFO - 25/11/19 02:11:25 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:11:26.634+0000] {docker.py:429} INFO - 2025-11-19 02:11:26,632 - INFO - Parsed 251 records successfully
+2025-11-19 02:11:26,632 - INFO - Processing timestamps and creating partitions...
+[2025-11-19T02:11:26.677+0000] {docker.py:429} INFO - 25/11/19 02:11:26 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:11:27.260+0000] {docker.py:429} INFO - [Stage 28:>                                                         (0 + 1) / 1]
+[2025-11-19T02:11:27.312+0000] {docker.py:429} INFO - 
+[2025-11-19T02:11:27.313+0000] {docker.py:429} INFO - 2025-11-19 02:11:27,312 - INFO - Processed 251 records with partitioning columns
+2025-11-19 02:11:27,312 - INFO - Sample of processed data:
+[2025-11-19T02:11:27.334+0000] {docker.py:429} INFO - 25/11/19 02:11:27 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:11:27.947+0000] {docker.py:429} INFO - 2025-11-19 02:11:27,945 - INFO - Writing data to HDFS...
+[2025-11-19T02:11:27.976+0000] {docker.py:429} INFO - 25/11/19 02:11:27 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:11:28.664+0000] {docker.py:429} INFO - [Stage 32:>                                                         (0 + 1) / 1]
+[2025-11-19T02:12:28.728+0000] {docker.py:429} INFO - [Stage 32:>                                                         (0 + 1) / 1]
+[2025-11-19T02:12:31.044+0000] {docker.py:429} INFO - 
+[2025-11-19T02:12:31.070+0000] {docker.py:429} INFO - 2025-11-19 02:12:31,069 - INFO - Data successfully written to HDFS
+2025-11-19 02:12:31,069 - INFO - Starting Spark Session creation...
+2025-11-19 02:12:31,069 - INFO - Spark Session created successfully
+2025-11-19 02:12:31,069 - INFO - Reading data from Kafka topic 'historical_prices'...
+[2025-11-19T02:12:31.091+0000] {docker.py:429} INFO - 25/11/19 02:12:31 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:12:31.739+0000] {docker.py:429} INFO - 2025-11-19 02:12:31,737 - INFO - Read 250 records from Kafka
+2025-11-19 02:12:31,737 - INFO - Parsing JSON data with schema...
+[2025-11-19T02:12:31.765+0000] {docker.py:429} INFO - 25/11/19 02:12:31 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:12:32.335+0000] {docker.py:429} INFO - [Stage 36:>                                                         (0 + 1) / 1]
+[2025-11-19T02:12:32.393+0000] {docker.py:429} INFO - 
+[2025-11-19T02:12:32.394+0000] {docker.py:429} INFO - 2025-11-19 02:12:32,392 - INFO - Parsed 250 records successfully
+2025-11-19 02:12:32,393 - INFO - Processing timestamps and creating partitions...
+[2025-11-19T02:12:32.435+0000] {docker.py:429} INFO - 25/11/19 02:12:32 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:12:33.096+0000] {docker.py:429} INFO - 2025-11-19 02:12:33,094 - INFO - Processed 250 records with partitioning columns
+2025-11-19 02:12:33,094 - INFO - Sample of processed data:
+[2025-11-19T02:12:33.112+0000] {docker.py:429} INFO - 25/11/19 02:12:33 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:12:33.724+0000] {docker.py:429} INFO - 2025-11-19 02:12:33,722 - INFO - Writing data to HDFS...
+[2025-11-19T02:12:33.744+0000] {docker.py:429} INFO - 25/11/19 02:12:33 WARN AdminClientConfig: These configurations '[key.deserializer, value.deserializer, enable.auto.commit, max.poll.records, auto.offset.reset]' were supplied but are not used yet.
+[2025-11-19T02:12:34.340+0000] {docker.py:429} INFO - [Stage 43:>                                                         (0 + 1) / 1]
+[2025-11-19T02:13:34.373+0000] {docker.py:429} INFO - [Stage 43:>                                                         (0 + 1) / 1]
+[2025-11-19T02:13:37.418+0000] {docker.py:429} INFO - 
+[2025-11-19T02:13:37.441+0000] {docker.py:429} INFO - 2025-11-19 02:13:37,439 - INFO - Data successfully written to HDFS
+[2025-11-19T02:13:37.442+0000] {docker.py:429} INFO - +-------+-------------------+----------------+----------------+----------------+----------------+----------+------------+------------------+-----------------------+----+-----+---+
+|Company|timestamp          |Open            |High            |Low             |Close           |Volume    |Daily_Return|Volatility_Cluster|Volume_Based_Volatility|year|month|day|
++-------+-------------------+----------------+----------------+----------------+----------------+----------+------------+------------------+-----------------------+----+-----+---+
+|GSPC   |2024-11-19 05:00:00|5870.0498046875 |5923.509765625  |5855.2900390625 |5916.97998046875|4036940000|NULL        |NULL              |NULL                   |2024|11   |19 |
+|GSPC   |2024-11-20 05:00:00|5914.33984375   |5920.669921875  |5860.56005859375|5917.10986328125|3772620000|NULL        |NULL              |NULL                   |2024|11   |20 |
+|GSPC   |2024-11-21 05:00:00|5940.580078125  |5963.31982421875|5887.259765625  |5948.7099609375 |4230120000|NULL        |NULL              |NULL                   |2024|11   |21 |
+|GSPC   |2024-11-22 05:00:00|5944.35986328125|5972.89990234375|5944.35986328125|5969.33984375   |4141420000|NULL        |NULL              |NULL                   |2024|11   |22 |
+|GSPC   |2024-11-25 05:00:00|5992.27978515625|6020.75         |5963.91015625   |5987.3701171875 |5633150000|NULL        |NULL              |NULL                   |2024|11   |25 |
++-------+-------------------+----------------+----------------+----------------+----------------+----------+------------+------------------+-----------------------+----+-----+---+
+only showing top 5 rows
+
++-------+-------------------+------------------+------------------+------------------+------------------+--------+------------+------------------+-----------------------+----+-----+---+
+|Company|timestamp          |Open              |High              |Low               |Close             |Volume  |Daily_Return|Volatility_Cluster|Volume_Based_Volatility|year|month|day|
++-------+-------------------+------------------+------------------+------------------+------------------+--------+------------+------------------+-----------------------+----+-----+---+
+|XOM    |2024-11-19 05:00:00|115.51061212917479|115.51061212917479|114.01548226436782|114.43025970458984|11584400|NULL        |NULL              |NULL                   |2024|11   |19 |
+|XOM    |2024-11-20 05:00:00|114.95113569266894|116.2051159687418 |114.43989995773562|116.0604248046875 |11360900|NULL        |NULL              |NULL                   |2024|11   |20 |
+|XOM    |2024-11-21 05:00:00|116.79352701390856|118.2114872442051 |116.01219763354798|117.61343383789062|14675400|NULL        |NULL              |NULL                   |2024|11   |21 |
+|XOM    |2024-11-22 05:00:00|117.50732268648053|118.8481132563591 |117.33369476005677|117.47838592529297|13323400|NULL        |NULL              |NULL                   |2024|11   |22 |
+|XOM    |2024-11-25 05:00:00|117.13112858177797|117.56519471266405|115.37556061885698|115.72281646728516|26580300|NULL        |NULL              |NULL                   |2024|11   |25 |
++-------+-------------------+------------------+------------------+------------------+------------------+--------+------------+------------------+-----------------------+----+-----+---+
+only showing top 5 rows
+
++-------+-------------------+------------------+------------------+------------------+------------------+-------+------------+------------------+-----------------------+----+-----+---+
+|Company|timestamp          |Open              |High              |Low               |Close             |Volume |Daily_Return|Volatility_Cluster|Volume_Based_Volatility|year|month|day|
++-------+-------------------+------------------+------------------+------------------+------------------+-------+------------+------------------+-----------------------+----+-----+---+
+|CVX    |2024-11-18 05:00:00|NaN               |NaN               |NaN               |NaN               |0      |NULL        |NULL              |NULL                   |2024|11   |18 |
+|CVX    |2024-11-19 05:00:00|154.59995308351168|155.03481687238468|153.4113214617537 |154.2327423095703 |4657400|NULL        |NULL              |NULL                   |2024|11   |19 |
+|CVX    |2024-11-20 05:00:00|154.53232704306058|156.0108728896192 |154.4066941457565 |155.90457153320312|6391300|NULL        |NULL              |NULL                   |2024|11   |20 |
+|CVX    |2024-11-21 05:00:00|156.57135718295484|157.18016058897533|155.86589608016624|156.19447326660156|7945200|NULL        |NULL              |NULL                   |2024|11   |21 |
+|CVX    |2024-11-22 05:00:00|156.07849676549853|157.1415102315929 |155.73060278983527|156.89991760253906|7005900|NULL        |NULL              |NULL                   |2024|11   |22 |
++-------+-------------------+------------------+------------------+------------------+------------------+-------+------------+------------------+-----------------------+----+-----+---+
+only showing top 5 rows
+
++-------+-------------------+------------------+------------------+------------------+------------------+--------+------------+------------------+-----------------------+----+-----+---+
+|Company|timestamp          |Open              |High              |Low               |Close             |Volume  |Daily_Return|Volatility_Cluster|Volume_Based_Volatility|year|month|day|
++-------+-------------------+------------------+------------------+------------------+------------------+--------+------------+------------------+-----------------------+----+-----+---+
+|BP     |2024-11-19 05:00:00|27.3387967976596  |27.518037172887265|27.253893556727085|27.442567825317383|11686900|NULL        |NULL              |NULL                   |2024|11   |19 |
+|BP     |2024-11-20 05:00:00|27.39540220938302 |27.480303657342336|27.197294032594446|27.433135986328125|11456100|NULL        |NULL              |NULL                   |2024|11   |20 |
+|BP     |2024-11-21 05:00:00|27.697280208210493|27.86708670638404 |27.508605921499584|27.84821891784668 |18619700|NULL        |NULL              |NULL                   |2024|11   |21 |
+|BP     |2024-11-22 05:00:00|27.650107499485223|28.046322015722716|27.59350593983162 |28.036888122558594|16067800|NULL        |NULL              |NULL                   |2024|11   |22 |
+|BP     |2024-11-25 05:00:00|27.933119594341903|28.018022835609237|27.54633896160458 |27.659542083740234|10472600|NULL        |NULL              |NULL                   |2024|11   |25 |
++-------+-------------------+------------------+------------------+------------------+------------------+--------+------------+------------------+-----------------------+----+-----+---+
+only showing top 5 rows
+[2025-11-19T02:13:37.809+0000] {taskinstance.py:1138} INFO - Marking task as SUCCESS. dag_id=training_pipeline, task_id=save_to_hdfs, execution_date=20251119T020818, start_date=20251119T020829, end_date=20251119T021337
+[2025-11-19T02:13:37.842+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2025-11-19T02:13:37.861+0000] {taskinstance.py:3280} INFO - 1 downstream tasks scheduled from follow-on schedule check
