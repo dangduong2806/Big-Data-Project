@@ -1,6 +1,6 @@
 # Market Risk Management and Fraud Detection System
 ## Tên thành viên
-Group: 6
+Group: 5
 1. 23020350 Nguyễn Đăng Dương
 2. 2302056 Bùi Hải Đăng
 3. 23020360 Trương Trọng Đức
@@ -113,6 +113,7 @@ _LƯU Ý: CẬP NHẬT ĐƯỜNG DẪN TRỰC TIẾP CỦA THƯ MỤC DATA TRÊN
 
 
 **Sau đó ta có thể xem kết quả dự đoán trong log của container model-service của từng công ty và container fraud-consumer hoặc vào localhost:8501 UI của hệ thống.**
+
 
 
 
